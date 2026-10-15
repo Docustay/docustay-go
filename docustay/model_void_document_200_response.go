@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ var _ MappedNullable = &VoidDocument200Response{}
 type VoidDocument200Response struct {
 	Id string `json:"id"`
 	State string `json:"state"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _VoidDocument200Response VoidDocument200Response
@@ -107,6 +107,11 @@ func (o VoidDocument200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["state"] = o.State
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *VoidDocument200Response) UnmarshalJSON(data []byte) (err error) {
 
 	varVoidDocument200Response := _VoidDocument200Response{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varVoidDocument200Response)
+	err = json.Unmarshal(data, &varVoidDocument200Response)
 
 	if err != nil {
 		return err
 	}
 
 	*o = VoidDocument200Response(varVoidDocument200Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "state")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

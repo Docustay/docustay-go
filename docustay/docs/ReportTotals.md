@@ -10,15 +10,15 @@ Name | Type | Description | Notes
 **Expired** | **int32** |  | 
 **Voided** | **int32** |  | 
 **WaitingNow** | **int32** |  | 
-**CompletionRate** | **NullableFloat32** |  | 
-**AverageHoursToComplete** | **NullableFloat32** |  | 
-**MedianHoursToComplete** | **NullableFloat32** |  | 
+**CompletionRate** | **float32** |  | 
+**AverageHoursToComplete** | **float32** |  | 
+**MedianHoursToComplete** | **float32** |  | 
 
 ## Methods
 
 ### NewReportTotals
 
-`func NewReportTotals(sent int32, completed int32, declined int32, expired int32, voided int32, waitingNow int32, completionRate NullableFloat32, averageHoursToComplete NullableFloat32, medianHoursToComplete NullableFloat32, ) *ReportTotals`
+`func NewReportTotals(sent int32, completed int32, declined int32, expired int32, voided int32, waitingNow int32, completionRate float32, averageHoursToComplete float32, medianHoursToComplete float32, ) *ReportTotals`
 
 NewReportTotals instantiates a new ReportTotals object
 This constructor will assign default values to properties that have it defined,
@@ -173,16 +173,6 @@ and a boolean to check if the value has been set.
 SetCompletionRate sets CompletionRate field to given value.
 
 
-### SetCompletionRateNil
-
-`func (o *ReportTotals) SetCompletionRateNil(b bool)`
-
- SetCompletionRateNil sets the value for CompletionRate to be an explicit nil
-
-### UnsetCompletionRate
-`func (o *ReportTotals) UnsetCompletionRate()`
-
-UnsetCompletionRate ensures that no value is present for CompletionRate, not even an explicit nil
 ### GetAverageHoursToComplete
 
 `func (o *ReportTotals) GetAverageHoursToComplete() float32`
@@ -203,16 +193,6 @@ and a boolean to check if the value has been set.
 SetAverageHoursToComplete sets AverageHoursToComplete field to given value.
 
 
-### SetAverageHoursToCompleteNil
-
-`func (o *ReportTotals) SetAverageHoursToCompleteNil(b bool)`
-
- SetAverageHoursToCompleteNil sets the value for AverageHoursToComplete to be an explicit nil
-
-### UnsetAverageHoursToComplete
-`func (o *ReportTotals) UnsetAverageHoursToComplete()`
-
-UnsetAverageHoursToComplete ensures that no value is present for AverageHoursToComplete, not even an explicit nil
 ### GetMedianHoursToComplete
 
 `func (o *ReportTotals) GetMedianHoursToComplete() float32`
@@ -233,16 +213,6 @@ and a boolean to check if the value has been set.
 SetMedianHoursToComplete sets MedianHoursToComplete field to given value.
 
 
-### SetMedianHoursToCompleteNil
-
-`func (o *ReportTotals) SetMedianHoursToCompleteNil(b bool)`
-
- SetMedianHoursToCompleteNil sets the value for MedianHoursToComplete to be an explicit nil
-
-### UnsetMedianHoursToComplete
-`func (o *ReportTotals) UnsetMedianHoursToComplete()`
-
-UnsetMedianHoursToComplete ensures that no value is present for MedianHoursToComplete, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

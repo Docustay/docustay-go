@@ -7,13 +7,13 @@ Name | Type | Description | Notes
 **BasisPoints** | **int32** | Docustay&#39;s fee, decided when the payment started: 200 (2%) on the Free plan, 0 on Pro. | 
 **AmountMinor** | **int32** |  | 
 **RefundedMinor** | **int32** | How much of the fee went back with refunds. | 
-**Plan** | **NullableString** |  | 
+**Plan** | **string** |  | 
 
 ## Methods
 
 ### NewPaymentFee
 
-`func NewPaymentFee(basisPoints int32, amountMinor int32, refundedMinor int32, plan NullableString, ) *PaymentFee`
+`func NewPaymentFee(basisPoints int32, amountMinor int32, refundedMinor int32, plan string, ) *PaymentFee`
 
 NewPaymentFee instantiates a new PaymentFee object
 This constructor will assign default values to properties that have it defined,
@@ -108,16 +108,6 @@ and a boolean to check if the value has been set.
 SetPlan sets Plan field to given value.
 
 
-### SetPlanNil
-
-`func (o *PaymentFee) SetPlanNil(b bool)`
-
- SetPlanNil sets the value for Plan to be an explicit nil
-
-### UnsetPlan
-`func (o *PaymentFee) UnsetPlan()`
-
-UnsetPlan ensures that no value is present for Plan, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

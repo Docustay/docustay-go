@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ var _ MappedNullable = &TemplateSeatsInner{}
 type TemplateSeatsInner struct {
 	Key string `json:"key"`
 	Label string `json:"label"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TemplateSeatsInner TemplateSeatsInner
@@ -107,6 +107,11 @@ func (o TemplateSeatsInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["key"] = o.Key
 	toSerialize["label"] = o.Label
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *TemplateSeatsInner) UnmarshalJSON(data []byte) (err error) {
 
 	varTemplateSeatsInner := _TemplateSeatsInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTemplateSeatsInner)
+	err = json.Unmarshal(data, &varTemplateSeatsInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TemplateSeatsInner(varTemplateSeatsInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "key")
+		delete(additionalProperties, "label")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

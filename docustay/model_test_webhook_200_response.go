@@ -22,10 +22,10 @@ var _ MappedNullable = &TestWebhook200Response{}
 // TestWebhook200Response struct for TestWebhook200Response
 type TestWebhook200Response struct {
 	Outcome string `json:"outcome"`
-	Status NullableFloat32 `json:"status"`
+	Status float32 `json:"status"`
 	DurationMs float32 `json:"durationMs"`
-	ResponseExcerpt NullableString `json:"responseExcerpt"`
-	Error NullableString `json:"error"`
+	ResponseExcerpt string `json:"responseExcerpt"`
+	Error string `json:"error"`
 	Topic string `json:"topic"`
 	AdditionalProperties map[string]interface{}
 }
@@ -36,7 +36,7 @@ type _TestWebhook200Response TestWebhook200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTestWebhook200Response(outcome string, status NullableFloat32, durationMs float32, responseExcerpt NullableString, error_ NullableString, topic string) *TestWebhook200Response {
+func NewTestWebhook200Response(outcome string, status float32, durationMs float32, responseExcerpt string, error_ string, topic string) *TestWebhook200Response {
 	this := TestWebhook200Response{}
 	this.Outcome = outcome
 	this.Status = status
@@ -80,29 +80,27 @@ func (o *TestWebhook200Response) SetOutcome(v string) {
 }
 
 // GetStatus returns the Status field value
-// If the value is explicit nil, the zero value for float32 will be returned
 func (o *TestWebhook200Response) GetStatus() float32 {
-	if o == nil || o.Status.Get() == nil {
+	if o == nil {
 		var ret float32
 		return ret
 	}
 
-	return *o.Status.Get()
+	return o.Status
 }
 
 // GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TestWebhook200Response) GetStatusOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Status.Get(), o.Status.IsSet()
+	return &o.Status, true
 }
 
 // SetStatus sets field value
 func (o *TestWebhook200Response) SetStatus(v float32) {
-	o.Status.Set(&v)
+	o.Status = v
 }
 
 // GetDurationMs returns the DurationMs field value
@@ -130,55 +128,51 @@ func (o *TestWebhook200Response) SetDurationMs(v float32) {
 }
 
 // GetResponseExcerpt returns the ResponseExcerpt field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *TestWebhook200Response) GetResponseExcerpt() string {
-	if o == nil || o.ResponseExcerpt.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.ResponseExcerpt.Get()
+	return o.ResponseExcerpt
 }
 
 // GetResponseExcerptOk returns a tuple with the ResponseExcerpt field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TestWebhook200Response) GetResponseExcerptOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.ResponseExcerpt.Get(), o.ResponseExcerpt.IsSet()
+	return &o.ResponseExcerpt, true
 }
 
 // SetResponseExcerpt sets field value
 func (o *TestWebhook200Response) SetResponseExcerpt(v string) {
-	o.ResponseExcerpt.Set(&v)
+	o.ResponseExcerpt = v
 }
 
 // GetError returns the Error field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *TestWebhook200Response) GetError() string {
-	if o == nil || o.Error.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.Error.Get()
+	return o.Error
 }
 
 // GetErrorOk returns a tuple with the Error field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TestWebhook200Response) GetErrorOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Error.Get(), o.Error.IsSet()
+	return &o.Error, true
 }
 
 // SetError sets field value
 func (o *TestWebhook200Response) SetError(v string) {
-	o.Error.Set(&v)
+	o.Error = v
 }
 
 // GetTopic returns the Topic field value
@@ -216,10 +210,10 @@ func (o TestWebhook200Response) MarshalJSON() ([]byte, error) {
 func (o TestWebhook200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["outcome"] = o.Outcome
-	toSerialize["status"] = o.Status.Get()
+	toSerialize["status"] = o.Status
 	toSerialize["durationMs"] = o.DurationMs
-	toSerialize["responseExcerpt"] = o.ResponseExcerpt.Get()
-	toSerialize["error"] = o.Error.Get()
+	toSerialize["responseExcerpt"] = o.ResponseExcerpt
+	toSerialize["error"] = o.Error
 	toSerialize["topic"] = o.Topic
 
 	for key, value := range o.AdditionalProperties {

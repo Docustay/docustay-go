@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type ListTeams200ResponseTeamsInner struct {
 	Members []ListTeams200ResponseTeamsInnerMembersInner `json:"members"`
 	Documents int32 `json:"documents"`
 	Templates int32 `json:"templates"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ListTeams200ResponseTeamsInner ListTeams200ResponseTeamsInner
@@ -188,6 +188,11 @@ func (o ListTeams200ResponseTeamsInner) ToMap() (map[string]interface{}, error) 
 	toSerialize["members"] = o.Members
 	toSerialize["documents"] = o.Documents
 	toSerialize["templates"] = o.Templates
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -219,15 +224,24 @@ func (o *ListTeams200ResponseTeamsInner) UnmarshalJSON(data []byte) (err error) 
 
 	varListTeams200ResponseTeamsInner := _ListTeams200ResponseTeamsInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varListTeams200ResponseTeamsInner)
+	err = json.Unmarshal(data, &varListTeams200ResponseTeamsInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ListTeams200ResponseTeamsInner(varListTeams200ResponseTeamsInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "members")
+		delete(additionalProperties, "documents")
+		delete(additionalProperties, "templates")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

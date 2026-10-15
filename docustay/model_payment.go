@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,19 +22,20 @@ var _ MappedNullable = &Payment{}
 // Payment struct for Payment
 type Payment struct {
 	Id string `json:"id"`
-	FieldId NullableString `json:"fieldId"`
+	FieldId string `json:"fieldId"`
 	Person string `json:"person"`
 	// `paid` once Stripe says so. A refund moves it to `partially_refunded` or `refunded`.
 	Status string `json:"status"`
 	// What was charged, in the smallest unit of `currency` (cents). Worked out on the server; never taken from the browser.
 	AmountMinor int32 `json:"amountMinor"`
 	Currency string `json:"currency"`
-	PaidAt NullableString `json:"paidAt"`
+	PaidAt string `json:"paidAt"`
 	// Stripe's own receipt for the payment.
-	ReceiptUrl NullableString `json:"receiptUrl"`
+	ReceiptUrl string `json:"receiptUrl"`
 	RefundedMinor int32 `json:"refundedMinor"`
 	Fee PaymentFee `json:"fee"`
 	Test bool `json:"test"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Payment Payment
@@ -44,7 +44,7 @@ type _Payment Payment
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPayment(id string, fieldId NullableString, person string, status string, amountMinor int32, currency string, paidAt NullableString, receiptUrl NullableString, refundedMinor int32, fee PaymentFee, test bool) *Payment {
+func NewPayment(id string, fieldId string, person string, status string, amountMinor int32, currency string, paidAt string, receiptUrl string, refundedMinor int32, fee PaymentFee, test bool) *Payment {
 	this := Payment{}
 	this.Id = id
 	this.FieldId = fieldId
@@ -93,29 +93,27 @@ func (o *Payment) SetId(v string) {
 }
 
 // GetFieldId returns the FieldId field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *Payment) GetFieldId() string {
-	if o == nil || o.FieldId.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.FieldId.Get()
+	return o.FieldId
 }
 
 // GetFieldIdOk returns a tuple with the FieldId field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Payment) GetFieldIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.FieldId.Get(), o.FieldId.IsSet()
+	return &o.FieldId, true
 }
 
 // SetFieldId sets field value
 func (o *Payment) SetFieldId(v string) {
-	o.FieldId.Set(&v)
+	o.FieldId = v
 }
 
 // GetPerson returns the Person field value
@@ -215,55 +213,51 @@ func (o *Payment) SetCurrency(v string) {
 }
 
 // GetPaidAt returns the PaidAt field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *Payment) GetPaidAt() string {
-	if o == nil || o.PaidAt.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.PaidAt.Get()
+	return o.PaidAt
 }
 
 // GetPaidAtOk returns a tuple with the PaidAt field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Payment) GetPaidAtOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.PaidAt.Get(), o.PaidAt.IsSet()
+	return &o.PaidAt, true
 }
 
 // SetPaidAt sets field value
 func (o *Payment) SetPaidAt(v string) {
-	o.PaidAt.Set(&v)
+	o.PaidAt = v
 }
 
 // GetReceiptUrl returns the ReceiptUrl field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *Payment) GetReceiptUrl() string {
-	if o == nil || o.ReceiptUrl.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.ReceiptUrl.Get()
+	return o.ReceiptUrl
 }
 
 // GetReceiptUrlOk returns a tuple with the ReceiptUrl field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Payment) GetReceiptUrlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.ReceiptUrl.Get(), o.ReceiptUrl.IsSet()
+	return &o.ReceiptUrl, true
 }
 
 // SetReceiptUrl sets field value
 func (o *Payment) SetReceiptUrl(v string) {
-	o.ReceiptUrl.Set(&v)
+	o.ReceiptUrl = v
 }
 
 // GetRefundedMinor returns the RefundedMinor field value
@@ -349,16 +343,21 @@ func (o Payment) MarshalJSON() ([]byte, error) {
 func (o Payment) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
-	toSerialize["fieldId"] = o.FieldId.Get()
+	toSerialize["fieldId"] = o.FieldId
 	toSerialize["person"] = o.Person
 	toSerialize["status"] = o.Status
 	toSerialize["amountMinor"] = o.AmountMinor
 	toSerialize["currency"] = o.Currency
-	toSerialize["paidAt"] = o.PaidAt.Get()
-	toSerialize["receiptUrl"] = o.ReceiptUrl.Get()
+	toSerialize["paidAt"] = o.PaidAt
+	toSerialize["receiptUrl"] = o.ReceiptUrl
 	toSerialize["refundedMinor"] = o.RefundedMinor
 	toSerialize["fee"] = o.Fee
 	toSerialize["test"] = o.Test
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -396,15 +395,30 @@ func (o *Payment) UnmarshalJSON(data []byte) (err error) {
 
 	varPayment := _Payment{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPayment)
+	err = json.Unmarshal(data, &varPayment)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Payment(varPayment)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "fieldId")
+		delete(additionalProperties, "person")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "amountMinor")
+		delete(additionalProperties, "currency")
+		delete(additionalProperties, "paidAt")
+		delete(additionalProperties, "receiptUrl")
+		delete(additionalProperties, "refundedMinor")
+		delete(additionalProperties, "fee")
+		delete(additionalProperties, "test")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

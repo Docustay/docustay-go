@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,16 +22,17 @@ var _ MappedNullable = &AiUsage{}
 // AiUsage struct for AiUsage
 type AiUsage struct {
 	Mode string `json:"mode"`
-	Plan NullableString `json:"plan"`
-	Allowance NullableFloat32 `json:"allowance"`
-	Used NullableFloat32 `json:"used"`
-	Remaining NullableFloat32 `json:"remaining"`
-	Percent NullableFloat32 `json:"percent"`
+	Plan string `json:"plan"`
+	Allowance float32 `json:"allowance"`
+	Used float32 `json:"used"`
+	Remaining float32 `json:"remaining"`
+	Percent float32 `json:"percent"`
 	State string `json:"state"`
-	ResetsAt NullableString `json:"resetsAt"`
+	ResetsAt string `json:"resetsAt"`
 	ByFeature map[string]AiUsageByFeatureValue `json:"byFeature"`
 	ThinkHarder AiUsageThinkHarder `json:"thinkHarder"`
 	Paused bool `json:"paused"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AiUsage AiUsage
@@ -41,7 +41,7 @@ type _AiUsage AiUsage
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAiUsage(mode string, plan NullableString, allowance NullableFloat32, used NullableFloat32, remaining NullableFloat32, percent NullableFloat32, state string, resetsAt NullableString, byFeature map[string]AiUsageByFeatureValue, thinkHarder AiUsageThinkHarder, paused bool) *AiUsage {
+func NewAiUsage(mode string, plan string, allowance float32, used float32, remaining float32, percent float32, state string, resetsAt string, byFeature map[string]AiUsageByFeatureValue, thinkHarder AiUsageThinkHarder, paused bool) *AiUsage {
 	this := AiUsage{}
 	this.Mode = mode
 	this.Plan = plan
@@ -90,133 +90,123 @@ func (o *AiUsage) SetMode(v string) {
 }
 
 // GetPlan returns the Plan field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *AiUsage) GetPlan() string {
-	if o == nil || o.Plan.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.Plan.Get()
+	return o.Plan
 }
 
 // GetPlanOk returns a tuple with the Plan field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AiUsage) GetPlanOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Plan.Get(), o.Plan.IsSet()
+	return &o.Plan, true
 }
 
 // SetPlan sets field value
 func (o *AiUsage) SetPlan(v string) {
-	o.Plan.Set(&v)
+	o.Plan = v
 }
 
 // GetAllowance returns the Allowance field value
-// If the value is explicit nil, the zero value for float32 will be returned
 func (o *AiUsage) GetAllowance() float32 {
-	if o == nil || o.Allowance.Get() == nil {
+	if o == nil {
 		var ret float32
 		return ret
 	}
 
-	return *o.Allowance.Get()
+	return o.Allowance
 }
 
 // GetAllowanceOk returns a tuple with the Allowance field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AiUsage) GetAllowanceOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Allowance.Get(), o.Allowance.IsSet()
+	return &o.Allowance, true
 }
 
 // SetAllowance sets field value
 func (o *AiUsage) SetAllowance(v float32) {
-	o.Allowance.Set(&v)
+	o.Allowance = v
 }
 
 // GetUsed returns the Used field value
-// If the value is explicit nil, the zero value for float32 will be returned
 func (o *AiUsage) GetUsed() float32 {
-	if o == nil || o.Used.Get() == nil {
+	if o == nil {
 		var ret float32
 		return ret
 	}
 
-	return *o.Used.Get()
+	return o.Used
 }
 
 // GetUsedOk returns a tuple with the Used field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AiUsage) GetUsedOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Used.Get(), o.Used.IsSet()
+	return &o.Used, true
 }
 
 // SetUsed sets field value
 func (o *AiUsage) SetUsed(v float32) {
-	o.Used.Set(&v)
+	o.Used = v
 }
 
 // GetRemaining returns the Remaining field value
-// If the value is explicit nil, the zero value for float32 will be returned
 func (o *AiUsage) GetRemaining() float32 {
-	if o == nil || o.Remaining.Get() == nil {
+	if o == nil {
 		var ret float32
 		return ret
 	}
 
-	return *o.Remaining.Get()
+	return o.Remaining
 }
 
 // GetRemainingOk returns a tuple with the Remaining field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AiUsage) GetRemainingOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Remaining.Get(), o.Remaining.IsSet()
+	return &o.Remaining, true
 }
 
 // SetRemaining sets field value
 func (o *AiUsage) SetRemaining(v float32) {
-	o.Remaining.Set(&v)
+	o.Remaining = v
 }
 
 // GetPercent returns the Percent field value
-// If the value is explicit nil, the zero value for float32 will be returned
 func (o *AiUsage) GetPercent() float32 {
-	if o == nil || o.Percent.Get() == nil {
+	if o == nil {
 		var ret float32
 		return ret
 	}
 
-	return *o.Percent.Get()
+	return o.Percent
 }
 
 // GetPercentOk returns a tuple with the Percent field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AiUsage) GetPercentOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Percent.Get(), o.Percent.IsSet()
+	return &o.Percent, true
 }
 
 // SetPercent sets field value
 func (o *AiUsage) SetPercent(v float32) {
-	o.Percent.Set(&v)
+	o.Percent = v
 }
 
 // GetState returns the State field value
@@ -244,29 +234,27 @@ func (o *AiUsage) SetState(v string) {
 }
 
 // GetResetsAt returns the ResetsAt field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *AiUsage) GetResetsAt() string {
-	if o == nil || o.ResetsAt.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.ResetsAt.Get()
+	return o.ResetsAt
 }
 
 // GetResetsAtOk returns a tuple with the ResetsAt field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AiUsage) GetResetsAtOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.ResetsAt.Get(), o.ResetsAt.IsSet()
+	return &o.ResetsAt, true
 }
 
 // SetResetsAt sets field value
 func (o *AiUsage) SetResetsAt(v string) {
-	o.ResetsAt.Set(&v)
+	o.ResetsAt = v
 }
 
 // GetByFeature returns the ByFeature field value
@@ -352,16 +340,21 @@ func (o AiUsage) MarshalJSON() ([]byte, error) {
 func (o AiUsage) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["mode"] = o.Mode
-	toSerialize["plan"] = o.Plan.Get()
-	toSerialize["allowance"] = o.Allowance.Get()
-	toSerialize["used"] = o.Used.Get()
-	toSerialize["remaining"] = o.Remaining.Get()
-	toSerialize["percent"] = o.Percent.Get()
+	toSerialize["plan"] = o.Plan
+	toSerialize["allowance"] = o.Allowance
+	toSerialize["used"] = o.Used
+	toSerialize["remaining"] = o.Remaining
+	toSerialize["percent"] = o.Percent
 	toSerialize["state"] = o.State
-	toSerialize["resetsAt"] = o.ResetsAt.Get()
+	toSerialize["resetsAt"] = o.ResetsAt
 	toSerialize["byFeature"] = o.ByFeature
 	toSerialize["thinkHarder"] = o.ThinkHarder
 	toSerialize["paused"] = o.Paused
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -399,15 +392,30 @@ func (o *AiUsage) UnmarshalJSON(data []byte) (err error) {
 
 	varAiUsage := _AiUsage{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAiUsage)
+	err = json.Unmarshal(data, &varAiUsage)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AiUsage(varAiUsage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "mode")
+		delete(additionalProperties, "plan")
+		delete(additionalProperties, "allowance")
+		delete(additionalProperties, "used")
+		delete(additionalProperties, "remaining")
+		delete(additionalProperties, "percent")
+		delete(additionalProperties, "state")
+		delete(additionalProperties, "resetsAt")
+		delete(additionalProperties, "byFeature")
+		delete(additionalProperties, "thinkHarder")
+		delete(additionalProperties, "paused")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

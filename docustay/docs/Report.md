@@ -9,14 +9,14 @@ Name | Type | Description | Notes
 **Totals** | [**ReportTotals**](ReportTotals.md) |  | 
 **ByDay** | [**[]ReportByDayInner**](ReportByDayInner.md) |  | 
 **ByTemplate** | [**[]ReportByTemplateInner**](ReportByTemplateInner.md) |  | 
-**ByTeam** | [**[]ReportByTemplateInner**](ReportByTemplateInner.md) |  | 
-**BySender** | [**[]ReportByTemplateInner**](ReportByTemplateInner.md) |  | 
+**ByTeam** | [**[]ReportByTeamInner**](ReportByTeamInner.md) |  | 
+**BySender** | [**[]ReportByTeamInner**](ReportByTeamInner.md) |  | 
 
 ## Methods
 
 ### NewReport
 
-`func NewReport(window ReportWindow, timezone string, totals ReportTotals, byDay []ReportByDayInner, byTemplate []ReportByTemplateInner, byTeam []ReportByTemplateInner, bySender []ReportByTemplateInner, ) *Report`
+`func NewReport(window ReportWindow, timezone string, totals ReportTotals, byDay []ReportByDayInner, byTemplate []ReportByTemplateInner, byTeam []ReportByTeamInner, bySender []ReportByTeamInner, ) *Report`
 
 NewReport instantiates a new Report object
 This constructor will assign default values to properties that have it defined,
@@ -133,40 +133,40 @@ SetByTemplate sets ByTemplate field to given value.
 
 ### GetByTeam
 
-`func (o *Report) GetByTeam() []ReportByTemplateInner`
+`func (o *Report) GetByTeam() []ReportByTeamInner`
 
 GetByTeam returns the ByTeam field if non-nil, zero value otherwise.
 
 ### GetByTeamOk
 
-`func (o *Report) GetByTeamOk() (*[]ReportByTemplateInner, bool)`
+`func (o *Report) GetByTeamOk() (*[]ReportByTeamInner, bool)`
 
 GetByTeamOk returns a tuple with the ByTeam field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetByTeam
 
-`func (o *Report) SetByTeam(v []ReportByTemplateInner)`
+`func (o *Report) SetByTeam(v []ReportByTeamInner)`
 
 SetByTeam sets ByTeam field to given value.
 
 
 ### GetBySender
 
-`func (o *Report) GetBySender() []ReportByTemplateInner`
+`func (o *Report) GetBySender() []ReportByTeamInner`
 
 GetBySender returns the BySender field if non-nil, zero value otherwise.
 
 ### GetBySenderOk
 
-`func (o *Report) GetBySenderOk() (*[]ReportByTemplateInner, bool)`
+`func (o *Report) GetBySenderOk() (*[]ReportByTeamInner, bool)`
 
 GetBySenderOk returns a tuple with the BySender field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBySender
 
-`func (o *Report) SetBySender(v []ReportByTemplateInner)`
+`func (o *Report) SetBySender(v []ReportByTeamInner)`
 
 SetBySender sets BySender field to given value.
 

@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,13 +22,14 @@ var _ MappedNullable = &Template{}
 // Template struct for Template
 type Template struct {
 	// Your own id for this thing, so you can match it to your records. Filter lists with `externalId=`.
-	ExternalId NullableString `json:"externalId,omitempty"`
+	ExternalId *string `json:"externalId,omitempty"`
 	// Your own key-value text (up to 20 keys; keys 1–40 letters, digits, dot, dash or underscore; values up to 500 characters). Returned in every response and every webhook for this document; never shown to a signer.
 	Metadata map[string]string `json:"metadata,omitempty"`
 	Id string `json:"id"`
 	Name string `json:"name"`
-	Pages NullableInt32 `json:"pages"`
+	Pages int32 `json:"pages"`
 	Seats []TemplateSeatsInner `json:"seats"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Template Template
@@ -38,7 +38,7 @@ type _Template Template
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTemplate(id string, name string, pages NullableInt32, seats []TemplateSeatsInner) *Template {
+func NewTemplate(id string, name string, pages int32, seats []TemplateSeatsInner) *Template {
 	this := Template{}
 	this.Id = id
 	this.Name = name
@@ -55,46 +55,36 @@ func NewTemplateWithDefaults() *Template {
 	return &this
 }
 
-// GetExternalId returns the ExternalId field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetExternalId returns the ExternalId field value if set, zero value otherwise.
 func (o *Template) GetExternalId() string {
-	if o == nil || IsNil(o.ExternalId.Get()) {
+	if o == nil || IsNil(o.ExternalId) {
 		var ret string
 		return ret
 	}
-	return *o.ExternalId.Get()
+	return *o.ExternalId
 }
 
 // GetExternalIdOk returns a tuple with the ExternalId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Template) GetExternalIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ExternalId) {
 		return nil, false
 	}
-	return o.ExternalId.Get(), o.ExternalId.IsSet()
+	return o.ExternalId, true
 }
 
 // HasExternalId returns a boolean if a field has been set.
 func (o *Template) HasExternalId() bool {
-	if o != nil && o.ExternalId.IsSet() {
+	if o != nil && !IsNil(o.ExternalId) {
 		return true
 	}
 
 	return false
 }
 
-// SetExternalId gets a reference to the given NullableString and assigns it to the ExternalId field.
+// SetExternalId gets a reference to the given string and assigns it to the ExternalId field.
 func (o *Template) SetExternalId(v string) {
-	o.ExternalId.Set(&v)
-}
-// SetExternalIdNil sets the value for ExternalId to be an explicit nil
-func (o *Template) SetExternalIdNil() {
-	o.ExternalId.Set(nil)
-}
-
-// UnsetExternalId ensures that no value is present for ExternalId, not even an explicit nil
-func (o *Template) UnsetExternalId() {
-	o.ExternalId.Unset()
+	o.ExternalId = &v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
@@ -178,29 +168,27 @@ func (o *Template) SetName(v string) {
 }
 
 // GetPages returns the Pages field value
-// If the value is explicit nil, the zero value for int32 will be returned
 func (o *Template) GetPages() int32 {
-	if o == nil || o.Pages.Get() == nil {
+	if o == nil {
 		var ret int32
 		return ret
 	}
 
-	return *o.Pages.Get()
+	return o.Pages
 }
 
 // GetPagesOk returns a tuple with the Pages field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Template) GetPagesOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Pages.Get(), o.Pages.IsSet()
+	return &o.Pages, true
 }
 
 // SetPages sets field value
 func (o *Template) SetPages(v int32) {
-	o.Pages.Set(&v)
+	o.Pages = v
 }
 
 // GetSeats returns the Seats field value
@@ -237,16 +225,21 @@ func (o Template) MarshalJSON() ([]byte, error) {
 
 func (o Template) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.ExternalId.IsSet() {
-		toSerialize["externalId"] = o.ExternalId.Get()
+	if !IsNil(o.ExternalId) {
+		toSerialize["externalId"] = o.ExternalId
 	}
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
 	}
 	toSerialize["id"] = o.Id
 	toSerialize["name"] = o.Name
-	toSerialize["pages"] = o.Pages.Get()
+	toSerialize["pages"] = o.Pages
 	toSerialize["seats"] = o.Seats
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -277,15 +270,25 @@ func (o *Template) UnmarshalJSON(data []byte) (err error) {
 
 	varTemplate := _Template{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTemplate)
+	err = json.Unmarshal(data, &varTemplate)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Template(varTemplate)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "externalId")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "pages")
+		delete(additionalProperties, "seats")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

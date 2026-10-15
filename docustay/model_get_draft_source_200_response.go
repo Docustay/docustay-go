@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type GetDraftSource200Response struct {
 	Roles []interface{} `json:"roles"`
 	People []interface{} `json:"people"`
 	SendOptions map[string]interface{} `json:"sendOptions"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _GetDraftSource200Response GetDraftSource200Response
@@ -324,6 +324,11 @@ func (o GetDraftSource200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize["roles"] = o.Roles
 	toSerialize["people"] = o.People
 	toSerialize["sendOptions"] = o.SendOptions
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -360,15 +365,29 @@ func (o *GetDraftSource200Response) UnmarshalJSON(data []byte) (err error) {
 
 	varGetDraftSource200Response := _GetDraftSource200Response{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGetDraftSource200Response)
+	err = json.Unmarshal(data, &varGetDraftSource200Response)
 
 	if err != nil {
 		return err
 	}
 
 	*o = GetDraftSource200Response(varGetDraftSource200Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "state")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "source")
+		delete(additionalProperties, "facts")
+		delete(additionalProperties, "variableValues")
+		delete(additionalProperties, "paper")
+		delete(additionalProperties, "roles")
+		delete(additionalProperties, "people")
+		delete(additionalProperties, "sendOptions")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

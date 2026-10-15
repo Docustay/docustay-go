@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type CheckDocument200Response struct {
 	Errors []string `json:"errors"`
 	Warnings []interface{} `json:"warnings"`
 	Roles []interface{} `json:"roles"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _CheckDocument200Response CheckDocument200Response
@@ -161,6 +161,11 @@ func (o CheckDocument200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize["errors"] = o.Errors
 	toSerialize["warnings"] = o.Warnings
 	toSerialize["roles"] = o.Roles
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -191,15 +196,23 @@ func (o *CheckDocument200Response) UnmarshalJSON(data []byte) (err error) {
 
 	varCheckDocument200Response := _CheckDocument200Response{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCheckDocument200Response)
+	err = json.Unmarshal(data, &varCheckDocument200Response)
 
 	if err != nil {
 		return err
 	}
 
 	*o = CheckDocument200Response(varCheckDocument200Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ok")
+		delete(additionalProperties, "errors")
+		delete(additionalProperties, "warnings")
+		delete(additionalProperties, "roles")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

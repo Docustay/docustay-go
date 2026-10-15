@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ var _ MappedNullable = &AiUsageByFeatureValue{}
 type AiUsageByFeatureValue struct {
 	Calls float32 `json:"calls"`
 	Credits float32 `json:"credits"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _AiUsageByFeatureValue AiUsageByFeatureValue
@@ -107,6 +107,11 @@ func (o AiUsageByFeatureValue) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["calls"] = o.Calls
 	toSerialize["credits"] = o.Credits
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *AiUsageByFeatureValue) UnmarshalJSON(data []byte) (err error) {
 
 	varAiUsageByFeatureValue := _AiUsageByFeatureValue{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varAiUsageByFeatureValue)
+	err = json.Unmarshal(data, &varAiUsageByFeatureValue)
 
 	if err != nil {
 		return err
 	}
 
 	*o = AiUsageByFeatureValue(varAiUsageByFeatureValue)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "calls")
+		delete(additionalProperties, "credits")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

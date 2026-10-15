@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &ListWebhookTopics200Response{}
 // ListWebhookTopics200Response struct for ListWebhookTopics200Response
 type ListWebhookTopics200Response struct {
 	Topics []string `json:"topics"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ListWebhookTopics200Response ListWebhookTopics200Response
@@ -80,6 +80,11 @@ func (o ListWebhookTopics200Response) MarshalJSON() ([]byte, error) {
 func (o ListWebhookTopics200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["topics"] = o.Topics
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *ListWebhookTopics200Response) UnmarshalJSON(data []byte) (err error) {
 
 	varListWebhookTopics200Response := _ListWebhookTopics200Response{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varListWebhookTopics200Response)
+	err = json.Unmarshal(data, &varListWebhookTopics200Response)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ListWebhookTopics200Response(varListWebhookTopics200Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "topics")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

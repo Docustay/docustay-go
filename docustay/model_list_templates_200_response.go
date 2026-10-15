@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &ListTemplates200Response{}
 // ListTemplates200Response struct for ListTemplates200Response
 type ListTemplates200Response struct {
 	Templates []Template `json:"templates"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ListTemplates200Response ListTemplates200Response
@@ -80,6 +80,11 @@ func (o ListTemplates200Response) MarshalJSON() ([]byte, error) {
 func (o ListTemplates200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["templates"] = o.Templates
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *ListTemplates200Response) UnmarshalJSON(data []byte) (err error) {
 
 	varListTemplates200Response := _ListTemplates200Response{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varListTemplates200Response)
+	err = json.Unmarshal(data, &varListTemplates200Response)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ListTemplates200Response(varListTemplates200Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "templates")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

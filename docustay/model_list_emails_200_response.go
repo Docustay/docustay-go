@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,7 +22,8 @@ var _ MappedNullable = &ListEmails200Response{}
 // ListEmails200Response struct for ListEmails200Response
 type ListEmails200Response struct {
 	Emails []map[string]interface{} `json:"emails"`
-	NextCursor NullableString `json:"nextCursor"`
+	NextCursor string `json:"nextCursor"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ListEmails200Response ListEmails200Response
@@ -32,7 +32,7 @@ type _ListEmails200Response ListEmails200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListEmails200Response(emails []map[string]interface{}, nextCursor NullableString) *ListEmails200Response {
+func NewListEmails200Response(emails []map[string]interface{}, nextCursor string) *ListEmails200Response {
 	this := ListEmails200Response{}
 	this.Emails = emails
 	this.NextCursor = nextCursor
@@ -72,29 +72,27 @@ func (o *ListEmails200Response) SetEmails(v []map[string]interface{}) {
 }
 
 // GetNextCursor returns the NextCursor field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *ListEmails200Response) GetNextCursor() string {
-	if o == nil || o.NextCursor.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.NextCursor.Get()
+	return o.NextCursor
 }
 
 // GetNextCursorOk returns a tuple with the NextCursor field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ListEmails200Response) GetNextCursorOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.NextCursor.Get(), o.NextCursor.IsSet()
+	return &o.NextCursor, true
 }
 
 // SetNextCursor sets field value
 func (o *ListEmails200Response) SetNextCursor(v string) {
-	o.NextCursor.Set(&v)
+	o.NextCursor = v
 }
 
 func (o ListEmails200Response) MarshalJSON() ([]byte, error) {
@@ -108,7 +106,12 @@ func (o ListEmails200Response) MarshalJSON() ([]byte, error) {
 func (o ListEmails200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["emails"] = o.Emails
-	toSerialize["nextCursor"] = o.NextCursor.Get()
+	toSerialize["nextCursor"] = o.NextCursor
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -137,15 +140,21 @@ func (o *ListEmails200Response) UnmarshalJSON(data []byte) (err error) {
 
 	varListEmails200Response := _ListEmails200Response{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varListEmails200Response)
+	err = json.Unmarshal(data, &varListEmails200Response)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ListEmails200Response(varListEmails200Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "emails")
+		delete(additionalProperties, "nextCursor")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

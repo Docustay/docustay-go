@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ var _ MappedNullable = &BuilderSession{}
 type BuilderSession struct {
 	Url string `json:"url"`
 	ExpiresAt string `json:"expiresAt"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _BuilderSession BuilderSession
@@ -107,6 +107,11 @@ func (o BuilderSession) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["url"] = o.Url
 	toSerialize["expiresAt"] = o.ExpiresAt
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *BuilderSession) UnmarshalJSON(data []byte) (err error) {
 
 	varBuilderSession := _BuilderSession{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varBuilderSession)
+	err = json.Unmarshal(data, &varBuilderSession)
 
 	if err != nil {
 		return err
 	}
 
 	*o = BuilderSession(varBuilderSession)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "expiresAt")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

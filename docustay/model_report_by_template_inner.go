@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type ReportByTemplateInner struct {
 	Name string `json:"name"`
 	Sent int32 `json:"sent"`
 	Completed int32 `json:"completed"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ReportByTemplateInner ReportByTemplateInner
@@ -134,6 +134,11 @@ func (o ReportByTemplateInner) ToMap() (map[string]interface{}, error) {
 	toSerialize["name"] = o.Name
 	toSerialize["sent"] = o.Sent
 	toSerialize["completed"] = o.Completed
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -163,15 +168,22 @@ func (o *ReportByTemplateInner) UnmarshalJSON(data []byte) (err error) {
 
 	varReportByTemplateInner := _ReportByTemplateInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varReportByTemplateInner)
+	err = json.Unmarshal(data, &varReportByTemplateInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ReportByTemplateInner(varReportByTemplateInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "sent")
+		delete(additionalProperties, "completed")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

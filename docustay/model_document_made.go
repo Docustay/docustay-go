@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,9 +21,9 @@ var _ MappedNullable = &DocumentMade{}
 
 // DocumentMade struct for DocumentMade
 type DocumentMade struct {
-	Approval *SendDraft202ResponseApproval `json:"approval,omitempty"`
+	Approval *DocumentMadeApproval `json:"approval,omitempty"`
 	// Your own id for this thing, so you can match it to your records. Filter lists with `externalId=`.
-	ExternalId NullableString `json:"externalId,omitempty"`
+	ExternalId *string `json:"externalId,omitempty"`
 	// Your own key-value text (up to 20 keys; keys 1–40 letters, digits, dot, dash or underscore; values up to 500 characters). Returned in every response and every webhook for this document; never shown to a signer.
 	Metadata map[string]string `json:"metadata,omitempty"`
 	Id string `json:"id"`
@@ -33,6 +32,7 @@ type DocumentMade struct {
 	Emailed *int32 `json:"emailed,omitempty"`
 	NotEmailed []interface{} `json:"notEmailed,omitempty"`
 	Warnings []interface{} `json:"warnings,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DocumentMade DocumentMade
@@ -57,9 +57,9 @@ func NewDocumentMadeWithDefaults() *DocumentMade {
 }
 
 // GetApproval returns the Approval field value if set, zero value otherwise.
-func (o *DocumentMade) GetApproval() SendDraft202ResponseApproval {
+func (o *DocumentMade) GetApproval() DocumentMadeApproval {
 	if o == nil || IsNil(o.Approval) {
-		var ret SendDraft202ResponseApproval
+		var ret DocumentMadeApproval
 		return ret
 	}
 	return *o.Approval
@@ -67,7 +67,7 @@ func (o *DocumentMade) GetApproval() SendDraft202ResponseApproval {
 
 // GetApprovalOk returns a tuple with the Approval field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DocumentMade) GetApprovalOk() (*SendDraft202ResponseApproval, bool) {
+func (o *DocumentMade) GetApprovalOk() (*DocumentMadeApproval, bool) {
 	if o == nil || IsNil(o.Approval) {
 		return nil, false
 	}
@@ -83,51 +83,41 @@ func (o *DocumentMade) HasApproval() bool {
 	return false
 }
 
-// SetApproval gets a reference to the given SendDraft202ResponseApproval and assigns it to the Approval field.
-func (o *DocumentMade) SetApproval(v SendDraft202ResponseApproval) {
+// SetApproval gets a reference to the given DocumentMadeApproval and assigns it to the Approval field.
+func (o *DocumentMade) SetApproval(v DocumentMadeApproval) {
 	o.Approval = &v
 }
 
-// GetExternalId returns the ExternalId field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetExternalId returns the ExternalId field value if set, zero value otherwise.
 func (o *DocumentMade) GetExternalId() string {
-	if o == nil || IsNil(o.ExternalId.Get()) {
+	if o == nil || IsNil(o.ExternalId) {
 		var ret string
 		return ret
 	}
-	return *o.ExternalId.Get()
+	return *o.ExternalId
 }
 
 // GetExternalIdOk returns a tuple with the ExternalId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DocumentMade) GetExternalIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ExternalId) {
 		return nil, false
 	}
-	return o.ExternalId.Get(), o.ExternalId.IsSet()
+	return o.ExternalId, true
 }
 
 // HasExternalId returns a boolean if a field has been set.
 func (o *DocumentMade) HasExternalId() bool {
-	if o != nil && o.ExternalId.IsSet() {
+	if o != nil && !IsNil(o.ExternalId) {
 		return true
 	}
 
 	return false
 }
 
-// SetExternalId gets a reference to the given NullableString and assigns it to the ExternalId field.
+// SetExternalId gets a reference to the given string and assigns it to the ExternalId field.
 func (o *DocumentMade) SetExternalId(v string) {
-	o.ExternalId.Set(&v)
-}
-// SetExternalIdNil sets the value for ExternalId to be an explicit nil
-func (o *DocumentMade) SetExternalIdNil() {
-	o.ExternalId.Set(nil)
-}
-
-// UnsetExternalId ensures that no value is present for ExternalId, not even an explicit nil
-func (o *DocumentMade) UnsetExternalId() {
-	o.ExternalId.Unset()
+	o.ExternalId = &v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
@@ -351,8 +341,8 @@ func (o DocumentMade) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Approval) {
 		toSerialize["approval"] = o.Approval
 	}
-	if o.ExternalId.IsSet() {
-		toSerialize["externalId"] = o.ExternalId.Get()
+	if !IsNil(o.ExternalId) {
+		toSerialize["externalId"] = o.ExternalId
 	}
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
@@ -371,6 +361,11 @@ func (o DocumentMade) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Warnings) {
 		toSerialize["warnings"] = o.Warnings
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -399,15 +394,28 @@ func (o *DocumentMade) UnmarshalJSON(data []byte) (err error) {
 
 	varDocumentMade := _DocumentMade{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDocumentMade)
+	err = json.Unmarshal(data, &varDocumentMade)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DocumentMade(varDocumentMade)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "approval")
+		delete(additionalProperties, "externalId")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "state")
+		delete(additionalProperties, "roles")
+		delete(additionalProperties, "emailed")
+		delete(additionalProperties, "notEmailed")
+		delete(additionalProperties, "warnings")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

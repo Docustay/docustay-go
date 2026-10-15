@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,9 +27,10 @@ type ReportTotals struct {
 	Expired int32 `json:"expired"`
 	Voided int32 `json:"voided"`
 	WaitingNow int32 `json:"waitingNow"`
-	CompletionRate NullableFloat32 `json:"completionRate"`
-	AverageHoursToComplete NullableFloat32 `json:"averageHoursToComplete"`
-	MedianHoursToComplete NullableFloat32 `json:"medianHoursToComplete"`
+	CompletionRate float32 `json:"completionRate"`
+	AverageHoursToComplete float32 `json:"averageHoursToComplete"`
+	MedianHoursToComplete float32 `json:"medianHoursToComplete"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ReportTotals ReportTotals
@@ -39,7 +39,7 @@ type _ReportTotals ReportTotals
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewReportTotals(sent int32, completed int32, declined int32, expired int32, voided int32, waitingNow int32, completionRate NullableFloat32, averageHoursToComplete NullableFloat32, medianHoursToComplete NullableFloat32) *ReportTotals {
+func NewReportTotals(sent int32, completed int32, declined int32, expired int32, voided int32, waitingNow int32, completionRate float32, averageHoursToComplete float32, medianHoursToComplete float32) *ReportTotals {
 	this := ReportTotals{}
 	this.Sent = sent
 	this.Completed = completed
@@ -206,81 +206,75 @@ func (o *ReportTotals) SetWaitingNow(v int32) {
 }
 
 // GetCompletionRate returns the CompletionRate field value
-// If the value is explicit nil, the zero value for float32 will be returned
 func (o *ReportTotals) GetCompletionRate() float32 {
-	if o == nil || o.CompletionRate.Get() == nil {
+	if o == nil {
 		var ret float32
 		return ret
 	}
 
-	return *o.CompletionRate.Get()
+	return o.CompletionRate
 }
 
 // GetCompletionRateOk returns a tuple with the CompletionRate field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ReportTotals) GetCompletionRateOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.CompletionRate.Get(), o.CompletionRate.IsSet()
+	return &o.CompletionRate, true
 }
 
 // SetCompletionRate sets field value
 func (o *ReportTotals) SetCompletionRate(v float32) {
-	o.CompletionRate.Set(&v)
+	o.CompletionRate = v
 }
 
 // GetAverageHoursToComplete returns the AverageHoursToComplete field value
-// If the value is explicit nil, the zero value for float32 will be returned
 func (o *ReportTotals) GetAverageHoursToComplete() float32 {
-	if o == nil || o.AverageHoursToComplete.Get() == nil {
+	if o == nil {
 		var ret float32
 		return ret
 	}
 
-	return *o.AverageHoursToComplete.Get()
+	return o.AverageHoursToComplete
 }
 
 // GetAverageHoursToCompleteOk returns a tuple with the AverageHoursToComplete field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ReportTotals) GetAverageHoursToCompleteOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.AverageHoursToComplete.Get(), o.AverageHoursToComplete.IsSet()
+	return &o.AverageHoursToComplete, true
 }
 
 // SetAverageHoursToComplete sets field value
 func (o *ReportTotals) SetAverageHoursToComplete(v float32) {
-	o.AverageHoursToComplete.Set(&v)
+	o.AverageHoursToComplete = v
 }
 
 // GetMedianHoursToComplete returns the MedianHoursToComplete field value
-// If the value is explicit nil, the zero value for float32 will be returned
 func (o *ReportTotals) GetMedianHoursToComplete() float32 {
-	if o == nil || o.MedianHoursToComplete.Get() == nil {
+	if o == nil {
 		var ret float32
 		return ret
 	}
 
-	return *o.MedianHoursToComplete.Get()
+	return o.MedianHoursToComplete
 }
 
 // GetMedianHoursToCompleteOk returns a tuple with the MedianHoursToComplete field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ReportTotals) GetMedianHoursToCompleteOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.MedianHoursToComplete.Get(), o.MedianHoursToComplete.IsSet()
+	return &o.MedianHoursToComplete, true
 }
 
 // SetMedianHoursToComplete sets field value
 func (o *ReportTotals) SetMedianHoursToComplete(v float32) {
-	o.MedianHoursToComplete.Set(&v)
+	o.MedianHoursToComplete = v
 }
 
 func (o ReportTotals) MarshalJSON() ([]byte, error) {
@@ -299,9 +293,14 @@ func (o ReportTotals) ToMap() (map[string]interface{}, error) {
 	toSerialize["expired"] = o.Expired
 	toSerialize["voided"] = o.Voided
 	toSerialize["waitingNow"] = o.WaitingNow
-	toSerialize["completionRate"] = o.CompletionRate.Get()
-	toSerialize["averageHoursToComplete"] = o.AverageHoursToComplete.Get()
-	toSerialize["medianHoursToComplete"] = o.MedianHoursToComplete.Get()
+	toSerialize["completionRate"] = o.CompletionRate
+	toSerialize["averageHoursToComplete"] = o.AverageHoursToComplete
+	toSerialize["medianHoursToComplete"] = o.MedianHoursToComplete
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -337,15 +336,28 @@ func (o *ReportTotals) UnmarshalJSON(data []byte) (err error) {
 
 	varReportTotals := _ReportTotals{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varReportTotals)
+	err = json.Unmarshal(data, &varReportTotals)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ReportTotals(varReportTotals)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "sent")
+		delete(additionalProperties, "completed")
+		delete(additionalProperties, "declined")
+		delete(additionalProperties, "expired")
+		delete(additionalProperties, "voided")
+		delete(additionalProperties, "waitingNow")
+		delete(additionalProperties, "completionRate")
+		delete(additionalProperties, "averageHoursToComplete")
+		delete(additionalProperties, "medianHoursToComplete")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

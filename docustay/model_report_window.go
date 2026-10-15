@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type ReportWindow struct {
 	From string `json:"from"`
 	To string `json:"to"`
 	Days int32 `json:"days"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ReportWindow ReportWindow
@@ -134,6 +134,11 @@ func (o ReportWindow) ToMap() (map[string]interface{}, error) {
 	toSerialize["from"] = o.From
 	toSerialize["to"] = o.To
 	toSerialize["days"] = o.Days
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -163,15 +168,22 @@ func (o *ReportWindow) UnmarshalJSON(data []byte) (err error) {
 
 	varReportWindow := _ReportWindow{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varReportWindow)
+	err = json.Unmarshal(data, &varReportWindow)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ReportWindow(varReportWindow)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "from")
+		delete(additionalProperties, "to")
+		delete(additionalProperties, "days")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

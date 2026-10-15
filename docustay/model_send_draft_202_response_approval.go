@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type SendDraft202ResponseApproval struct {
 	Id string `json:"id"`
 	Status string `json:"status"`
 	InstanceId *string `json:"instanceId,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SendDraft202ResponseApproval SendDraft202ResponseApproval
@@ -143,6 +143,11 @@ func (o SendDraft202ResponseApproval) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.InstanceId) {
 		toSerialize["instanceId"] = o.InstanceId
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -171,15 +176,22 @@ func (o *SendDraft202ResponseApproval) UnmarshalJSON(data []byte) (err error) {
 
 	varSendDraft202ResponseApproval := _SendDraft202ResponseApproval{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSendDraft202ResponseApproval)
+	err = json.Unmarshal(data, &varSendDraft202ResponseApproval)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SendDraft202ResponseApproval(varSendDraft202ResponseApproval)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "instanceId")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

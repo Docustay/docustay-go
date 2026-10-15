@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Emails** | **[]map[string]interface{}** |  | 
-**NextCursor** | **NullableString** |  | 
+**NextCursor** | **string** |  | 
 
 ## Methods
 
 ### NewListEmails200Response
 
-`func NewListEmails200Response(emails []map[string]interface{}, nextCursor NullableString, ) *ListEmails200Response`
+`func NewListEmails200Response(emails []map[string]interface{}, nextCursor string, ) *ListEmails200Response`
 
 NewListEmails200Response instantiates a new ListEmails200Response object
 This constructor will assign default values to properties that have it defined,
@@ -66,16 +66,6 @@ and a boolean to check if the value has been set.
 SetNextCursor sets NextCursor field to given value.
 
 
-### SetNextCursorNil
-
-`func (o *ListEmails200Response) SetNextCursorNil(b bool)`
-
- SetNextCursorNil sets the value for NextCursor to be an explicit nil
-
-### UnsetNextCursor
-`func (o *ListEmails200Response) UnsetNextCursor()`
-
-UnsetNextCursor ensures that no value is present for NextCursor, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

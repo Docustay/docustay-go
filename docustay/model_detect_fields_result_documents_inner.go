@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,7 +24,8 @@ type DetectFieldsResultDocumentsInner struct {
 	From int32 `json:"from"`
 	To int32 `json:"to"`
 	Kind string `json:"kind"`
-	Title NullableString `json:"title"`
+	Title string `json:"title"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DetectFieldsResultDocumentsInner DetectFieldsResultDocumentsInner
@@ -34,7 +34,7 @@ type _DetectFieldsResultDocumentsInner DetectFieldsResultDocumentsInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDetectFieldsResultDocumentsInner(from int32, to int32, kind string, title NullableString) *DetectFieldsResultDocumentsInner {
+func NewDetectFieldsResultDocumentsInner(from int32, to int32, kind string, title string) *DetectFieldsResultDocumentsInner {
 	this := DetectFieldsResultDocumentsInner{}
 	this.From = from
 	this.To = to
@@ -124,29 +124,27 @@ func (o *DetectFieldsResultDocumentsInner) SetKind(v string) {
 }
 
 // GetTitle returns the Title field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *DetectFieldsResultDocumentsInner) GetTitle() string {
-	if o == nil || o.Title.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.Title.Get()
+	return o.Title
 }
 
 // GetTitleOk returns a tuple with the Title field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DetectFieldsResultDocumentsInner) GetTitleOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Title.Get(), o.Title.IsSet()
+	return &o.Title, true
 }
 
 // SetTitle sets field value
 func (o *DetectFieldsResultDocumentsInner) SetTitle(v string) {
-	o.Title.Set(&v)
+	o.Title = v
 }
 
 func (o DetectFieldsResultDocumentsInner) MarshalJSON() ([]byte, error) {
@@ -162,7 +160,12 @@ func (o DetectFieldsResultDocumentsInner) ToMap() (map[string]interface{}, error
 	toSerialize["from"] = o.From
 	toSerialize["to"] = o.To
 	toSerialize["kind"] = o.Kind
-	toSerialize["title"] = o.Title.Get()
+	toSerialize["title"] = o.Title
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -193,15 +196,23 @@ func (o *DetectFieldsResultDocumentsInner) UnmarshalJSON(data []byte) (err error
 
 	varDetectFieldsResultDocumentsInner := _DetectFieldsResultDocumentsInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDetectFieldsResultDocumentsInner)
+	err = json.Unmarshal(data, &varDetectFieldsResultDocumentsInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DetectFieldsResultDocumentsInner(varDetectFieldsResultDocumentsInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "from")
+		delete(additionalProperties, "to")
+		delete(additionalProperties, "kind")
+		delete(additionalProperties, "title")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

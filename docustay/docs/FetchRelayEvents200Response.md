@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Events** | [**[]FetchRelayEvents200ResponseEventsInner**](FetchRelayEvents200ResponseEventsInner.md) |  | 
-**Cursor** | **NullableString** |  | 
+**Cursor** | **string** |  | 
 
 ## Methods
 
 ### NewFetchRelayEvents200Response
 
-`func NewFetchRelayEvents200Response(events []FetchRelayEvents200ResponseEventsInner, cursor NullableString, ) *FetchRelayEvents200Response`
+`func NewFetchRelayEvents200Response(events []FetchRelayEvents200ResponseEventsInner, cursor string, ) *FetchRelayEvents200Response`
 
 NewFetchRelayEvents200Response instantiates a new FetchRelayEvents200Response object
 This constructor will assign default values to properties that have it defined,
@@ -66,16 +66,6 @@ and a boolean to check if the value has been set.
 SetCursor sets Cursor field to given value.
 
 
-### SetCursorNil
-
-`func (o *FetchRelayEvents200Response) SetCursorNil(b bool)`
-
- SetCursorNil sets the value for Cursor to be an explicit nil
-
-### UnsetCursor
-`func (o *FetchRelayEvents200Response) UnsetCursor()`
-
-UnsetCursor ensures that no value is present for Cursor, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type ReportByDayInner struct {
 	Date string `json:"date"`
 	Sent int32 `json:"sent"`
 	Completed int32 `json:"completed"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ReportByDayInner ReportByDayInner
@@ -134,6 +134,11 @@ func (o ReportByDayInner) ToMap() (map[string]interface{}, error) {
 	toSerialize["date"] = o.Date
 	toSerialize["sent"] = o.Sent
 	toSerialize["completed"] = o.Completed
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -163,15 +168,22 @@ func (o *ReportByDayInner) UnmarshalJSON(data []byte) (err error) {
 
 	varReportByDayInner := _ReportByDayInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varReportByDayInner)
+	err = json.Unmarshal(data, &varReportByDayInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ReportByDayInner(varReportByDayInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "date")
+		delete(additionalProperties, "sent")
+		delete(additionalProperties, "completed")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

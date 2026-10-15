@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -33,6 +32,7 @@ type WebhookEndpoint struct {
 	ConsecutiveFailures int32 `json:"consecutiveFailures"`
 	Fingerprint string `json:"fingerprint"`
 	CreatedAt string `json:"createdAt"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _WebhookEndpoint WebhookEndpoint
@@ -328,6 +328,11 @@ func (o WebhookEndpoint) ToMap() (map[string]interface{}, error) {
 	toSerialize["consecutiveFailures"] = o.ConsecutiveFailures
 	toSerialize["fingerprint"] = o.Fingerprint
 	toSerialize["createdAt"] = o.CreatedAt
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -364,15 +369,29 @@ func (o *WebhookEndpoint) UnmarshalJSON(data []byte) (err error) {
 
 	varWebhookEndpoint := _WebhookEndpoint{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varWebhookEndpoint)
+	err = json.Unmarshal(data, &varWebhookEndpoint)
 
 	if err != nil {
 		return err
 	}
 
 	*o = WebhookEndpoint(varWebhookEndpoint)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "relay")
+		delete(additionalProperties, "eventTypes")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "disabledReason")
+		delete(additionalProperties, "consecutiveFailures")
+		delete(additionalProperties, "fingerprint")
+		delete(additionalProperties, "createdAt")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

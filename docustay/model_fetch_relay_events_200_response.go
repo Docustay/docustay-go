@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,7 +22,8 @@ var _ MappedNullable = &FetchRelayEvents200Response{}
 // FetchRelayEvents200Response struct for FetchRelayEvents200Response
 type FetchRelayEvents200Response struct {
 	Events []FetchRelayEvents200ResponseEventsInner `json:"events"`
-	Cursor NullableString `json:"cursor"`
+	Cursor string `json:"cursor"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FetchRelayEvents200Response FetchRelayEvents200Response
@@ -32,7 +32,7 @@ type _FetchRelayEvents200Response FetchRelayEvents200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFetchRelayEvents200Response(events []FetchRelayEvents200ResponseEventsInner, cursor NullableString) *FetchRelayEvents200Response {
+func NewFetchRelayEvents200Response(events []FetchRelayEvents200ResponseEventsInner, cursor string) *FetchRelayEvents200Response {
 	this := FetchRelayEvents200Response{}
 	this.Events = events
 	this.Cursor = cursor
@@ -72,29 +72,27 @@ func (o *FetchRelayEvents200Response) SetEvents(v []FetchRelayEvents200ResponseE
 }
 
 // GetCursor returns the Cursor field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *FetchRelayEvents200Response) GetCursor() string {
-	if o == nil || o.Cursor.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.Cursor.Get()
+	return o.Cursor
 }
 
 // GetCursorOk returns a tuple with the Cursor field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FetchRelayEvents200Response) GetCursorOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Cursor.Get(), o.Cursor.IsSet()
+	return &o.Cursor, true
 }
 
 // SetCursor sets field value
 func (o *FetchRelayEvents200Response) SetCursor(v string) {
-	o.Cursor.Set(&v)
+	o.Cursor = v
 }
 
 func (o FetchRelayEvents200Response) MarshalJSON() ([]byte, error) {
@@ -108,7 +106,12 @@ func (o FetchRelayEvents200Response) MarshalJSON() ([]byte, error) {
 func (o FetchRelayEvents200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["events"] = o.Events
-	toSerialize["cursor"] = o.Cursor.Get()
+	toSerialize["cursor"] = o.Cursor
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -137,15 +140,21 @@ func (o *FetchRelayEvents200Response) UnmarshalJSON(data []byte) (err error) {
 
 	varFetchRelayEvents200Response := _FetchRelayEvents200Response{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFetchRelayEvents200Response)
+	err = json.Unmarshal(data, &varFetchRelayEvents200Response)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FetchRelayEvents200Response(varFetchRelayEvents200Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "events")
+		delete(additionalProperties, "cursor")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

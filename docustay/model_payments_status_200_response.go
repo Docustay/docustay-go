@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,7 +22,8 @@ var _ MappedNullable = &PaymentsStatus200Response{}
 // PaymentsStatus200Response struct for PaymentsStatus200Response
 type PaymentsStatus200Response struct {
 	Status string `json:"status"`
-	Mode NullableString `json:"mode"`
+	Mode string `json:"mode"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PaymentsStatus200Response PaymentsStatus200Response
@@ -32,7 +32,7 @@ type _PaymentsStatus200Response PaymentsStatus200Response
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPaymentsStatus200Response(status string, mode NullableString) *PaymentsStatus200Response {
+func NewPaymentsStatus200Response(status string, mode string) *PaymentsStatus200Response {
 	this := PaymentsStatus200Response{}
 	this.Status = status
 	this.Mode = mode
@@ -72,29 +72,27 @@ func (o *PaymentsStatus200Response) SetStatus(v string) {
 }
 
 // GetMode returns the Mode field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *PaymentsStatus200Response) GetMode() string {
-	if o == nil || o.Mode.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.Mode.Get()
+	return o.Mode
 }
 
 // GetModeOk returns a tuple with the Mode field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PaymentsStatus200Response) GetModeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Mode.Get(), o.Mode.IsSet()
+	return &o.Mode, true
 }
 
 // SetMode sets field value
 func (o *PaymentsStatus200Response) SetMode(v string) {
-	o.Mode.Set(&v)
+	o.Mode = v
 }
 
 func (o PaymentsStatus200Response) MarshalJSON() ([]byte, error) {
@@ -108,7 +106,12 @@ func (o PaymentsStatus200Response) MarshalJSON() ([]byte, error) {
 func (o PaymentsStatus200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["status"] = o.Status
-	toSerialize["mode"] = o.Mode.Get()
+	toSerialize["mode"] = o.Mode
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -137,15 +140,21 @@ func (o *PaymentsStatus200Response) UnmarshalJSON(data []byte) (err error) {
 
 	varPaymentsStatus200Response := _PaymentsStatus200Response{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPaymentsStatus200Response)
+	err = json.Unmarshal(data, &varPaymentsStatus200Response)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PaymentsStatus200Response(varPaymentsStatus200Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "mode")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,24 +22,25 @@ var _ MappedNullable = &Document{}
 // Document struct for Document
 type Document struct {
 	// Your own id for this thing, so you can match it to your records. Filter lists with `externalId=`.
-	ExternalId NullableString `json:"externalId"`
+	ExternalId string `json:"externalId"`
 	// Your own key-value text (up to 20 keys; keys 1–40 letters, digits, dot, dash or underscore; values up to 500 characters). Returned in every response and every webhook for this document; never shown to a signer.
 	Metadata map[string]string `json:"metadata"`
 	Test bool `json:"test"`
 	Id string `json:"id"`
 	Title string `json:"title"`
 	State string `json:"state"`
-	SentAt NullableString `json:"sentAt"`
-	ExpiresAt NullableString `json:"expiresAt"`
-	ExecutedAt NullableString `json:"executedAt"`
-	VoidedAt NullableString `json:"voidedAt"`
-	VoidReason NullableString `json:"voidReason"`
-	Progress TestSign200ResponseProgress `json:"progress"`
+	SentAt string `json:"sentAt"`
+	ExpiresAt string `json:"expiresAt"`
+	ExecutedAt string `json:"executedAt"`
+	VoidedAt string `json:"voidedAt"`
+	VoidReason string `json:"voidReason"`
+	Progress DocumentProgress `json:"progress"`
 	SignedCopyAvailable bool `json:"signedCopyAvailable"`
 	Parties []Party `json:"parties"`
 	// Payments made through payment fields on this document (empty when it has none). A payment field's amount is set by ONE of: a fixed amount, a formula over the signer's own fields, a Stripe price, or a Stripe payment link — see the text tag settings `amount`, `formula`, `price` and `link`.
 	Payments []Payment `json:"payments"`
 	Events []DocumentEventsInner `json:"events"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Document Document
@@ -49,7 +49,7 @@ type _Document Document
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDocument(externalId NullableString, metadata map[string]string, test bool, id string, title string, state string, sentAt NullableString, expiresAt NullableString, executedAt NullableString, voidedAt NullableString, voidReason NullableString, progress TestSign200ResponseProgress, signedCopyAvailable bool, parties []Party, payments []Payment, events []DocumentEventsInner) *Document {
+func NewDocument(externalId string, metadata map[string]string, test bool, id string, title string, state string, sentAt string, expiresAt string, executedAt string, voidedAt string, voidReason string, progress DocumentProgress, signedCopyAvailable bool, parties []Party, payments []Payment, events []DocumentEventsInner) *Document {
 	this := Document{}
 	this.ExternalId = externalId
 	this.Metadata = metadata
@@ -79,29 +79,27 @@ func NewDocumentWithDefaults() *Document {
 }
 
 // GetExternalId returns the ExternalId field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *Document) GetExternalId() string {
-	if o == nil || o.ExternalId.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.ExternalId.Get()
+	return o.ExternalId
 }
 
 // GetExternalIdOk returns a tuple with the ExternalId field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Document) GetExternalIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.ExternalId.Get(), o.ExternalId.IsSet()
+	return &o.ExternalId, true
 }
 
 // SetExternalId sets field value
 func (o *Document) SetExternalId(v string) {
-	o.ExternalId.Set(&v)
+	o.ExternalId = v
 }
 
 // GetMetadata returns the Metadata field value
@@ -225,139 +223,129 @@ func (o *Document) SetState(v string) {
 }
 
 // GetSentAt returns the SentAt field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *Document) GetSentAt() string {
-	if o == nil || o.SentAt.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.SentAt.Get()
+	return o.SentAt
 }
 
 // GetSentAtOk returns a tuple with the SentAt field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Document) GetSentAtOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.SentAt.Get(), o.SentAt.IsSet()
+	return &o.SentAt, true
 }
 
 // SetSentAt sets field value
 func (o *Document) SetSentAt(v string) {
-	o.SentAt.Set(&v)
+	o.SentAt = v
 }
 
 // GetExpiresAt returns the ExpiresAt field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *Document) GetExpiresAt() string {
-	if o == nil || o.ExpiresAt.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.ExpiresAt.Get()
+	return o.ExpiresAt
 }
 
 // GetExpiresAtOk returns a tuple with the ExpiresAt field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Document) GetExpiresAtOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.ExpiresAt.Get(), o.ExpiresAt.IsSet()
+	return &o.ExpiresAt, true
 }
 
 // SetExpiresAt sets field value
 func (o *Document) SetExpiresAt(v string) {
-	o.ExpiresAt.Set(&v)
+	o.ExpiresAt = v
 }
 
 // GetExecutedAt returns the ExecutedAt field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *Document) GetExecutedAt() string {
-	if o == nil || o.ExecutedAt.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.ExecutedAt.Get()
+	return o.ExecutedAt
 }
 
 // GetExecutedAtOk returns a tuple with the ExecutedAt field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Document) GetExecutedAtOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.ExecutedAt.Get(), o.ExecutedAt.IsSet()
+	return &o.ExecutedAt, true
 }
 
 // SetExecutedAt sets field value
 func (o *Document) SetExecutedAt(v string) {
-	o.ExecutedAt.Set(&v)
+	o.ExecutedAt = v
 }
 
 // GetVoidedAt returns the VoidedAt field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *Document) GetVoidedAt() string {
-	if o == nil || o.VoidedAt.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.VoidedAt.Get()
+	return o.VoidedAt
 }
 
 // GetVoidedAtOk returns a tuple with the VoidedAt field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Document) GetVoidedAtOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.VoidedAt.Get(), o.VoidedAt.IsSet()
+	return &o.VoidedAt, true
 }
 
 // SetVoidedAt sets field value
 func (o *Document) SetVoidedAt(v string) {
-	o.VoidedAt.Set(&v)
+	o.VoidedAt = v
 }
 
 // GetVoidReason returns the VoidReason field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *Document) GetVoidReason() string {
-	if o == nil || o.VoidReason.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.VoidReason.Get()
+	return o.VoidReason
 }
 
 // GetVoidReasonOk returns a tuple with the VoidReason field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Document) GetVoidReasonOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.VoidReason.Get(), o.VoidReason.IsSet()
+	return &o.VoidReason, true
 }
 
 // SetVoidReason sets field value
 func (o *Document) SetVoidReason(v string) {
-	o.VoidReason.Set(&v)
+	o.VoidReason = v
 }
 
 // GetProgress returns the Progress field value
-func (o *Document) GetProgress() TestSign200ResponseProgress {
+func (o *Document) GetProgress() DocumentProgress {
 	if o == nil {
-		var ret TestSign200ResponseProgress
+		var ret DocumentProgress
 		return ret
 	}
 
@@ -366,7 +354,7 @@ func (o *Document) GetProgress() TestSign200ResponseProgress {
 
 // GetProgressOk returns a tuple with the Progress field value
 // and a boolean to check if the value has been set.
-func (o *Document) GetProgressOk() (*TestSign200ResponseProgress, bool) {
+func (o *Document) GetProgressOk() (*DocumentProgress, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -374,7 +362,7 @@ func (o *Document) GetProgressOk() (*TestSign200ResponseProgress, bool) {
 }
 
 // SetProgress sets field value
-func (o *Document) SetProgress(v TestSign200ResponseProgress) {
+func (o *Document) SetProgress(v DocumentProgress) {
 	o.Progress = v
 }
 
@@ -484,22 +472,27 @@ func (o Document) MarshalJSON() ([]byte, error) {
 
 func (o Document) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["externalId"] = o.ExternalId.Get()
+	toSerialize["externalId"] = o.ExternalId
 	toSerialize["metadata"] = o.Metadata
 	toSerialize["test"] = o.Test
 	toSerialize["id"] = o.Id
 	toSerialize["title"] = o.Title
 	toSerialize["state"] = o.State
-	toSerialize["sentAt"] = o.SentAt.Get()
-	toSerialize["expiresAt"] = o.ExpiresAt.Get()
-	toSerialize["executedAt"] = o.ExecutedAt.Get()
-	toSerialize["voidedAt"] = o.VoidedAt.Get()
-	toSerialize["voidReason"] = o.VoidReason.Get()
+	toSerialize["sentAt"] = o.SentAt
+	toSerialize["expiresAt"] = o.ExpiresAt
+	toSerialize["executedAt"] = o.ExecutedAt
+	toSerialize["voidedAt"] = o.VoidedAt
+	toSerialize["voidReason"] = o.VoidReason
 	toSerialize["progress"] = o.Progress
 	toSerialize["signedCopyAvailable"] = o.SignedCopyAvailable
 	toSerialize["parties"] = o.Parties
 	toSerialize["payments"] = o.Payments
 	toSerialize["events"] = o.Events
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -542,15 +535,35 @@ func (o *Document) UnmarshalJSON(data []byte) (err error) {
 
 	varDocument := _Document{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDocument)
+	err = json.Unmarshal(data, &varDocument)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Document(varDocument)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "externalId")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "test")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "state")
+		delete(additionalProperties, "sentAt")
+		delete(additionalProperties, "expiresAt")
+		delete(additionalProperties, "executedAt")
+		delete(additionalProperties, "voidedAt")
+		delete(additionalProperties, "voidReason")
+		delete(additionalProperties, "progress")
+		delete(additionalProperties, "signedCopyAvailable")
+		delete(additionalProperties, "parties")
+		delete(additionalProperties, "payments")
+		delete(additionalProperties, "events")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

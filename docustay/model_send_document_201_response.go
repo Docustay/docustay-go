@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,10 +23,15 @@ var _ MappedNullable = &SendDocument201Response{}
 type SendDocument201Response struct {
 	Id string `json:"id"`
 	State string `json:"state"`
+	// Your own id for this thing, so you can match it to your records. Filter lists with `externalId=`.
+	ExternalId *string `json:"externalId,omitempty"`
+	// Your own key-value text (up to 20 keys; keys 1–40 letters, digits, dot, dash or underscore; values up to 500 characters). Returned in every response and every webhook for this document; never shown to a signer.
+	Metadata map[string]string `json:"metadata,omitempty"`
 	// How many signing emails went out now.
 	Emailed int32 `json:"emailed"`
 	// Anyone who was NOT emailed, and why (for example `limit_reached`: the daily email limit). The document is still sent; fetch their link or send a reminder later.
 	NotEmailed []SendDocument201ResponseNotEmailedInner `json:"notEmailed"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SendDocument201Response SendDocument201Response
@@ -101,6 +105,70 @@ func (o *SendDocument201Response) SetState(v string) {
 	o.State = v
 }
 
+// GetExternalId returns the ExternalId field value if set, zero value otherwise.
+func (o *SendDocument201Response) GetExternalId() string {
+	if o == nil || IsNil(o.ExternalId) {
+		var ret string
+		return ret
+	}
+	return *o.ExternalId
+}
+
+// GetExternalIdOk returns a tuple with the ExternalId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SendDocument201Response) GetExternalIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ExternalId) {
+		return nil, false
+	}
+	return o.ExternalId, true
+}
+
+// HasExternalId returns a boolean if a field has been set.
+func (o *SendDocument201Response) HasExternalId() bool {
+	if o != nil && !IsNil(o.ExternalId) {
+		return true
+	}
+
+	return false
+}
+
+// SetExternalId gets a reference to the given string and assigns it to the ExternalId field.
+func (o *SendDocument201Response) SetExternalId(v string) {
+	o.ExternalId = &v
+}
+
+// GetMetadata returns the Metadata field value if set, zero value otherwise.
+func (o *SendDocument201Response) GetMetadata() map[string]string {
+	if o == nil || IsNil(o.Metadata) {
+		var ret map[string]string
+		return ret
+	}
+	return o.Metadata
+}
+
+// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SendDocument201Response) GetMetadataOk() (map[string]string, bool) {
+	if o == nil || IsNil(o.Metadata) {
+		return map[string]string{}, false
+	}
+	return o.Metadata, true
+}
+
+// HasMetadata returns a boolean if a field has been set.
+func (o *SendDocument201Response) HasMetadata() bool {
+	if o != nil && !IsNil(o.Metadata) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetadata gets a reference to the given map[string]string and assigns it to the Metadata field.
+func (o *SendDocument201Response) SetMetadata(v map[string]string) {
+	o.Metadata = v
+}
+
 // GetEmailed returns the Emailed field value
 func (o *SendDocument201Response) GetEmailed() int32 {
 	if o == nil {
@@ -161,8 +229,19 @@ func (o SendDocument201Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["state"] = o.State
+	if !IsNil(o.ExternalId) {
+		toSerialize["externalId"] = o.ExternalId
+	}
+	if !IsNil(o.Metadata) {
+		toSerialize["metadata"] = o.Metadata
+	}
 	toSerialize["emailed"] = o.Emailed
 	toSerialize["notEmailed"] = o.NotEmailed
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -193,15 +272,25 @@ func (o *SendDocument201Response) UnmarshalJSON(data []byte) (err error) {
 
 	varSendDocument201Response := _SendDocument201Response{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSendDocument201Response)
+	err = json.Unmarshal(data, &varSendDocument201Response)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SendDocument201Response(varSendDocument201Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "state")
+		delete(additionalProperties, "externalId")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "emailed")
+		delete(additionalProperties, "notEmailed")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

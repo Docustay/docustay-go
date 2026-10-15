@@ -4,18 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ExternalId** | Pointer to **NullableString** | Your own id for this thing, so you can match it to your records. Filter lists with &#x60;externalId&#x3D;&#x60;. | [optional] 
+**ExternalId** | Pointer to **string** | Your own id for this thing, so you can match it to your records. Filter lists with &#x60;externalId&#x3D;&#x60;. | [optional] 
 **Metadata** | Pointer to **map[string]string** | Your own key-value text (up to 20 keys; keys 1–40 letters, digits, dot, dash or underscore; values up to 500 characters). Returned in every response and every webhook for this document; never shown to a signer. | [optional] 
 **Id** | **string** |  | 
 **Name** | **string** |  | 
-**Pages** | **NullableInt32** |  | 
+**Pages** | **int32** |  | 
 **Seats** | [**[]TemplateSeatsInner**](TemplateSeatsInner.md) |  | 
 
 ## Methods
 
 ### NewTemplate
 
-`func NewTemplate(id string, name string, pages NullableInt32, seats []TemplateSeatsInner, ) *Template`
+`func NewTemplate(id string, name string, pages int32, seats []TemplateSeatsInner, ) *Template`
 
 NewTemplate instantiates a new Template object
 This constructor will assign default values to properties that have it defined,
@@ -55,16 +55,6 @@ SetExternalId sets ExternalId field to given value.
 
 HasExternalId returns a boolean if a field has been set.
 
-### SetExternalIdNil
-
-`func (o *Template) SetExternalIdNil(b bool)`
-
- SetExternalIdNil sets the value for ExternalId to be an explicit nil
-
-### UnsetExternalId
-`func (o *Template) UnsetExternalId()`
-
-UnsetExternalId ensures that no value is present for ExternalId, not even an explicit nil
 ### GetMetadata
 
 `func (o *Template) GetMetadata() map[string]string`
@@ -150,16 +140,6 @@ and a boolean to check if the value has been set.
 SetPages sets Pages field to given value.
 
 
-### SetPagesNil
-
-`func (o *Template) SetPagesNil(b bool)`
-
- SetPagesNil sets the value for Pages to be an explicit nil
-
-### UnsetPages
-`func (o *Template) UnsetPages()`
-
-UnsetPages ensures that no value is present for Pages, not even an explicit nil
 ### GetSeats
 
 `func (o *Template) GetSeats() []TemplateSeatsInner`

@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -40,6 +39,7 @@ type DetectedField struct {
 	// Tick boxes that answer one question share a group: pick one.
 	Group *string `json:"group,omitempty"`
 	Uncertain bool `json:"uncertain"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DetectedField DetectedField
@@ -506,6 +506,11 @@ func (o DetectedField) ToMap() (map[string]interface{}, error) {
 		toSerialize["group"] = o.Group
 	}
 	toSerialize["uncertain"] = o.Uncertain
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -542,15 +547,34 @@ func (o *DetectedField) UnmarshalJSON(data []byte) (err error) {
 
 	varDetectedField := _DetectedField{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDetectedField)
+	err = json.Unmarshal(data, &varDetectedField)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DetectedField(varDetectedField)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "type")
+		delete(additionalProperties, "page")
+		delete(additionalProperties, "x")
+		delete(additionalProperties, "y")
+		delete(additionalProperties, "w")
+		delete(additionalProperties, "h")
+		delete(additionalProperties, "confidence")
+		delete(additionalProperties, "source")
+		delete(additionalProperties, "label")
+		delete(additionalProperties, "role")
+		delete(additionalProperties, "sensitive")
+		delete(additionalProperties, "format")
+		delete(additionalProperties, "group")
+		delete(additionalProperties, "uncertain")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

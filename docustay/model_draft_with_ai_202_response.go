@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ var _ MappedNullable = &DraftWithAi202Response{}
 type DraftWithAi202Response struct {
 	JobId string `json:"jobId"`
 	State string `json:"state"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DraftWithAi202Response DraftWithAi202Response
@@ -107,6 +107,11 @@ func (o DraftWithAi202Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["jobId"] = o.JobId
 	toSerialize["state"] = o.State
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *DraftWithAi202Response) UnmarshalJSON(data []byte) (err error) {
 
 	varDraftWithAi202Response := _DraftWithAi202Response{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDraftWithAi202Response)
+	err = json.Unmarshal(data, &varDraftWithAi202Response)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DraftWithAi202Response(varDraftWithAi202Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "jobId")
+		delete(additionalProperties, "state")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

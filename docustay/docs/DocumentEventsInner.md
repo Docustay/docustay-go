@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**At** | **NullableString** |  | 
+**At** | **string** |  | 
 **Kind** | **string** |  | 
 **Text** | **string** |  | 
 
@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 
 ### NewDocumentEventsInner
 
-`func NewDocumentEventsInner(at NullableString, kind string, text string, ) *DocumentEventsInner`
+`func NewDocumentEventsInner(at string, kind string, text string, ) *DocumentEventsInner`
 
 NewDocumentEventsInner instantiates a new DocumentEventsInner object
 This constructor will assign default values to properties that have it defined,
@@ -47,16 +47,6 @@ and a boolean to check if the value has been set.
 SetAt sets At field to given value.
 
 
-### SetAtNil
-
-`func (o *DocumentEventsInner) SetAtNil(b bool)`
-
- SetAtNil sets the value for At to be an explicit nil
-
-### UnsetAt
-`func (o *DocumentEventsInner) UnsetAt()`
-
-UnsetAt ensures that no value is present for At, not even an explicit nil
 ### GetKind
 
 `func (o *DocumentEventsInner) GetKind() string`

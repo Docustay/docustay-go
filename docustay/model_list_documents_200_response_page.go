@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,8 +22,9 @@ var _ MappedNullable = &ListDocuments200ResponsePage{}
 // ListDocuments200ResponsePage struct for ListDocuments200ResponsePage
 type ListDocuments200ResponsePage struct {
 	Limit int32 `json:"limit"`
-	NextCursor NullableString `json:"nextCursor"`
+	NextCursor string `json:"nextCursor"`
 	HasMore bool `json:"hasMore"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ListDocuments200ResponsePage ListDocuments200ResponsePage
@@ -33,7 +33,7 @@ type _ListDocuments200ResponsePage ListDocuments200ResponsePage
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListDocuments200ResponsePage(limit int32, nextCursor NullableString, hasMore bool) *ListDocuments200ResponsePage {
+func NewListDocuments200ResponsePage(limit int32, nextCursor string, hasMore bool) *ListDocuments200ResponsePage {
 	this := ListDocuments200ResponsePage{}
 	this.Limit = limit
 	this.NextCursor = nextCursor
@@ -74,29 +74,27 @@ func (o *ListDocuments200ResponsePage) SetLimit(v int32) {
 }
 
 // GetNextCursor returns the NextCursor field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *ListDocuments200ResponsePage) GetNextCursor() string {
-	if o == nil || o.NextCursor.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.NextCursor.Get()
+	return o.NextCursor
 }
 
 // GetNextCursorOk returns a tuple with the NextCursor field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ListDocuments200ResponsePage) GetNextCursorOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.NextCursor.Get(), o.NextCursor.IsSet()
+	return &o.NextCursor, true
 }
 
 // SetNextCursor sets field value
 func (o *ListDocuments200ResponsePage) SetNextCursor(v string) {
-	o.NextCursor.Set(&v)
+	o.NextCursor = v
 }
 
 // GetHasMore returns the HasMore field value
@@ -134,8 +132,13 @@ func (o ListDocuments200ResponsePage) MarshalJSON() ([]byte, error) {
 func (o ListDocuments200ResponsePage) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["limit"] = o.Limit
-	toSerialize["nextCursor"] = o.NextCursor.Get()
+	toSerialize["nextCursor"] = o.NextCursor
 	toSerialize["hasMore"] = o.HasMore
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -165,15 +168,22 @@ func (o *ListDocuments200ResponsePage) UnmarshalJSON(data []byte) (err error) {
 
 	varListDocuments200ResponsePage := _ListDocuments200ResponsePage{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varListDocuments200ResponsePage)
+	err = json.Unmarshal(data, &varListDocuments200ResponsePage)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ListDocuments200ResponsePage(varListDocuments200ResponsePage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "limit")
+		delete(additionalProperties, "nextCursor")
+		delete(additionalProperties, "hasMore")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

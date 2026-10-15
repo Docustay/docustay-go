@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,9 +25,10 @@ type ListWebhookDeliveries200ResponseDeliveriesInner struct {
 	Event string `json:"event"`
 	Attempt int32 `json:"attempt"`
 	Status string `json:"status"`
-	ResponseStatus NullableFloat32 `json:"responseStatus"`
-	Error NullableString `json:"error"`
+	ResponseStatus float32 `json:"responseStatus"`
+	Error string `json:"error"`
 	AttemptedAt string `json:"attemptedAt"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ListWebhookDeliveries200ResponseDeliveriesInner ListWebhookDeliveries200ResponseDeliveriesInner
@@ -37,7 +37,7 @@ type _ListWebhookDeliveries200ResponseDeliveriesInner ListWebhookDeliveries200Re
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewListWebhookDeliveries200ResponseDeliveriesInner(id string, event string, attempt int32, status string, responseStatus NullableFloat32, error_ NullableString, attemptedAt string) *ListWebhookDeliveries200ResponseDeliveriesInner {
+func NewListWebhookDeliveries200ResponseDeliveriesInner(id string, event string, attempt int32, status string, responseStatus float32, error_ string, attemptedAt string) *ListWebhookDeliveries200ResponseDeliveriesInner {
 	this := ListWebhookDeliveries200ResponseDeliveriesInner{}
 	this.Id = id
 	this.Event = event
@@ -154,55 +154,51 @@ func (o *ListWebhookDeliveries200ResponseDeliveriesInner) SetStatus(v string) {
 }
 
 // GetResponseStatus returns the ResponseStatus field value
-// If the value is explicit nil, the zero value for float32 will be returned
 func (o *ListWebhookDeliveries200ResponseDeliveriesInner) GetResponseStatus() float32 {
-	if o == nil || o.ResponseStatus.Get() == nil {
+	if o == nil {
 		var ret float32
 		return ret
 	}
 
-	return *o.ResponseStatus.Get()
+	return o.ResponseStatus
 }
 
 // GetResponseStatusOk returns a tuple with the ResponseStatus field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ListWebhookDeliveries200ResponseDeliveriesInner) GetResponseStatusOk() (*float32, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.ResponseStatus.Get(), o.ResponseStatus.IsSet()
+	return &o.ResponseStatus, true
 }
 
 // SetResponseStatus sets field value
 func (o *ListWebhookDeliveries200ResponseDeliveriesInner) SetResponseStatus(v float32) {
-	o.ResponseStatus.Set(&v)
+	o.ResponseStatus = v
 }
 
 // GetError returns the Error field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *ListWebhookDeliveries200ResponseDeliveriesInner) GetError() string {
-	if o == nil || o.Error.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.Error.Get()
+	return o.Error
 }
 
 // GetErrorOk returns a tuple with the Error field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ListWebhookDeliveries200ResponseDeliveriesInner) GetErrorOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Error.Get(), o.Error.IsSet()
+	return &o.Error, true
 }
 
 // SetError sets field value
 func (o *ListWebhookDeliveries200ResponseDeliveriesInner) SetError(v string) {
-	o.Error.Set(&v)
+	o.Error = v
 }
 
 // GetAttemptedAt returns the AttemptedAt field value
@@ -243,9 +239,14 @@ func (o ListWebhookDeliveries200ResponseDeliveriesInner) ToMap() (map[string]int
 	toSerialize["event"] = o.Event
 	toSerialize["attempt"] = o.Attempt
 	toSerialize["status"] = o.Status
-	toSerialize["responseStatus"] = o.ResponseStatus.Get()
-	toSerialize["error"] = o.Error.Get()
+	toSerialize["responseStatus"] = o.ResponseStatus
+	toSerialize["error"] = o.Error
 	toSerialize["attemptedAt"] = o.AttemptedAt
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -279,15 +280,26 @@ func (o *ListWebhookDeliveries200ResponseDeliveriesInner) UnmarshalJSON(data []b
 
 	varListWebhookDeliveries200ResponseDeliveriesInner := _ListWebhookDeliveries200ResponseDeliveriesInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varListWebhookDeliveries200ResponseDeliveriesInner)
+	err = json.Unmarshal(data, &varListWebhookDeliveries200ResponseDeliveriesInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ListWebhookDeliveries200ResponseDeliveriesInner(varListWebhookDeliveries200ResponseDeliveriesInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "event")
+		delete(additionalProperties, "attempt")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "responseStatus")
+		delete(additionalProperties, "error")
+		delete(additionalProperties, "attemptedAt")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

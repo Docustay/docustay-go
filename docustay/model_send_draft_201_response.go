@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type SendDraft201Response struct {
 	State string `json:"state"`
 	Emailed int32 `json:"emailed"`
 	NotEmailed []interface{} `json:"notEmailed"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SendDraft201Response SendDraft201Response
@@ -161,6 +161,11 @@ func (o SendDraft201Response) ToMap() (map[string]interface{}, error) {
 	toSerialize["state"] = o.State
 	toSerialize["emailed"] = o.Emailed
 	toSerialize["notEmailed"] = o.NotEmailed
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -191,15 +196,23 @@ func (o *SendDraft201Response) UnmarshalJSON(data []byte) (err error) {
 
 	varSendDraft201Response := _SendDraft201Response{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSendDraft201Response)
+	err = json.Unmarshal(data, &varSendDraft201Response)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SendDraft201Response(varSendDraft201Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "state")
+		delete(additionalProperties, "emailed")
+		delete(additionalProperties, "notEmailed")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

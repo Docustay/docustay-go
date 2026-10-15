@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -34,6 +33,7 @@ type Party struct {
 	ViewedAt NullableString `json:"viewedAt"`
 	CompletedAt NullableString `json:"completedAt"`
 	DeclineReason NullableString `json:"declineReason"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Party Party
@@ -335,6 +335,11 @@ func (o Party) ToMap() (map[string]interface{}, error) {
 	toSerialize["viewedAt"] = o.ViewedAt.Get()
 	toSerialize["completedAt"] = o.CompletedAt.Get()
 	toSerialize["declineReason"] = o.DeclineReason.Get()
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -371,15 +376,29 @@ func (o *Party) UnmarshalJSON(data []byte) (err error) {
 
 	varParty := _Party{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varParty)
+	err = json.Unmarshal(data, &varParty)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Party(varParty)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "seat")
+		delete(additionalProperties, "externalId")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "name")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "role")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "viewedAt")
+		delete(additionalProperties, "completedAt")
+		delete(additionalProperties, "declineReason")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

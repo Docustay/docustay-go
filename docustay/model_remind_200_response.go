@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ var _ MappedNullable = &Remind200Response{}
 type Remind200Response struct {
 	Id string `json:"id"`
 	Reminded int32 `json:"reminded"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Remind200Response Remind200Response
@@ -107,6 +107,11 @@ func (o Remind200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
 	toSerialize["reminded"] = o.Reminded
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *Remind200Response) UnmarshalJSON(data []byte) (err error) {
 
 	varRemind200Response := _Remind200Response{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRemind200Response)
+	err = json.Unmarshal(data, &varRemind200Response)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Remind200Response(varRemind200Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "reminded")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

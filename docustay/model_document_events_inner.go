@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -22,9 +21,10 @@ var _ MappedNullable = &DocumentEventsInner{}
 
 // DocumentEventsInner struct for DocumentEventsInner
 type DocumentEventsInner struct {
-	At NullableString `json:"at"`
+	At string `json:"at"`
 	Kind string `json:"kind"`
 	Text string `json:"text"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DocumentEventsInner DocumentEventsInner
@@ -33,7 +33,7 @@ type _DocumentEventsInner DocumentEventsInner
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDocumentEventsInner(at NullableString, kind string, text string) *DocumentEventsInner {
+func NewDocumentEventsInner(at string, kind string, text string) *DocumentEventsInner {
 	this := DocumentEventsInner{}
 	this.At = at
 	this.Kind = kind
@@ -50,29 +50,27 @@ func NewDocumentEventsInnerWithDefaults() *DocumentEventsInner {
 }
 
 // GetAt returns the At field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *DocumentEventsInner) GetAt() string {
-	if o == nil || o.At.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.At.Get()
+	return o.At
 }
 
 // GetAtOk returns a tuple with the At field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DocumentEventsInner) GetAtOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.At.Get(), o.At.IsSet()
+	return &o.At, true
 }
 
 // SetAt sets field value
 func (o *DocumentEventsInner) SetAt(v string) {
-	o.At.Set(&v)
+	o.At = v
 }
 
 // GetKind returns the Kind field value
@@ -133,9 +131,14 @@ func (o DocumentEventsInner) MarshalJSON() ([]byte, error) {
 
 func (o DocumentEventsInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["at"] = o.At.Get()
+	toSerialize["at"] = o.At
 	toSerialize["kind"] = o.Kind
 	toSerialize["text"] = o.Text
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -165,15 +168,22 @@ func (o *DocumentEventsInner) UnmarshalJSON(data []byte) (err error) {
 
 	varDocumentEventsInner := _DocumentEventsInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDocumentEventsInner)
+	err = json.Unmarshal(data, &varDocumentEventsInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DocumentEventsInner(varDocumentEventsInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "at")
+		delete(additionalProperties, "kind")
+		delete(additionalProperties, "text")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

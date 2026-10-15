@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ var _ MappedNullable = &TestSign200ResponseProgress{}
 type TestSign200ResponseProgress struct {
 	Signed int32 `json:"signed"`
 	Of int32 `json:"of"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TestSign200ResponseProgress TestSign200ResponseProgress
@@ -107,6 +107,11 @@ func (o TestSign200ResponseProgress) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["signed"] = o.Signed
 	toSerialize["of"] = o.Of
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *TestSign200ResponseProgress) UnmarshalJSON(data []byte) (err error) {
 
 	varTestSign200ResponseProgress := _TestSign200ResponseProgress{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTestSign200ResponseProgress)
+	err = json.Unmarshal(data, &varTestSign200ResponseProgress)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TestSign200ResponseProgress(varTestSign200ResponseProgress)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "signed")
+		delete(additionalProperties, "of")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

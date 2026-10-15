@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type TemplateMadeDetected struct {
 	Signers int32 `json:"signers"`
 	LowConfidence int32 `json:"lowConfidence"`
 	Placed int32 `json:"placed"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TemplateMadeDetected TemplateMadeDetected
@@ -161,6 +161,11 @@ func (o TemplateMadeDetected) ToMap() (map[string]interface{}, error) {
 	toSerialize["signers"] = o.Signers
 	toSerialize["lowConfidence"] = o.LowConfidence
 	toSerialize["placed"] = o.Placed
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -191,15 +196,23 @@ func (o *TemplateMadeDetected) UnmarshalJSON(data []byte) (err error) {
 
 	varTemplateMadeDetected := _TemplateMadeDetected{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTemplateMadeDetected)
+	err = json.Unmarshal(data, &varTemplateMadeDetected)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TemplateMadeDetected(varTemplateMadeDetected)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fields")
+		delete(additionalProperties, "signers")
+		delete(additionalProperties, "lowConfidence")
+		delete(additionalProperties, "placed")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -46,6 +46,8 @@ docs/DetectedField.md
 docs/Document.md
 docs/DocumentEventsInner.md
 docs/DocumentMade.md
+docs/DocumentMadeApproval.md
+docs/DocumentProgress.md
 docs/DocumentSummary.md
 docs/DocumentsAPI.md
 docs/DraftFromLibraryTemplateRequest.md
@@ -98,6 +100,7 @@ docs/Remind200Response.md
 docs/RemindRequest.md
 docs/Report.md
 docs/ReportByDayInner.md
+docs/ReportByTeamInner.md
 docs/ReportByTemplateInner.md
 docs/ReportTotals.md
 docs/ReportWindow.md
@@ -178,6 +181,8 @@ model_detected_field.go
 model_document.go
 model_document_events_inner.go
 model_document_made.go
+model_document_made_approval.go
+model_document_progress.go
 model_document_summary.go
 model_draft_from_library_template_request.go
 model_draft_with_ai_202_response.go
@@ -224,6 +229,7 @@ model_remind_200_response.go
 model_remind_request.go
 model_report.go
 model_report_by_day_inner.go
+model_report_by_team_inner.go
 model_report_by_template_inner.go
 model_report_totals.go
 model_report_window.go

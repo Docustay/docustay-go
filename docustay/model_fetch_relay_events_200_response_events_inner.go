@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,10 +22,11 @@ var _ MappedNullable = &FetchRelayEvents200ResponseEventsInner{}
 // FetchRelayEvents200ResponseEventsInner struct for FetchRelayEvents200ResponseEventsInner
 type FetchRelayEvents200ResponseEventsInner struct {
 	Id string `json:"id"`
-	Topic NullableString `json:"topic"`
+	Topic string `json:"topic"`
 	Headers map[string]string `json:"headers"`
 	Body string `json:"body"`
 	At string `json:"at"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _FetchRelayEvents200ResponseEventsInner FetchRelayEvents200ResponseEventsInner
@@ -35,7 +35,7 @@ type _FetchRelayEvents200ResponseEventsInner FetchRelayEvents200ResponseEventsIn
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFetchRelayEvents200ResponseEventsInner(id string, topic NullableString, headers map[string]string, body string, at string) *FetchRelayEvents200ResponseEventsInner {
+func NewFetchRelayEvents200ResponseEventsInner(id string, topic string, headers map[string]string, body string, at string) *FetchRelayEvents200ResponseEventsInner {
 	this := FetchRelayEvents200ResponseEventsInner{}
 	this.Id = id
 	this.Topic = topic
@@ -78,29 +78,27 @@ func (o *FetchRelayEvents200ResponseEventsInner) SetId(v string) {
 }
 
 // GetTopic returns the Topic field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *FetchRelayEvents200ResponseEventsInner) GetTopic() string {
-	if o == nil || o.Topic.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.Topic.Get()
+	return o.Topic
 }
 
 // GetTopicOk returns a tuple with the Topic field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *FetchRelayEvents200ResponseEventsInner) GetTopicOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Topic.Get(), o.Topic.IsSet()
+	return &o.Topic, true
 }
 
 // SetTopic sets field value
 func (o *FetchRelayEvents200ResponseEventsInner) SetTopic(v string) {
-	o.Topic.Set(&v)
+	o.Topic = v
 }
 
 // GetHeaders returns the Headers field value
@@ -186,10 +184,15 @@ func (o FetchRelayEvents200ResponseEventsInner) MarshalJSON() ([]byte, error) {
 func (o FetchRelayEvents200ResponseEventsInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
-	toSerialize["topic"] = o.Topic.Get()
+	toSerialize["topic"] = o.Topic
 	toSerialize["headers"] = o.Headers
 	toSerialize["body"] = o.Body
 	toSerialize["at"] = o.At
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -221,15 +224,24 @@ func (o *FetchRelayEvents200ResponseEventsInner) UnmarshalJSON(data []byte) (err
 
 	varFetchRelayEvents200ResponseEventsInner := _FetchRelayEvents200ResponseEventsInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varFetchRelayEvents200ResponseEventsInner)
+	err = json.Unmarshal(data, &varFetchRelayEvents200ResponseEventsInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = FetchRelayEvents200ResponseEventsInner(varFetchRelayEvents200ResponseEventsInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "topic")
+		delete(additionalProperties, "headers")
+		delete(additionalProperties, "body")
+		delete(additionalProperties, "at")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

@@ -7,13 +7,13 @@ Name | Type | Description | Notes
 **From** | **int32** |  | 
 **To** | **int32** |  | 
 **Kind** | **string** |  | 
-**Title** | **NullableString** |  | 
+**Title** | **string** |  | 
 
 ## Methods
 
 ### NewDetectFieldsResultDocumentsInner
 
-`func NewDetectFieldsResultDocumentsInner(from int32, to int32, kind string, title NullableString, ) *DetectFieldsResultDocumentsInner`
+`func NewDetectFieldsResultDocumentsInner(from int32, to int32, kind string, title string, ) *DetectFieldsResultDocumentsInner`
 
 NewDetectFieldsResultDocumentsInner instantiates a new DetectFieldsResultDocumentsInner object
 This constructor will assign default values to properties that have it defined,
@@ -108,16 +108,6 @@ and a boolean to check if the value has been set.
 SetTitle sets Title field to given value.
 
 
-### SetTitleNil
-
-`func (o *DetectFieldsResultDocumentsInner) SetTitleNil(b bool)`
-
- SetTitleNil sets the value for Title to be an explicit nil
-
-### UnsetTitle
-`func (o *DetectFieldsResultDocumentsInner) UnsetTitle()`
-
-UnsetTitle ensures that no value is present for Title, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

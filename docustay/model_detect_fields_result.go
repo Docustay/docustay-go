@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type DetectFieldsResult struct {
 	Documents []DetectFieldsResultDocumentsInner `json:"documents"`
 	Summary DetectFieldsResultSummary `json:"summary"`
 	Notes []string `json:"notes"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DetectFieldsResult DetectFieldsResult
@@ -215,6 +215,11 @@ func (o DetectFieldsResult) ToMap() (map[string]interface{}, error) {
 	toSerialize["documents"] = o.Documents
 	toSerialize["summary"] = o.Summary
 	toSerialize["notes"] = o.Notes
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -247,15 +252,25 @@ func (o *DetectFieldsResult) UnmarshalJSON(data []byte) (err error) {
 
 	varDetectFieldsResult := _DetectFieldsResult{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDetectFieldsResult)
+	err = json.Unmarshal(data, &varDetectFieldsResult)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DetectFieldsResult(varDetectFieldsResult)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "fields")
+		delete(additionalProperties, "signers")
+		delete(additionalProperties, "pages")
+		delete(additionalProperties, "documents")
+		delete(additionalProperties, "summary")
+		delete(additionalProperties, "notes")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

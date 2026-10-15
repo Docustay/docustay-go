@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,8 +26,9 @@ type Report struct {
 	Totals ReportTotals `json:"totals"`
 	ByDay []ReportByDayInner `json:"byDay"`
 	ByTemplate []ReportByTemplateInner `json:"byTemplate"`
-	ByTeam []ReportByTemplateInner `json:"byTeam"`
-	BySender []ReportByTemplateInner `json:"bySender"`
+	ByTeam []ReportByTeamInner `json:"byTeam"`
+	BySender []ReportByTeamInner `json:"bySender"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Report Report
@@ -37,7 +37,7 @@ type _Report Report
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewReport(window ReportWindow, timezone string, totals ReportTotals, byDay []ReportByDayInner, byTemplate []ReportByTemplateInner, byTeam []ReportByTemplateInner, bySender []ReportByTemplateInner) *Report {
+func NewReport(window ReportWindow, timezone string, totals ReportTotals, byDay []ReportByDayInner, byTemplate []ReportByTemplateInner, byTeam []ReportByTeamInner, bySender []ReportByTeamInner) *Report {
 	this := Report{}
 	this.Window = window
 	this.Timezone = timezone
@@ -178,9 +178,9 @@ func (o *Report) SetByTemplate(v []ReportByTemplateInner) {
 }
 
 // GetByTeam returns the ByTeam field value
-func (o *Report) GetByTeam() []ReportByTemplateInner {
+func (o *Report) GetByTeam() []ReportByTeamInner {
 	if o == nil {
-		var ret []ReportByTemplateInner
+		var ret []ReportByTeamInner
 		return ret
 	}
 
@@ -189,7 +189,7 @@ func (o *Report) GetByTeam() []ReportByTemplateInner {
 
 // GetByTeamOk returns a tuple with the ByTeam field value
 // and a boolean to check if the value has been set.
-func (o *Report) GetByTeamOk() ([]ReportByTemplateInner, bool) {
+func (o *Report) GetByTeamOk() ([]ReportByTeamInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -197,14 +197,14 @@ func (o *Report) GetByTeamOk() ([]ReportByTemplateInner, bool) {
 }
 
 // SetByTeam sets field value
-func (o *Report) SetByTeam(v []ReportByTemplateInner) {
+func (o *Report) SetByTeam(v []ReportByTeamInner) {
 	o.ByTeam = v
 }
 
 // GetBySender returns the BySender field value
-func (o *Report) GetBySender() []ReportByTemplateInner {
+func (o *Report) GetBySender() []ReportByTeamInner {
 	if o == nil {
-		var ret []ReportByTemplateInner
+		var ret []ReportByTeamInner
 		return ret
 	}
 
@@ -213,7 +213,7 @@ func (o *Report) GetBySender() []ReportByTemplateInner {
 
 // GetBySenderOk returns a tuple with the BySender field value
 // and a boolean to check if the value has been set.
-func (o *Report) GetBySenderOk() ([]ReportByTemplateInner, bool) {
+func (o *Report) GetBySenderOk() ([]ReportByTeamInner, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -221,7 +221,7 @@ func (o *Report) GetBySenderOk() ([]ReportByTemplateInner, bool) {
 }
 
 // SetBySender sets field value
-func (o *Report) SetBySender(v []ReportByTemplateInner) {
+func (o *Report) SetBySender(v []ReportByTeamInner) {
 	o.BySender = v
 }
 
@@ -242,6 +242,11 @@ func (o Report) ToMap() (map[string]interface{}, error) {
 	toSerialize["byTemplate"] = o.ByTemplate
 	toSerialize["byTeam"] = o.ByTeam
 	toSerialize["bySender"] = o.BySender
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -275,15 +280,26 @@ func (o *Report) UnmarshalJSON(data []byte) (err error) {
 
 	varReport := _Report{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varReport)
+	err = json.Unmarshal(data, &varReport)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Report(varReport)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "window")
+		delete(additionalProperties, "timezone")
+		delete(additionalProperties, "totals")
+		delete(additionalProperties, "byDay")
+		delete(additionalProperties, "byTemplate")
+		delete(additionalProperties, "byTeam")
+		delete(additionalProperties, "bySender")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

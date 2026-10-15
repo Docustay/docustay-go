@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,13 +22,14 @@ var _ MappedNullable = &TemplateMade{}
 // TemplateMade struct for TemplateMade
 type TemplateMade struct {
 	// Your own id for this thing, so you can match it to your records. Filter lists with `externalId=`.
-	ExternalId NullableString `json:"externalId,omitempty"`
+	ExternalId *string `json:"externalId,omitempty"`
 	// Your own key-value text (up to 20 keys; keys 1–40 letters, digits, dot, dash or underscore; values up to 500 characters). Returned in every response and every webhook for this document; never shown to a signer.
 	Metadata map[string]string `json:"metadata,omitempty"`
 	TemplateId string `json:"templateId"`
 	Fields int32 `json:"fields"`
 	Warnings []TemplateMadeWarningsInner `json:"warnings"`
 	Detected *TemplateMadeDetected `json:"detected,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TemplateMade TemplateMade
@@ -54,46 +54,36 @@ func NewTemplateMadeWithDefaults() *TemplateMade {
 	return &this
 }
 
-// GetExternalId returns the ExternalId field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetExternalId returns the ExternalId field value if set, zero value otherwise.
 func (o *TemplateMade) GetExternalId() string {
-	if o == nil || IsNil(o.ExternalId.Get()) {
+	if o == nil || IsNil(o.ExternalId) {
 		var ret string
 		return ret
 	}
-	return *o.ExternalId.Get()
+	return *o.ExternalId
 }
 
 // GetExternalIdOk returns a tuple with the ExternalId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TemplateMade) GetExternalIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ExternalId) {
 		return nil, false
 	}
-	return o.ExternalId.Get(), o.ExternalId.IsSet()
+	return o.ExternalId, true
 }
 
 // HasExternalId returns a boolean if a field has been set.
 func (o *TemplateMade) HasExternalId() bool {
-	if o != nil && o.ExternalId.IsSet() {
+	if o != nil && !IsNil(o.ExternalId) {
 		return true
 	}
 
 	return false
 }
 
-// SetExternalId gets a reference to the given NullableString and assigns it to the ExternalId field.
+// SetExternalId gets a reference to the given string and assigns it to the ExternalId field.
 func (o *TemplateMade) SetExternalId(v string) {
-	o.ExternalId.Set(&v)
-}
-// SetExternalIdNil sets the value for ExternalId to be an explicit nil
-func (o *TemplateMade) SetExternalIdNil() {
-	o.ExternalId.Set(nil)
-}
-
-// UnsetExternalId ensures that no value is present for ExternalId, not even an explicit nil
-func (o *TemplateMade) UnsetExternalId() {
-	o.ExternalId.Unset()
+	o.ExternalId = &v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
@@ -242,8 +232,8 @@ func (o TemplateMade) MarshalJSON() ([]byte, error) {
 
 func (o TemplateMade) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if o.ExternalId.IsSet() {
-		toSerialize["externalId"] = o.ExternalId.Get()
+	if !IsNil(o.ExternalId) {
+		toSerialize["externalId"] = o.ExternalId
 	}
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
@@ -254,6 +244,11 @@ func (o TemplateMade) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Detected) {
 		toSerialize["detected"] = o.Detected
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -283,15 +278,25 @@ func (o *TemplateMade) UnmarshalJSON(data []byte) (err error) {
 
 	varTemplateMade := _TemplateMade{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTemplateMade)
+	err = json.Unmarshal(data, &varTemplateMade)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TemplateMade(varTemplateMade)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "externalId")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "templateId")
+		delete(additionalProperties, "fields")
+		delete(additionalProperties, "warnings")
+		delete(additionalProperties, "detected")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

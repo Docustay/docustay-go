@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -23,6 +22,7 @@ var _ MappedNullable = &DeleteWebhook200Response{}
 // DeleteWebhook200Response struct for DeleteWebhook200Response
 type DeleteWebhook200Response struct {
 	Ok bool `json:"ok"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DeleteWebhook200Response DeleteWebhook200Response
@@ -80,6 +80,11 @@ func (o DeleteWebhook200Response) MarshalJSON() ([]byte, error) {
 func (o DeleteWebhook200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["ok"] = o.Ok
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -107,15 +112,20 @@ func (o *DeleteWebhook200Response) UnmarshalJSON(data []byte) (err error) {
 
 	varDeleteWebhook200Response := _DeleteWebhook200Response{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDeleteWebhook200Response)
+	err = json.Unmarshal(data, &varDeleteWebhook200Response)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DeleteWebhook200Response(varDeleteWebhook200Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "ok")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

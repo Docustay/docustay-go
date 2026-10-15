@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type RotateWebhookSecret200Response struct {
 	Secret string `json:"secret"`
 	Fingerprint string `json:"fingerprint"`
 	PreviousValidUntil string `json:"previousValidUntil"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _RotateWebhookSecret200Response RotateWebhookSecret200Response
@@ -134,6 +134,11 @@ func (o RotateWebhookSecret200Response) ToMap() (map[string]interface{}, error) 
 	toSerialize["secret"] = o.Secret
 	toSerialize["fingerprint"] = o.Fingerprint
 	toSerialize["previousValidUntil"] = o.PreviousValidUntil
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -163,15 +168,22 @@ func (o *RotateWebhookSecret200Response) UnmarshalJSON(data []byte) (err error) 
 
 	varRotateWebhookSecret200Response := _RotateWebhookSecret200Response{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varRotateWebhookSecret200Response)
+	err = json.Unmarshal(data, &varRotateWebhookSecret200Response)
 
 	if err != nil {
 		return err
 	}
 
 	*o = RotateWebhookSecret200Response(varRotateWebhookSecret200Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "secret")
+		delete(additionalProperties, "fingerprint")
+		delete(additionalProperties, "previousValidUntil")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

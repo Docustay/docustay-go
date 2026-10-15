@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -36,6 +35,7 @@ type DocumentSummary struct {
 	SentAt NullableString `json:"sentAt"`
 	ExecutedAt NullableString `json:"executedAt"`
 	ExpiresAt NullableString `json:"expiresAt"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _DocumentSummary DocumentSummary
@@ -363,6 +363,11 @@ func (o DocumentSummary) ToMap() (map[string]interface{}, error) {
 	toSerialize["sentAt"] = o.SentAt.Get()
 	toSerialize["executedAt"] = o.ExecutedAt.Get()
 	toSerialize["expiresAt"] = o.ExpiresAt.Get()
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -400,15 +405,30 @@ func (o *DocumentSummary) UnmarshalJSON(data []byte) (err error) {
 
 	varDocumentSummary := _DocumentSummary{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varDocumentSummary)
+	err = json.Unmarshal(data, &varDocumentSummary)
 
 	if err != nil {
 		return err
 	}
 
 	*o = DocumentSummary(varDocumentSummary)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "externalId")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "test")
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "title")
+		delete(additionalProperties, "state")
+		delete(additionalProperties, "parties")
+		delete(additionalProperties, "createdAt")
+		delete(additionalProperties, "sentAt")
+		delete(additionalProperties, "executedAt")
+		delete(additionalProperties, "expiresAt")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

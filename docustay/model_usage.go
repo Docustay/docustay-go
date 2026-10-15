@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,6 +26,7 @@ type Usage struct {
 	Documents UsageDocuments `json:"documents"`
 	Emails UsageEmails `json:"emails"`
 	Templates *UsageTemplates `json:"templates,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _Usage Usage
@@ -199,6 +199,11 @@ func (o Usage) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Templates) {
 		toSerialize["templates"] = o.Templates
 	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -229,15 +234,24 @@ func (o *Usage) UnmarshalJSON(data []byte) (err error) {
 
 	varUsage := _Usage{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varUsage)
+	err = json.Unmarshal(data, &varUsage)
 
 	if err != nil {
 		return err
 	}
 
 	*o = Usage(varUsage)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "plan")
+		delete(additionalProperties, "period")
+		delete(additionalProperties, "documents")
+		delete(additionalProperties, "emails")
+		delete(additionalProperties, "templates")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

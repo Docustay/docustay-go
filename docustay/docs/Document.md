@@ -4,18 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ExternalId** | **NullableString** | Your own id for this thing, so you can match it to your records. Filter lists with &#x60;externalId&#x3D;&#x60;. | 
+**ExternalId** | **string** | Your own id for this thing, so you can match it to your records. Filter lists with &#x60;externalId&#x3D;&#x60;. | 
 **Metadata** | **map[string]string** | Your own key-value text (up to 20 keys; keys 1–40 letters, digits, dot, dash or underscore; values up to 500 characters). Returned in every response and every webhook for this document; never shown to a signer. | 
 **Test** | **bool** |  | 
 **Id** | **string** |  | 
 **Title** | **string** |  | 
 **State** | **string** |  | 
-**SentAt** | **NullableString** |  | 
-**ExpiresAt** | **NullableString** |  | 
-**ExecutedAt** | **NullableString** |  | 
-**VoidedAt** | **NullableString** |  | 
-**VoidReason** | **NullableString** |  | 
-**Progress** | [**TestSign200ResponseProgress**](TestSign200ResponseProgress.md) |  | 
+**SentAt** | **string** |  | 
+**ExpiresAt** | **string** |  | 
+**ExecutedAt** | **string** |  | 
+**VoidedAt** | **string** |  | 
+**VoidReason** | **string** |  | 
+**Progress** | [**DocumentProgress**](DocumentProgress.md) |  | 
 **SignedCopyAvailable** | **bool** |  | 
 **Parties** | [**[]Party**](Party.md) |  | 
 **Payments** | [**[]Payment**](Payment.md) | Payments made through payment fields on this document (empty when it has none). A payment field&#39;s amount is set by ONE of: a fixed amount, a formula over the signer&#39;s own fields, a Stripe price, or a Stripe payment link — see the text tag settings &#x60;amount&#x60;, &#x60;formula&#x60;, &#x60;price&#x60; and &#x60;link&#x60;. | 
@@ -25,7 +25,7 @@ Name | Type | Description | Notes
 
 ### NewDocument
 
-`func NewDocument(externalId NullableString, metadata map[string]string, test bool, id string, title string, state string, sentAt NullableString, expiresAt NullableString, executedAt NullableString, voidedAt NullableString, voidReason NullableString, progress TestSign200ResponseProgress, signedCopyAvailable bool, parties []Party, payments []Payment, events []DocumentEventsInner, ) *Document`
+`func NewDocument(externalId string, metadata map[string]string, test bool, id string, title string, state string, sentAt string, expiresAt string, executedAt string, voidedAt string, voidReason string, progress DocumentProgress, signedCopyAvailable bool, parties []Party, payments []Payment, events []DocumentEventsInner, ) *Document`
 
 NewDocument instantiates a new Document object
 This constructor will assign default values to properties that have it defined,
@@ -60,16 +60,6 @@ and a boolean to check if the value has been set.
 SetExternalId sets ExternalId field to given value.
 
 
-### SetExternalIdNil
-
-`func (o *Document) SetExternalIdNil(b bool)`
-
- SetExternalIdNil sets the value for ExternalId to be an explicit nil
-
-### UnsetExternalId
-`func (o *Document) UnsetExternalId()`
-
-UnsetExternalId ensures that no value is present for ExternalId, not even an explicit nil
 ### GetMetadata
 
 `func (o *Document) GetMetadata() map[string]string`
@@ -190,16 +180,6 @@ and a boolean to check if the value has been set.
 SetSentAt sets SentAt field to given value.
 
 
-### SetSentAtNil
-
-`func (o *Document) SetSentAtNil(b bool)`
-
- SetSentAtNil sets the value for SentAt to be an explicit nil
-
-### UnsetSentAt
-`func (o *Document) UnsetSentAt()`
-
-UnsetSentAt ensures that no value is present for SentAt, not even an explicit nil
 ### GetExpiresAt
 
 `func (o *Document) GetExpiresAt() string`
@@ -220,16 +200,6 @@ and a boolean to check if the value has been set.
 SetExpiresAt sets ExpiresAt field to given value.
 
 
-### SetExpiresAtNil
-
-`func (o *Document) SetExpiresAtNil(b bool)`
-
- SetExpiresAtNil sets the value for ExpiresAt to be an explicit nil
-
-### UnsetExpiresAt
-`func (o *Document) UnsetExpiresAt()`
-
-UnsetExpiresAt ensures that no value is present for ExpiresAt, not even an explicit nil
 ### GetExecutedAt
 
 `func (o *Document) GetExecutedAt() string`
@@ -250,16 +220,6 @@ and a boolean to check if the value has been set.
 SetExecutedAt sets ExecutedAt field to given value.
 
 
-### SetExecutedAtNil
-
-`func (o *Document) SetExecutedAtNil(b bool)`
-
- SetExecutedAtNil sets the value for ExecutedAt to be an explicit nil
-
-### UnsetExecutedAt
-`func (o *Document) UnsetExecutedAt()`
-
-UnsetExecutedAt ensures that no value is present for ExecutedAt, not even an explicit nil
 ### GetVoidedAt
 
 `func (o *Document) GetVoidedAt() string`
@@ -280,16 +240,6 @@ and a boolean to check if the value has been set.
 SetVoidedAt sets VoidedAt field to given value.
 
 
-### SetVoidedAtNil
-
-`func (o *Document) SetVoidedAtNil(b bool)`
-
- SetVoidedAtNil sets the value for VoidedAt to be an explicit nil
-
-### UnsetVoidedAt
-`func (o *Document) UnsetVoidedAt()`
-
-UnsetVoidedAt ensures that no value is present for VoidedAt, not even an explicit nil
 ### GetVoidReason
 
 `func (o *Document) GetVoidReason() string`
@@ -310,32 +260,22 @@ and a boolean to check if the value has been set.
 SetVoidReason sets VoidReason field to given value.
 
 
-### SetVoidReasonNil
-
-`func (o *Document) SetVoidReasonNil(b bool)`
-
- SetVoidReasonNil sets the value for VoidReason to be an explicit nil
-
-### UnsetVoidReason
-`func (o *Document) UnsetVoidReason()`
-
-UnsetVoidReason ensures that no value is present for VoidReason, not even an explicit nil
 ### GetProgress
 
-`func (o *Document) GetProgress() TestSign200ResponseProgress`
+`func (o *Document) GetProgress() DocumentProgress`
 
 GetProgress returns the Progress field if non-nil, zero value otherwise.
 
 ### GetProgressOk
 
-`func (o *Document) GetProgressOk() (*TestSign200ResponseProgress, bool)`
+`func (o *Document) GetProgressOk() (*DocumentProgress, bool)`
 
 GetProgressOk returns a tuple with the Progress field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetProgress
 
-`func (o *Document) SetProgress(v TestSign200ResponseProgress)`
+`func (o *Document) SetProgress(v DocumentProgress)`
 
 SetProgress sets Progress field to given value.
 

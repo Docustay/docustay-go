@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -26,6 +25,7 @@ type EmbedSession200Response struct {
 	Seat string `json:"seat"`
 	Url string `json:"url"`
 	ExpiresAt string `json:"expiresAt"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _EmbedSession200Response EmbedSession200Response
@@ -161,6 +161,11 @@ func (o EmbedSession200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize["seat"] = o.Seat
 	toSerialize["url"] = o.Url
 	toSerialize["expiresAt"] = o.ExpiresAt
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -191,15 +196,23 @@ func (o *EmbedSession200Response) UnmarshalJSON(data []byte) (err error) {
 
 	varEmbedSession200Response := _EmbedSession200Response{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varEmbedSession200Response)
+	err = json.Unmarshal(data, &varEmbedSession200Response)
 
 	if err != nil {
 		return err
 	}
 
 	*o = EmbedSession200Response(varEmbedSession200Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "seat")
+		delete(additionalProperties, "url")
+		delete(additionalProperties, "expiresAt")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

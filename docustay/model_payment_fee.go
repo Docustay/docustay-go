@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -27,7 +26,8 @@ type PaymentFee struct {
 	AmountMinor int32 `json:"amountMinor"`
 	// How much of the fee went back with refunds.
 	RefundedMinor int32 `json:"refundedMinor"`
-	Plan NullableString `json:"plan"`
+	Plan string `json:"plan"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _PaymentFee PaymentFee
@@ -36,7 +36,7 @@ type _PaymentFee PaymentFee
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPaymentFee(basisPoints int32, amountMinor int32, refundedMinor int32, plan NullableString) *PaymentFee {
+func NewPaymentFee(basisPoints int32, amountMinor int32, refundedMinor int32, plan string) *PaymentFee {
 	this := PaymentFee{}
 	this.BasisPoints = basisPoints
 	this.AmountMinor = amountMinor
@@ -126,29 +126,27 @@ func (o *PaymentFee) SetRefundedMinor(v int32) {
 }
 
 // GetPlan returns the Plan field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *PaymentFee) GetPlan() string {
-	if o == nil || o.Plan.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.Plan.Get()
+	return o.Plan
 }
 
 // GetPlanOk returns a tuple with the Plan field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PaymentFee) GetPlanOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Plan.Get(), o.Plan.IsSet()
+	return &o.Plan, true
 }
 
 // SetPlan sets field value
 func (o *PaymentFee) SetPlan(v string) {
-	o.Plan.Set(&v)
+	o.Plan = v
 }
 
 func (o PaymentFee) MarshalJSON() ([]byte, error) {
@@ -164,7 +162,12 @@ func (o PaymentFee) ToMap() (map[string]interface{}, error) {
 	toSerialize["basisPoints"] = o.BasisPoints
 	toSerialize["amountMinor"] = o.AmountMinor
 	toSerialize["refundedMinor"] = o.RefundedMinor
-	toSerialize["plan"] = o.Plan.Get()
+	toSerialize["plan"] = o.Plan
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -195,15 +198,23 @@ func (o *PaymentFee) UnmarshalJSON(data []byte) (err error) {
 
 	varPaymentFee := _PaymentFee{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPaymentFee)
+	err = json.Unmarshal(data, &varPaymentFee)
 
 	if err != nil {
 		return err
 	}
 
 	*o = PaymentFee(varPaymentFee)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "basisPoints")
+		delete(additionalProperties, "amountMinor")
+		delete(additionalProperties, "refundedMinor")
+		delete(additionalProperties, "plan")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

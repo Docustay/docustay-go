@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -28,6 +27,7 @@ type TestSign200Response struct {
 	State string `json:"state"`
 	Progress TestSign200ResponseProgress `json:"progress"`
 	Finished bool `json:"finished"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TestSign200Response TestSign200Response
@@ -215,6 +215,11 @@ func (o TestSign200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize["state"] = o.State
 	toSerialize["progress"] = o.Progress
 	toSerialize["finished"] = o.Finished
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -247,15 +252,25 @@ func (o *TestSign200Response) UnmarshalJSON(data []byte) (err error) {
 
 	varTestSign200Response := _TestSign200Response{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTestSign200Response)
+	err = json.Unmarshal(data, &varTestSign200Response)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TestSign200Response(varTestSign200Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "seat")
+		delete(additionalProperties, "signed")
+		delete(additionalProperties, "state")
+		delete(additionalProperties, "progress")
+		delete(additionalProperties, "finished")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

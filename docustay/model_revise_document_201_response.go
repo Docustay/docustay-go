@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,6 +24,7 @@ type ReviseDocument201Response struct {
 	Id string `json:"id"`
 	PreviousId string `json:"previousId"`
 	Warnings []interface{} `json:"warnings"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _ReviseDocument201Response ReviseDocument201Response
@@ -134,6 +134,11 @@ func (o ReviseDocument201Response) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["previousId"] = o.PreviousId
 	toSerialize["warnings"] = o.Warnings
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -163,15 +168,22 @@ func (o *ReviseDocument201Response) UnmarshalJSON(data []byte) (err error) {
 
 	varReviseDocument201Response := _ReviseDocument201Response{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varReviseDocument201Response)
+	err = json.Unmarshal(data, &varReviseDocument201Response)
 
 	if err != nil {
 		return err
 	}
 
 	*o = ReviseDocument201Response(varReviseDocument201Response)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "id")
+		delete(additionalProperties, "previousId")
+		delete(additionalProperties, "warnings")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

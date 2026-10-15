@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -25,7 +24,8 @@ type SendDocument201ResponseNotEmailedInner struct {
 	Seat string `json:"seat"`
 	Email string `json:"email"`
 	Reason string `json:"reason"`
-	Detail NullableString `json:"detail"`
+	Detail string `json:"detail"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _SendDocument201ResponseNotEmailedInner SendDocument201ResponseNotEmailedInner
@@ -34,7 +34,7 @@ type _SendDocument201ResponseNotEmailedInner SendDocument201ResponseNotEmailedIn
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSendDocument201ResponseNotEmailedInner(seat string, email string, reason string, detail NullableString) *SendDocument201ResponseNotEmailedInner {
+func NewSendDocument201ResponseNotEmailedInner(seat string, email string, reason string, detail string) *SendDocument201ResponseNotEmailedInner {
 	this := SendDocument201ResponseNotEmailedInner{}
 	this.Seat = seat
 	this.Email = email
@@ -124,29 +124,27 @@ func (o *SendDocument201ResponseNotEmailedInner) SetReason(v string) {
 }
 
 // GetDetail returns the Detail field value
-// If the value is explicit nil, the zero value for string will be returned
 func (o *SendDocument201ResponseNotEmailedInner) GetDetail() string {
-	if o == nil || o.Detail.Get() == nil {
+	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return *o.Detail.Get()
+	return o.Detail
 }
 
 // GetDetailOk returns a tuple with the Detail field value
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SendDocument201ResponseNotEmailedInner) GetDetailOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return o.Detail.Get(), o.Detail.IsSet()
+	return &o.Detail, true
 }
 
 // SetDetail sets field value
 func (o *SendDocument201ResponseNotEmailedInner) SetDetail(v string) {
-	o.Detail.Set(&v)
+	o.Detail = v
 }
 
 func (o SendDocument201ResponseNotEmailedInner) MarshalJSON() ([]byte, error) {
@@ -162,7 +160,12 @@ func (o SendDocument201ResponseNotEmailedInner) ToMap() (map[string]interface{},
 	toSerialize["seat"] = o.Seat
 	toSerialize["email"] = o.Email
 	toSerialize["reason"] = o.Reason
-	toSerialize["detail"] = o.Detail.Get()
+	toSerialize["detail"] = o.Detail
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -193,15 +196,23 @@ func (o *SendDocument201ResponseNotEmailedInner) UnmarshalJSON(data []byte) (err
 
 	varSendDocument201ResponseNotEmailedInner := _SendDocument201ResponseNotEmailedInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varSendDocument201ResponseNotEmailedInner)
+	err = json.Unmarshal(data, &varSendDocument201ResponseNotEmailedInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = SendDocument201ResponseNotEmailedInner(varSendDocument201ResponseNotEmailedInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "seat")
+		delete(additionalProperties, "email")
+		delete(additionalProperties, "reason")
+		delete(additionalProperties, "detail")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }

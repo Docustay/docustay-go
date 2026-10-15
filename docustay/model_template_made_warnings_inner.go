@@ -13,7 +13,6 @@ package docustay
 
 import (
 	"encoding/json"
-	"bytes"
 	"fmt"
 )
 
@@ -24,6 +23,7 @@ var _ MappedNullable = &TemplateMadeWarningsInner{}
 type TemplateMadeWarningsInner struct {
 	Tag string `json:"tag"`
 	Warning string `json:"warning"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _TemplateMadeWarningsInner TemplateMadeWarningsInner
@@ -107,6 +107,11 @@ func (o TemplateMadeWarningsInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["tag"] = o.Tag
 	toSerialize["warning"] = o.Warning
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
 	return toSerialize, nil
 }
 
@@ -135,15 +140,21 @@ func (o *TemplateMadeWarningsInner) UnmarshalJSON(data []byte) (err error) {
 
 	varTemplateMadeWarningsInner := _TemplateMadeWarningsInner{}
 
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varTemplateMadeWarningsInner)
+	err = json.Unmarshal(data, &varTemplateMadeWarningsInner)
 
 	if err != nil {
 		return err
 	}
 
 	*o = TemplateMadeWarningsInner(varTemplateMadeWarningsInner)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "tag")
+		delete(additionalProperties, "warning")
+		o.AdditionalProperties = additionalProperties
+	}
 
 	return err
 }
