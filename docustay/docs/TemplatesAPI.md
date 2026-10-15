@@ -19,7 +19,7 @@ Method | HTTP request | Description
 
 ## CreateTemplateFromFile
 
-> TemplateMade CreateTemplateFromFile(ctx).FileTemplateRequest(fileTemplateRequest).Execute()
+> TemplateMade CreateTemplateFromFile(ctx).IdempotencyKey(idempotencyKey).FileTemplateRequest(fileTemplateRequest).Execute()
 
 Make a template from a file with text tags
 
@@ -38,11 +38,12 @@ import (
 )
 
 func main() {
+	idempotencyKey := "idempotencyKey_example" // string | A unique value for this request (8–200 characters, for example a UUID). Repeating the request with the same key and body returns the first answer instead of doing it twice.
 	fileTemplateRequest := *openapiclient.NewFileTemplateRequest("Name_example", "FileName_example", "File_example") // FileTemplateRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.TemplatesAPI.CreateTemplateFromFile(context.Background()).FileTemplateRequest(fileTemplateRequest).Execute()
+	resp, r, err := apiClient.TemplatesAPI.CreateTemplateFromFile(context.Background()).IdempotencyKey(idempotencyKey).FileTemplateRequest(fileTemplateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `TemplatesAPI.CreateTemplateFromFile``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -63,6 +64,7 @@ Other parameters are passed through a pointer to a apiCreateTemplateFromFileRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **idempotencyKey** | **string** | A unique value for this request (8–200 characters, for example a UUID). Repeating the request with the same key and body returns the first answer instead of doing it twice. | 
  **fileTemplateRequest** | [**FileTemplateRequest**](FileTemplateRequest.md) |  | 
 
 ### Return type
@@ -85,7 +87,7 @@ Name | Type | Description  | Notes
 
 ## CreateTemplateFromHtml
 
-> TemplateMade CreateTemplateFromHtml(ctx).HtmlTemplateRequest(htmlTemplateRequest).Execute()
+> TemplateMade CreateTemplateFromHtml(ctx).IdempotencyKey(idempotencyKey).HtmlTemplateRequest(htmlTemplateRequest).Execute()
 
 Make a template from HTML with text tags
 
@@ -104,11 +106,12 @@ import (
 )
 
 func main() {
+	idempotencyKey := "idempotencyKey_example" // string | A unique value for this request (8–200 characters, for example a UUID). Repeating the request with the same key and body returns the first answer instead of doing it twice.
 	htmlTemplateRequest := *openapiclient.NewHtmlTemplateRequest("Name_example", "Html_example") // HtmlTemplateRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.TemplatesAPI.CreateTemplateFromHtml(context.Background()).HtmlTemplateRequest(htmlTemplateRequest).Execute()
+	resp, r, err := apiClient.TemplatesAPI.CreateTemplateFromHtml(context.Background()).IdempotencyKey(idempotencyKey).HtmlTemplateRequest(htmlTemplateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `TemplatesAPI.CreateTemplateFromHtml``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -129,6 +132,7 @@ Other parameters are passed through a pointer to a apiCreateTemplateFromHtmlRequ
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **idempotencyKey** | **string** | A unique value for this request (8–200 characters, for example a UUID). Repeating the request with the same key and body returns the first answer instead of doing it twice. | 
  **htmlTemplateRequest** | [**HtmlTemplateRequest**](HtmlTemplateRequest.md) |  | 
 
 ### Return type
@@ -151,7 +155,7 @@ Name | Type | Description  | Notes
 
 ## CreateTemplateFromSource
 
-> CreateTemplateFromSource201Response CreateTemplateFromSource(ctx).CreateTemplateFromSourceRequest(createTemplateFromSourceRequest).Execute()
+> CreateTemplateFromSource201Response CreateTemplateFromSource(ctx).IdempotencyKey(idempotencyKey).CreateTemplateFromSourceRequest(createTemplateFromSourceRequest).Execute()
 
 Make a template from a document source
 
@@ -170,11 +174,12 @@ import (
 )
 
 func main() {
+	idempotencyKey := "idempotencyKey_example" // string | A unique value for this request (8–200 characters, for example a UUID). Repeating the request with the same key and body returns the first answer instead of doing it twice.
 	createTemplateFromSourceRequest := *openapiclient.NewCreateTemplateFromSourceRequest("Name_example", map[string]interface{}{"key": interface{}(123)}) // CreateTemplateFromSourceRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.TemplatesAPI.CreateTemplateFromSource(context.Background()).CreateTemplateFromSourceRequest(createTemplateFromSourceRequest).Execute()
+	resp, r, err := apiClient.TemplatesAPI.CreateTemplateFromSource(context.Background()).IdempotencyKey(idempotencyKey).CreateTemplateFromSourceRequest(createTemplateFromSourceRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `TemplatesAPI.CreateTemplateFromSource``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -195,6 +200,7 @@ Other parameters are passed through a pointer to a apiCreateTemplateFromSourceRe
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **idempotencyKey** | **string** | A unique value for this request (8–200 characters, for example a UUID). Repeating the request with the same key and body returns the first answer instead of doing it twice. | 
  **createTemplateFromSourceRequest** | [**CreateTemplateFromSourceRequest**](CreateTemplateFromSourceRequest.md) |  | 
 
 ### Return type
@@ -635,7 +641,7 @@ Name | Type | Description  | Notes
 
 ## UseTemplate
 
-> DocumentMade UseTemplate(ctx, id).UseTemplateRequest(useTemplateRequest).Execute()
+> DocumentMade UseTemplate(ctx, id).IdempotencyKey(idempotencyKey).UseTemplateRequest(useTemplateRequest).Execute()
 
 Use a written template for people
 
@@ -655,11 +661,12 @@ import (
 
 func main() {
 	id := "6f1c1f0e-7a0c-4d1d-9b5e-2f0a7b1c3d4e" // string | 
+	idempotencyKey := "idempotencyKey_example" // string | A unique value for this request (8–200 characters, for example a UUID). Repeating the request with the same key and body returns the first answer instead of doing it twice.
 	useTemplateRequest := *openapiclient.NewUseTemplateRequest([]openapiclient.Person{*openapiclient.NewPerson("Name_example", "Email_example")}) // UseTemplateRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.TemplatesAPI.UseTemplate(context.Background(), id).UseTemplateRequest(useTemplateRequest).Execute()
+	resp, r, err := apiClient.TemplatesAPI.UseTemplate(context.Background(), id).IdempotencyKey(idempotencyKey).UseTemplateRequest(useTemplateRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `TemplatesAPI.UseTemplate``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -685,6 +692,7 @@ Other parameters are passed through a pointer to a apiUseTemplateRequest struct 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **idempotencyKey** | **string** | A unique value for this request (8–200 characters, for example a UUID). Repeating the request with the same key and body returns the first answer instead of doing it twice. | 
  **useTemplateRequest** | [**UseTemplateRequest**](UseTemplateRequest.md) |  | 
 
 ### Return type

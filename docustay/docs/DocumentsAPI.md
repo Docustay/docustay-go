@@ -231,7 +231,7 @@ Name | Type | Description  | Notes
 
 ## CreateDocument
 
-> DocumentMade CreateDocument(ctx).CreateDocumentRequest(createDocumentRequest).Execute()
+> DocumentMade CreateDocument(ctx).IdempotencyKey(idempotencyKey).CreateDocumentRequest(createDocumentRequest).Execute()
 
 Make a document from words and people
 
@@ -250,11 +250,12 @@ import (
 )
 
 func main() {
+	idempotencyKey := "idempotencyKey_example" // string | A unique value for this request (8–200 characters, for example a UUID). Repeating the request with the same key and body returns the first answer instead of doing it twice.
 	createDocumentRequest := *openapiclient.NewCreateDocumentRequest("Title_example", map[string]interface{}{"key": interface{}(123)}, []openapiclient.Person{*openapiclient.NewPerson("Name_example", "Email_example")}) // CreateDocumentRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DocumentsAPI.CreateDocument(context.Background()).CreateDocumentRequest(createDocumentRequest).Execute()
+	resp, r, err := apiClient.DocumentsAPI.CreateDocument(context.Background()).IdempotencyKey(idempotencyKey).CreateDocumentRequest(createDocumentRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DocumentsAPI.CreateDocument``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -275,6 +276,7 @@ Other parameters are passed through a pointer to a apiCreateDocumentRequest stru
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **idempotencyKey** | **string** | A unique value for this request (8–200 characters, for example a UUID). Repeating the request with the same key and body returns the first answer instead of doing it twice. | 
  **createDocumentRequest** | [**CreateDocumentRequest**](CreateDocumentRequest.md) |  | 
 
 ### Return type
@@ -1101,7 +1103,7 @@ Name | Type | Description  | Notes
 
 ## ReviseDocument
 
-> ReviseDocument201Response ReviseDocument(ctx, id).ReviseDocumentRequest(reviseDocumentRequest).Execute()
+> ReviseDocument201Response ReviseDocument(ctx, id).IdempotencyKey(idempotencyKey).ReviseDocumentRequest(reviseDocumentRequest).Execute()
 
 Change the words of a draft
 
@@ -1121,11 +1123,12 @@ import (
 
 func main() {
 	id := "6f1c1f0e-7a0c-4d1d-9b5e-2f0a7b1c3d4e" // string | 
+	idempotencyKey := "idempotencyKey_example" // string | A unique value for this request (8–200 characters, for example a UUID). Repeating the request with the same key and body returns the first answer instead of doing it twice.
 	reviseDocumentRequest := *openapiclient.NewReviseDocumentRequest(map[string]interface{}{"key": interface{}(123)}) // ReviseDocumentRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DocumentsAPI.ReviseDocument(context.Background(), id).ReviseDocumentRequest(reviseDocumentRequest).Execute()
+	resp, r, err := apiClient.DocumentsAPI.ReviseDocument(context.Background(), id).IdempotencyKey(idempotencyKey).ReviseDocumentRequest(reviseDocumentRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DocumentsAPI.ReviseDocument``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1151,6 +1154,7 @@ Other parameters are passed through a pointer to a apiReviseDocumentRequest stru
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **idempotencyKey** | **string** | A unique value for this request (8–200 characters, for example a UUID). Repeating the request with the same key and body returns the first answer instead of doing it twice. | 
  **reviseDocumentRequest** | [**ReviseDocumentRequest**](ReviseDocumentRequest.md) |  | 
 
 ### Return type
@@ -1241,7 +1245,7 @@ Name | Type | Description  | Notes
 
 ## SendDocument
 
-> SendDocument201Response SendDocument(ctx).SendRequest(sendRequest).Execute()
+> SendDocument201Response SendDocument(ctx).IdempotencyKey(idempotencyKey).SendRequest(sendRequest).Execute()
 
 Send a template to people to sign
 
@@ -1260,11 +1264,12 @@ import (
 )
 
 func main() {
+	idempotencyKey := "idempotencyKey_example" // string | A unique value for this request (8–200 characters, for example a UUID). Repeating the request with the same key and body returns the first answer instead of doing it twice.
 	sendRequest := *openapiclient.NewSendRequest("6f1c1f0e-7a0c-4d1d-9b5e-2f0a7b1c3d4e", []openapiclient.SendRequestPartiesInner{*openapiclient.NewSendRequestPartiesInner("Seat_example", "Name_example", "Email_example")}) // SendRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DocumentsAPI.SendDocument(context.Background()).SendRequest(sendRequest).Execute()
+	resp, r, err := apiClient.DocumentsAPI.SendDocument(context.Background()).IdempotencyKey(idempotencyKey).SendRequest(sendRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DocumentsAPI.SendDocument``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1285,6 +1290,7 @@ Other parameters are passed through a pointer to a apiSendDocumentRequest struct
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **idempotencyKey** | **string** | A unique value for this request (8–200 characters, for example a UUID). Repeating the request with the same key and body returns the first answer instead of doing it twice. | 
  **sendRequest** | [**SendRequest**](SendRequest.md) |  | 
 
 ### Return type
@@ -1307,7 +1313,7 @@ Name | Type | Description  | Notes
 
 ## SendDraft
 
-> SendDraft201Response SendDraft(ctx, id).Execute()
+> SendDraft201Response SendDraft(ctx, id).IdempotencyKey(idempotencyKey).Execute()
 
 Send a draft
 
@@ -1327,10 +1333,11 @@ import (
 
 func main() {
 	id := "6f1c1f0e-7a0c-4d1d-9b5e-2f0a7b1c3d4e" // string | 
+	idempotencyKey := "idempotencyKey_example" // string | A unique value for this request (8–200 characters, for example a UUID). Repeating the request with the same key and body returns the first answer instead of doing it twice.
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DocumentsAPI.SendDraft(context.Background(), id).Execute()
+	resp, r, err := apiClient.DocumentsAPI.SendDraft(context.Background(), id).IdempotencyKey(idempotencyKey).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DocumentsAPI.SendDraft``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1356,6 +1363,7 @@ Other parameters are passed through a pointer to a apiSendDraftRequest struct vi
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **idempotencyKey** | **string** | A unique value for this request (8–200 characters, for example a UUID). Repeating the request with the same key and body returns the first answer instead of doing it twice. | 
 
 ### Return type
 

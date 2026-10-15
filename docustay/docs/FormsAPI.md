@@ -282,7 +282,7 @@ Other parameters are passed through a pointer to a apiListFormsRequest struct vi
 
 ## PublishForm
 
-> interface{} PublishForm(ctx).PublishFormRequest(publishFormRequest).Execute()
+> interface{} PublishForm(ctx).IdempotencyKey(idempotencyKey).PublishFormRequest(publishFormRequest).Execute()
 
 Publish a form
 
@@ -301,11 +301,12 @@ import (
 )
 
 func main() {
+	idempotencyKey := "idempotencyKey_example" // string | A unique value for this request (8–200 characters, for example a UUID). Repeating the request with the same key and body returns the first answer instead of doing it twice.
 	publishFormRequest := *openapiclient.NewPublishFormRequest("TemplateId_example", "Slug_example") // PublishFormRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.FormsAPI.PublishForm(context.Background()).PublishFormRequest(publishFormRequest).Execute()
+	resp, r, err := apiClient.FormsAPI.PublishForm(context.Background()).IdempotencyKey(idempotencyKey).PublishFormRequest(publishFormRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `FormsAPI.PublishForm``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -326,6 +327,7 @@ Other parameters are passed through a pointer to a apiPublishFormRequest struct 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **idempotencyKey** | **string** | A unique value for this request (8–200 characters, for example a UUID). Repeating the request with the same key and body returns the first answer instead of doing it twice. | 
  **publishFormRequest** | [**PublishFormRequest**](PublishFormRequest.md) |  | 
 
 ### Return type

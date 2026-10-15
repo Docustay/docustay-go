@@ -80,7 +80,7 @@ Name | Type | Description  | Notes
 
 ## RefundPayment
 
-> interface{} RefundPayment(ctx, id).RefundPaymentRequest(refundPaymentRequest).Execute()
+> interface{} RefundPayment(ctx, id).IdempotencyKey(idempotencyKey).RefundPaymentRequest(refundPaymentRequest).Execute()
 
 Refund a payment, in full or in part
 
@@ -100,11 +100,12 @@ import (
 
 func main() {
 	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
+	idempotencyKey := "idempotencyKey_example" // string | A unique value for this request (8–200 characters, for example a UUID). Repeating the request with the same key and body returns the first answer instead of doing it twice.
 	refundPaymentRequest := *openapiclient.NewRefundPaymentRequest("Reason_example") // RefundPaymentRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PaymentsAPI.RefundPayment(context.Background(), id).RefundPaymentRequest(refundPaymentRequest).Execute()
+	resp, r, err := apiClient.PaymentsAPI.RefundPayment(context.Background(), id).IdempotencyKey(idempotencyKey).RefundPaymentRequest(refundPaymentRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `PaymentsAPI.RefundPayment``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -130,6 +131,7 @@ Other parameters are passed through a pointer to a apiRefundPaymentRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **idempotencyKey** | **string** | A unique value for this request (8–200 characters, for example a UUID). Repeating the request with the same key and body returns the first answer instead of doing it twice. | 
  **refundPaymentRequest** | [**RefundPaymentRequest**](RefundPaymentRequest.md) |  | 
 
 ### Return type
