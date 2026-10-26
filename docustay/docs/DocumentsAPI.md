@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**CancelAiJob**](DocumentsAPI.md#CancelAiJob) | **Post** /api/v1/documents/ai/jobs/{id}/cancel | Cancel an AI job
 [**CheckDocument**](DocumentsAPI.md#CheckDocument) | **Post** /api/v1/documents/check | Check a document&#39;s words before making it
 [**CreateDocument**](DocumentsAPI.md#CreateDocument) | **Post** /api/v1/documents | Make a document from words and people
+[**DeleteDraft**](DocumentsAPI.md#DeleteDraft) | **Delete** /api/v1/documents/{id} | Delete a draft that was never sent
 [**DetectFields**](DocumentsAPI.md#DetectFields) | **Post** /api/v1/documents/detect-fields | Find the fields on a PDF
 [**DownloadSignedPdf**](DocumentsAPI.md#DownloadSignedPdf) | **Get** /api/v1/documents/{id}/signed.pdf | Download the signed copy
 [**DraftWithAi**](DocumentsAPI.md#DraftWithAi) | **Post** /api/v1/documents/ai/draft | Ask for an AI-written draft
@@ -34,6 +35,8 @@ Method | HTTP request | Description
 > string AuditLogCsv(ctx, id).Execute()
 
 The document's audit log as CSV
+
+
 
 ### Example
 
@@ -103,6 +106,8 @@ Name | Type | Description  | Notes
 
 Cancel an AI job
 
+
+
 ### Example
 
 ```go
@@ -171,6 +176,8 @@ Name | Type | Description  | Notes
 
 Check a document's words before making it
 
+
+
 ### Example
 
 ```go
@@ -184,7 +191,7 @@ import (
 )
 
 func main() {
-	checkDocumentRequest := *openapiclient.NewCheckDocumentRequest(map[string]interface{}{"key": interface{}(123)}) // CheckDocumentRequest | 
+	checkDocumentRequest := *openapiclient.NewCheckDocumentRequest(map[string]*interface{}{"key": interface{}(123)}) // CheckDocumentRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -251,7 +258,7 @@ import (
 
 func main() {
 	idempotencyKey := "idempotencyKey_example" // string | A unique value for this request (8–200 characters, for example a UUID). Repeating the request with the same key and body returns the first answer instead of doing it twice.
-	createDocumentRequest := *openapiclient.NewCreateDocumentRequest("Title_example", map[string]interface{}{"key": interface{}(123)}, []openapiclient.Person{*openapiclient.NewPerson("Name_example", "Email_example")}) // CreateDocumentRequest | 
+	createDocumentRequest := *openapiclient.NewCreateDocumentRequest("Title_example", map[string]*interface{}{"key": interface{}(123)}, []openapiclient.Person{*openapiclient.NewPerson("Name_example", "Email_example")}) // CreateDocumentRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -290,6 +297,76 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteDraft
+
+> DeleteDraft200Response DeleteDraft(ctx, id).Execute()
+
+Delete a draft that was never sent
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/docustay/docustay-go/docustay"
+)
+
+func main() {
+	id := "6f1c1f0e-7a0c-4d1d-9b5e-2f0a7b1c3d4e" // string | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.DocumentsAPI.DeleteDraft(context.Background(), id).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `DocumentsAPI.DeleteDraft``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DeleteDraft`: DeleteDraft200Response
+	fmt.Fprintf(os.Stdout, "Response from `DocumentsAPI.DeleteDraft`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteDraftRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**DeleteDraft200Response**](DeleteDraft200Response.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -368,6 +445,8 @@ Name | Type | Description  | Notes
 > *os.File DownloadSignedPdf(ctx, id).Execute()
 
 Download the signed copy
+
+
 
 ### Example
 
@@ -518,7 +597,7 @@ import (
 )
 
 func main() {
-	editWithAiRequest := *openapiclient.NewEditWithAiRequest("Request_example", map[string]interface{}{"key": interface{}(123)}) // EditWithAiRequest | 
+	editWithAiRequest := *openapiclient.NewEditWithAiRequest("Request_example", map[string]*interface{}{"key": interface{}(123)}) // EditWithAiRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -641,6 +720,8 @@ Name | Type | Description  | Notes
 
 Read an AI draft job
 
+
+
 ### Example
 
 ```go
@@ -708,6 +789,8 @@ Name | Type | Description  | Notes
 > Document GetDocument(ctx, id).Execute()
 
 One document and where each person is
+
+
 
 ### Example
 
@@ -777,6 +860,8 @@ Name | Type | Description  | Notes
 
 The words, people and choices of a draft
 
+
+
 ### Example
 
 ```go
@@ -841,7 +926,7 @@ Name | Type | Description  | Notes
 
 ## GetWizard
 
-> map[string]interface{} GetWizard(ctx).Execute()
+> map[string]*interface{} GetWizard(ctx).Execute()
 
 The wizard's questions
 
@@ -868,7 +953,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `DocumentsAPI.GetWizard``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `GetWizard`: map[string]interface{}
+	// response from `GetWizard`: map[string]*interface{}
 	fmt.Fprintf(os.Stdout, "Response from `DocumentsAPI.GetWizard`: %v\n", resp)
 }
 ```
@@ -884,7 +969,7 @@ Other parameters are passed through a pointer to a apiGetWizardRequest struct vi
 
 ### Return type
 
-**map[string]interface{}**
+**map[string]*interface{}**
 
 ### Authorization
 
@@ -921,7 +1006,7 @@ import (
 )
 
 func main() {
-	state := "state_example" // string |  (optional)
+	state := "state_example" // string | Only documents in this state; any other value is refused. (optional)
 	limit := int32(56) // int32 |  (optional)
 	cursor := "cursor_example" // string |  (optional)
 	externalId := "externalId_example" // string | Only documents with this `externalId`. (optional)
@@ -949,7 +1034,7 @@ Other parameters are passed through a pointer to a apiListDocumentsRequest struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **state** | **string** |  | 
+ **state** | **string** | Only documents in this state; any other value is refused. | 
  **limit** | **int32** |  | 
  **cursor** | **string** |  | 
  **externalId** | **string** | Only documents with this &#x60;externalId&#x60;. | 
@@ -977,6 +1062,8 @@ Name | Type | Description  | Notes
 > ListTemplates200Response ListTemplates(ctx).Execute()
 
 Templates you can send
+
+
 
 ### Example
 
@@ -1036,6 +1123,8 @@ Other parameters are passed through a pointer to a apiListTemplatesRequest struc
 > Remind200Response Remind(ctx, id).RemindRequest(remindRequest).Execute()
 
 Remind the people who still have to sign
+
+
 
 ### Example
 
@@ -1124,7 +1213,7 @@ import (
 func main() {
 	id := "6f1c1f0e-7a0c-4d1d-9b5e-2f0a7b1c3d4e" // string | 
 	idempotencyKey := "idempotencyKey_example" // string | A unique value for this request (8–200 characters, for example a UUID). Repeating the request with the same key and body returns the first answer instead of doing it twice.
-	reviseDocumentRequest := *openapiclient.NewReviseDocumentRequest(map[string]interface{}{"key": interface{}(123)}) // ReviseDocumentRequest | 
+	reviseDocumentRequest := *openapiclient.NewReviseDocumentRequest(map[string]*interface{}{"key": interface{}(123)}) // ReviseDocumentRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1313,7 +1402,7 @@ Name | Type | Description  | Notes
 
 ## SendDraft
 
-> SendDraft201Response SendDraft(ctx, id).IdempotencyKey(idempotencyKey).Execute()
+> SendDraft201Response SendDraft(ctx, id).IdempotencyKey(idempotencyKey).SendDraftRequest(sendDraftRequest).Execute()
 
 Send a draft
 
@@ -1334,10 +1423,11 @@ import (
 func main() {
 	id := "6f1c1f0e-7a0c-4d1d-9b5e-2f0a7b1c3d4e" // string | 
 	idempotencyKey := "idempotencyKey_example" // string | A unique value for this request (8–200 characters, for example a UUID). Repeating the request with the same key and body returns the first answer instead of doing it twice.
+	sendDraftRequest := *openapiclient.NewSendDraftRequest() // SendDraftRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.DocumentsAPI.SendDraft(context.Background(), id).IdempotencyKey(idempotencyKey).Execute()
+	resp, r, err := apiClient.DocumentsAPI.SendDraft(context.Background(), id).IdempotencyKey(idempotencyKey).SendDraftRequest(sendDraftRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `DocumentsAPI.SendDraft``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1364,6 +1454,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **idempotencyKey** | **string** | A unique value for this request (8–200 characters, for example a UUID). Repeating the request with the same key and body returns the first answer instead of doing it twice. | 
+ **sendDraftRequest** | [**SendDraftRequest**](SendDraftRequest.md) |  | 
 
 ### Return type
 
@@ -1375,7 +1466,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -1460,6 +1551,8 @@ Name | Type | Description  | Notes
 > VoidDocument200Response VoidDocument(ctx, id).VoidDocumentRequest(voidDocumentRequest).Execute()
 
 Void a document that is still out for signature
+
+
 
 ### Example
 

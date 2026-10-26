@@ -8,15 +8,16 @@ Name | Type | Description | Notes
 **Event** | **string** |  | 
 **Attempt** | **int32** |  | 
 **Status** | **string** |  | 
-**ResponseStatus** | **float32** |  | 
-**Error** | **string** |  | 
+**ResponseStatus** | **NullableFloat32** |  | 
+**Error** | **NullableString** |  | 
 **AttemptedAt** | **string** |  | 
+**Test** | **bool** |  | 
 
 ## Methods
 
 ### NewListWebhookDeliveries200ResponseDeliveriesInner
 
-`func NewListWebhookDeliveries200ResponseDeliveriesInner(id string, event string, attempt int32, status string, responseStatus float32, error_ string, attemptedAt string, ) *ListWebhookDeliveries200ResponseDeliveriesInner`
+`func NewListWebhookDeliveries200ResponseDeliveriesInner(id string, event string, attempt int32, status string, responseStatus NullableFloat32, error_ NullableString, attemptedAt string, test bool, ) *ListWebhookDeliveries200ResponseDeliveriesInner`
 
 NewListWebhookDeliveries200ResponseDeliveriesInner instantiates a new ListWebhookDeliveries200ResponseDeliveriesInner object
 This constructor will assign default values to properties that have it defined,
@@ -131,6 +132,16 @@ and a boolean to check if the value has been set.
 SetResponseStatus sets ResponseStatus field to given value.
 
 
+### SetResponseStatusNil
+
+`func (o *ListWebhookDeliveries200ResponseDeliveriesInner) SetResponseStatusNil(b bool)`
+
+ SetResponseStatusNil sets the value for ResponseStatus to be an explicit nil
+
+### UnsetResponseStatus
+`func (o *ListWebhookDeliveries200ResponseDeliveriesInner) UnsetResponseStatus()`
+
+UnsetResponseStatus ensures that no value is present for ResponseStatus, not even an explicit nil
 ### GetError
 
 `func (o *ListWebhookDeliveries200ResponseDeliveriesInner) GetError() string`
@@ -151,6 +162,16 @@ and a boolean to check if the value has been set.
 SetError sets Error field to given value.
 
 
+### SetErrorNil
+
+`func (o *ListWebhookDeliveries200ResponseDeliveriesInner) SetErrorNil(b bool)`
+
+ SetErrorNil sets the value for Error to be an explicit nil
+
+### UnsetError
+`func (o *ListWebhookDeliveries200ResponseDeliveriesInner) UnsetError()`
+
+UnsetError ensures that no value is present for Error, not even an explicit nil
 ### GetAttemptedAt
 
 `func (o *ListWebhookDeliveries200ResponseDeliveriesInner) GetAttemptedAt() string`
@@ -169,6 +190,26 @@ and a boolean to check if the value has been set.
 `func (o *ListWebhookDeliveries200ResponseDeliveriesInner) SetAttemptedAt(v string)`
 
 SetAttemptedAt sets AttemptedAt field to given value.
+
+
+### GetTest
+
+`func (o *ListWebhookDeliveries200ResponseDeliveriesInner) GetTest() bool`
+
+GetTest returns the Test field if non-nil, zero value otherwise.
+
+### GetTestOk
+
+`func (o *ListWebhookDeliveries200ResponseDeliveriesInner) GetTestOk() (*bool, bool)`
+
+GetTestOk returns a tuple with the Test field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTest
+
+`func (o *ListWebhookDeliveries200ResponseDeliveriesInner) SetTest(v bool)`
+
+SetTest sets Test field to given value.
 
 
 

@@ -5,14 +5,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Limit** | **int32** |  | 
-**NextCursor** | **string** |  | 
+**NextCursor** | **NullableString** |  | 
 **HasMore** | **bool** |  | 
 
 ## Methods
 
 ### NewListDocuments200ResponsePage
 
-`func NewListDocuments200ResponsePage(limit int32, nextCursor string, hasMore bool, ) *ListDocuments200ResponsePage`
+`func NewListDocuments200ResponsePage(limit int32, nextCursor NullableString, hasMore bool, ) *ListDocuments200ResponsePage`
 
 NewListDocuments200ResponsePage instantiates a new ListDocuments200ResponsePage object
 This constructor will assign default values to properties that have it defined,
@@ -67,6 +67,16 @@ and a boolean to check if the value has been set.
 SetNextCursor sets NextCursor field to given value.
 
 
+### SetNextCursorNil
+
+`func (o *ListDocuments200ResponsePage) SetNextCursorNil(b bool)`
+
+ SetNextCursorNil sets the value for NextCursor to be an explicit nil
+
+### UnsetNextCursor
+`func (o *ListDocuments200ResponsePage) UnsetNextCursor()`
+
+UnsetNextCursor ensures that no value is present for NextCursor, not even an explicit nil
 ### GetHasMore
 
 `func (o *ListDocuments200ResponsePage) GetHasMore() bool`

@@ -14,6 +14,8 @@ Method | HTTP request | Description
 
 Teams and their members
 
+
+
 ### Example
 
 ```go

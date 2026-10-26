@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** |  | 
-**FieldId** | **string** |  | 
+**FieldId** | **NullableString** |  | 
 **Person** | **string** |  | 
 **Status** | **string** | &#x60;paid&#x60; once Stripe says so. A refund moves it to &#x60;partially_refunded&#x60; or &#x60;refunded&#x60;. | 
 **AmountMinor** | **int32** | What was charged, in the smallest unit of &#x60;currency&#x60; (cents). Worked out on the server; never taken from the browser. | 
 **Currency** | **string** |  | 
-**PaidAt** | **string** |  | 
-**ReceiptUrl** | **string** | Stripe&#39;s own receipt for the payment. | 
+**PaidAt** | **NullableString** |  | 
+**ReceiptUrl** | **NullableString** | Stripe&#39;s own receipt for the payment. | 
 **RefundedMinor** | **int32** |  | 
 **Fee** | [**PaymentFee**](PaymentFee.md) |  | 
 **Test** | **bool** |  | 
@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewPayment
 
-`func NewPayment(id string, fieldId string, person string, status string, amountMinor int32, currency string, paidAt string, receiptUrl string, refundedMinor int32, fee PaymentFee, test bool, ) *Payment`
+`func NewPayment(id string, fieldId NullableString, person string, status string, amountMinor int32, currency string, paidAt NullableString, receiptUrl NullableString, refundedMinor int32, fee PaymentFee, test bool, ) *Payment`
 
 NewPayment instantiates a new Payment object
 This constructor will assign default values to properties that have it defined,
@@ -75,6 +75,16 @@ and a boolean to check if the value has been set.
 SetFieldId sets FieldId field to given value.
 
 
+### SetFieldIdNil
+
+`func (o *Payment) SetFieldIdNil(b bool)`
+
+ SetFieldIdNil sets the value for FieldId to be an explicit nil
+
+### UnsetFieldId
+`func (o *Payment) UnsetFieldId()`
+
+UnsetFieldId ensures that no value is present for FieldId, not even an explicit nil
 ### GetPerson
 
 `func (o *Payment) GetPerson() string`
@@ -175,6 +185,16 @@ and a boolean to check if the value has been set.
 SetPaidAt sets PaidAt field to given value.
 
 
+### SetPaidAtNil
+
+`func (o *Payment) SetPaidAtNil(b bool)`
+
+ SetPaidAtNil sets the value for PaidAt to be an explicit nil
+
+### UnsetPaidAt
+`func (o *Payment) UnsetPaidAt()`
+
+UnsetPaidAt ensures that no value is present for PaidAt, not even an explicit nil
 ### GetReceiptUrl
 
 `func (o *Payment) GetReceiptUrl() string`
@@ -195,6 +215,16 @@ and a boolean to check if the value has been set.
 SetReceiptUrl sets ReceiptUrl field to given value.
 
 
+### SetReceiptUrlNil
+
+`func (o *Payment) SetReceiptUrlNil(b bool)`
+
+ SetReceiptUrlNil sets the value for ReceiptUrl to be an explicit nil
+
+### UnsetReceiptUrl
+`func (o *Payment) UnsetReceiptUrl()`
+
+UnsetReceiptUrl ensures that no value is present for ReceiptUrl, not even an explicit nil
 ### GetRefundedMinor
 
 `func (o *Payment) GetRefundedMinor() int32`

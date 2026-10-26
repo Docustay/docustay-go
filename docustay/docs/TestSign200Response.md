@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Id** | **string** |  | 
 **Seat** | **string** |  | 
 **Signed** | **bool** |  | 
+**Declined** | Pointer to **bool** |  | [optional] 
 **State** | **string** |  | 
 **Progress** | [**TestSign200ResponseProgress**](TestSign200ResponseProgress.md) |  | 
 **Finished** | **bool** |  | 
@@ -89,6 +90,31 @@ and a boolean to check if the value has been set.
 
 SetSigned sets Signed field to given value.
 
+
+### GetDeclined
+
+`func (o *TestSign200Response) GetDeclined() bool`
+
+GetDeclined returns the Declined field if non-nil, zero value otherwise.
+
+### GetDeclinedOk
+
+`func (o *TestSign200Response) GetDeclinedOk() (*bool, bool)`
+
+GetDeclinedOk returns a tuple with the Declined field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeclined
+
+`func (o *TestSign200Response) SetDeclined(v bool)`
+
+SetDeclined sets Declined field to given value.
+
+### HasDeclined
+
+`func (o *TestSign200Response) HasDeclined() bool`
+
+HasDeclined returns a boolean if a field has been set.
 
 ### GetState
 

@@ -175,7 +175,7 @@ import (
 
 func main() {
 	idempotencyKey := "idempotencyKey_example" // string | A unique value for this request (8–200 characters, for example a UUID). Repeating the request with the same key and body returns the first answer instead of doing it twice.
-	createTemplateFromSourceRequest := *openapiclient.NewCreateTemplateFromSourceRequest("Name_example", map[string]interface{}{"key": interface{}(123)}) // CreateTemplateFromSourceRequest | 
+	createTemplateFromSourceRequest := *openapiclient.NewCreateTemplateFromSourceRequest("Name_example", map[string]*interface{}{"key": interface{}(123)}) // CreateTemplateFromSourceRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -441,6 +441,8 @@ Name | Type | Description  | Notes
 
 One template and its seats
 
+
+
 ### Example
 
 ```go
@@ -574,6 +576,8 @@ Name | Type | Description  | Notes
 > SetTemplateDefaults200Response SetTemplateDefaults(ctx, id).SetTemplateDefaultsRequest(setTemplateDefaultsRequest).Execute()
 
 Set what a document made from a template starts with
+
+
 
 ### Example
 

@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 
 ### NewReviseDocumentRequest
 
-`func NewReviseDocumentRequest(source map[string]interface{}, ) *ReviseDocumentRequest`
+`func NewReviseDocumentRequest(source map[string]*interface{}, ) *ReviseDocumentRequest`
 
 NewReviseDocumentRequest instantiates a new ReviseDocumentRequest object
 This constructor will assign default values to properties that have it defined,
@@ -30,20 +30,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetSource
 
-`func (o *ReviseDocumentRequest) GetSource() map[string]interface{}`
+`func (o *ReviseDocumentRequest) GetSource() map[string]*interface{}`
 
 GetSource returns the Source field if non-nil, zero value otherwise.
 
 ### GetSourceOk
 
-`func (o *ReviseDocumentRequest) GetSourceOk() (*map[string]interface{}, bool)`
+`func (o *ReviseDocumentRequest) GetSourceOk() (*map[string]*interface{}, bool)`
 
 GetSourceOk returns a tuple with the Source field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSource
 
-`func (o *ReviseDocumentRequest) SetSource(v map[string]interface{})`
+`func (o *ReviseDocumentRequest) SetSource(v map[string]*interface{})`
 
 SetSource sets Source field to given value.
 

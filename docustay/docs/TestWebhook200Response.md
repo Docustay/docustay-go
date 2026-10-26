@@ -5,17 +5,17 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Outcome** | **string** |  | 
-**Status** | **float32** |  | 
+**Status** | **NullableFloat32** |  | 
 **DurationMs** | **float32** |  | 
-**ResponseExcerpt** | **string** |  | 
-**Error** | **string** |  | 
+**ResponseExcerpt** | **NullableString** |  | 
+**Error** | **NullableString** |  | 
 **Topic** | **string** |  | 
 
 ## Methods
 
 ### NewTestWebhook200Response
 
-`func NewTestWebhook200Response(outcome string, status float32, durationMs float32, responseExcerpt string, error_ string, topic string, ) *TestWebhook200Response`
+`func NewTestWebhook200Response(outcome string, status NullableFloat32, durationMs float32, responseExcerpt NullableString, error_ NullableString, topic string, ) *TestWebhook200Response`
 
 NewTestWebhook200Response instantiates a new TestWebhook200Response object
 This constructor will assign default values to properties that have it defined,
@@ -70,6 +70,16 @@ and a boolean to check if the value has been set.
 SetStatus sets Status field to given value.
 
 
+### SetStatusNil
+
+`func (o *TestWebhook200Response) SetStatusNil(b bool)`
+
+ SetStatusNil sets the value for Status to be an explicit nil
+
+### UnsetStatus
+`func (o *TestWebhook200Response) UnsetStatus()`
+
+UnsetStatus ensures that no value is present for Status, not even an explicit nil
 ### GetDurationMs
 
 `func (o *TestWebhook200Response) GetDurationMs() float32`
@@ -110,6 +120,16 @@ and a boolean to check if the value has been set.
 SetResponseExcerpt sets ResponseExcerpt field to given value.
 
 
+### SetResponseExcerptNil
+
+`func (o *TestWebhook200Response) SetResponseExcerptNil(b bool)`
+
+ SetResponseExcerptNil sets the value for ResponseExcerpt to be an explicit nil
+
+### UnsetResponseExcerpt
+`func (o *TestWebhook200Response) UnsetResponseExcerpt()`
+
+UnsetResponseExcerpt ensures that no value is present for ResponseExcerpt, not even an explicit nil
 ### GetError
 
 `func (o *TestWebhook200Response) GetError() string`
@@ -130,6 +150,16 @@ and a boolean to check if the value has been set.
 SetError sets Error field to given value.
 
 
+### SetErrorNil
+
+`func (o *TestWebhook200Response) SetErrorNil(b bool)`
+
+ SetErrorNil sets the value for Error to be an explicit nil
+
+### UnsetError
+`func (o *TestWebhook200Response) UnsetError()`
+
+UnsetError ensures that no value is present for Error, not even an explicit nil
 ### GetTopic
 
 `func (o *TestWebhook200Response) GetTopic() string`

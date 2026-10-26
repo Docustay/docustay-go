@@ -7,13 +7,13 @@ Name | Type | Description | Notes
 **Seat** | **string** |  | 
 **Email** | **string** |  | 
 **Reason** | **string** |  | 
-**Detail** | **string** |  | 
+**Detail** | **NullableString** |  | 
 
 ## Methods
 
 ### NewSendDocument201ResponseNotEmailedInner
 
-`func NewSendDocument201ResponseNotEmailedInner(seat string, email string, reason string, detail string, ) *SendDocument201ResponseNotEmailedInner`
+`func NewSendDocument201ResponseNotEmailedInner(seat string, email string, reason string, detail NullableString, ) *SendDocument201ResponseNotEmailedInner`
 
 NewSendDocument201ResponseNotEmailedInner instantiates a new SendDocument201ResponseNotEmailedInner object
 This constructor will assign default values to properties that have it defined,
@@ -108,6 +108,16 @@ and a boolean to check if the value has been set.
 SetDetail sets Detail field to given value.
 
 
+### SetDetailNil
+
+`func (o *SendDocument201ResponseNotEmailedInner) SetDetailNil(b bool)`
+
+ SetDetailNil sets the value for Detail to be an explicit nil
+
+### UnsetDetail
+`func (o *SendDocument201ResponseNotEmailedInner) UnsetDetail()`
+
+UnsetDetail ensures that no value is present for Detail, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

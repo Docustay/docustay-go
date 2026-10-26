@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **Message** | Pointer to **NullableString** |  | [optional] 
 **Subject** | Pointer to **string** |  | [optional] 
 **ExpiryDays** | Pointer to **int32** |  | [optional] 
+**SigningOrder** | Pointer to **string** | &#x60;sequential&#x60;: each seat signs in the template&#39;s seat order (signer_1 first), and an embedded seat gets its session only when it is that person&#39;s turn. Left out, the template&#39;s own setting. | [optional] 
+**Values** | Pointer to **map[string]string** | The boxes the sender fills in (\&quot;Filled in by: Sender\&quot;) and the template&#39;s send-time amounts, by key: a box&#39;s label in lower case with underscores (\&quot;Effective date\&quot; → &#x60;effective_date&#x60;). A send that leaves one empty answers 400 naming it. | [optional] 
 **Embedded** | Pointer to **[]string** | Seats signed inside your own app instead of by emailed link (for example [\&quot;signer_1\&quot;]). Nobody is emailed for these seats: you ask for a session with POST /api/v1/documents/{id}/embed-session and show it on a website you listed under Settings → Developers → Embedding. | [optional] 
 **Parties** | [**[]SendRequestPartiesInner**](SendRequestPartiesInner.md) | One entry for each seat of the template (see GET /api/v1/documents/templates). | 
 
@@ -238,6 +240,56 @@ SetExpiryDays sets ExpiryDays field to given value.
 `func (o *SendRequest) HasExpiryDays() bool`
 
 HasExpiryDays returns a boolean if a field has been set.
+
+### GetSigningOrder
+
+`func (o *SendRequest) GetSigningOrder() string`
+
+GetSigningOrder returns the SigningOrder field if non-nil, zero value otherwise.
+
+### GetSigningOrderOk
+
+`func (o *SendRequest) GetSigningOrderOk() (*string, bool)`
+
+GetSigningOrderOk returns a tuple with the SigningOrder field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSigningOrder
+
+`func (o *SendRequest) SetSigningOrder(v string)`
+
+SetSigningOrder sets SigningOrder field to given value.
+
+### HasSigningOrder
+
+`func (o *SendRequest) HasSigningOrder() bool`
+
+HasSigningOrder returns a boolean if a field has been set.
+
+### GetValues
+
+`func (o *SendRequest) GetValues() map[string]string`
+
+GetValues returns the Values field if non-nil, zero value otherwise.
+
+### GetValuesOk
+
+`func (o *SendRequest) GetValuesOk() (*map[string]string, bool)`
+
+GetValuesOk returns a tuple with the Values field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetValues
+
+`func (o *SendRequest) SetValues(v map[string]string)`
+
+SetValues sets Values field to given value.
+
+### HasValues
+
+`func (o *SendRequest) HasValues() bool`
+
+HasValues returns a boolean if a field has been set.
 
 ### GetEmbedded
 

@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Mode** | **string** |  | 
-**Plan** | **string** |  | 
-**Allowance** | **float32** |  | 
-**Used** | **float32** |  | 
-**Remaining** | **float32** |  | 
-**Percent** | **float32** |  | 
+**Plan** | **NullableString** |  | 
+**Allowance** | **NullableFloat32** |  | 
+**Used** | **NullableFloat32** |  | 
+**Remaining** | **NullableFloat32** |  | 
+**Percent** | **NullableFloat32** |  | 
 **State** | **string** |  | 
-**ResetsAt** | **string** |  | 
+**ResetsAt** | **NullableString** |  | 
 **ByFeature** | [**map[string]AiUsageByFeatureValue**](AiUsageByFeatureValue.md) |  | 
 **Paused** | **bool** |  | 
 
@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewAiUsage
 
-`func NewAiUsage(mode string, plan string, allowance float32, used float32, remaining float32, percent float32, state string, resetsAt string, byFeature map[string]AiUsageByFeatureValue, paused bool, ) *AiUsage`
+`func NewAiUsage(mode string, plan NullableString, allowance NullableFloat32, used NullableFloat32, remaining NullableFloat32, percent NullableFloat32, state string, resetsAt NullableString, byFeature map[string]AiUsageByFeatureValue, paused bool, ) *AiUsage`
 
 NewAiUsage instantiates a new AiUsage object
 This constructor will assign default values to properties that have it defined,
@@ -74,6 +74,16 @@ and a boolean to check if the value has been set.
 SetPlan sets Plan field to given value.
 
 
+### SetPlanNil
+
+`func (o *AiUsage) SetPlanNil(b bool)`
+
+ SetPlanNil sets the value for Plan to be an explicit nil
+
+### UnsetPlan
+`func (o *AiUsage) UnsetPlan()`
+
+UnsetPlan ensures that no value is present for Plan, not even an explicit nil
 ### GetAllowance
 
 `func (o *AiUsage) GetAllowance() float32`
@@ -94,6 +104,16 @@ and a boolean to check if the value has been set.
 SetAllowance sets Allowance field to given value.
 
 
+### SetAllowanceNil
+
+`func (o *AiUsage) SetAllowanceNil(b bool)`
+
+ SetAllowanceNil sets the value for Allowance to be an explicit nil
+
+### UnsetAllowance
+`func (o *AiUsage) UnsetAllowance()`
+
+UnsetAllowance ensures that no value is present for Allowance, not even an explicit nil
 ### GetUsed
 
 `func (o *AiUsage) GetUsed() float32`
@@ -114,6 +134,16 @@ and a boolean to check if the value has been set.
 SetUsed sets Used field to given value.
 
 
+### SetUsedNil
+
+`func (o *AiUsage) SetUsedNil(b bool)`
+
+ SetUsedNil sets the value for Used to be an explicit nil
+
+### UnsetUsed
+`func (o *AiUsage) UnsetUsed()`
+
+UnsetUsed ensures that no value is present for Used, not even an explicit nil
 ### GetRemaining
 
 `func (o *AiUsage) GetRemaining() float32`
@@ -134,6 +164,16 @@ and a boolean to check if the value has been set.
 SetRemaining sets Remaining field to given value.
 
 
+### SetRemainingNil
+
+`func (o *AiUsage) SetRemainingNil(b bool)`
+
+ SetRemainingNil sets the value for Remaining to be an explicit nil
+
+### UnsetRemaining
+`func (o *AiUsage) UnsetRemaining()`
+
+UnsetRemaining ensures that no value is present for Remaining, not even an explicit nil
 ### GetPercent
 
 `func (o *AiUsage) GetPercent() float32`
@@ -154,6 +194,16 @@ and a boolean to check if the value has been set.
 SetPercent sets Percent field to given value.
 
 
+### SetPercentNil
+
+`func (o *AiUsage) SetPercentNil(b bool)`
+
+ SetPercentNil sets the value for Percent to be an explicit nil
+
+### UnsetPercent
+`func (o *AiUsage) UnsetPercent()`
+
+UnsetPercent ensures that no value is present for Percent, not even an explicit nil
 ### GetState
 
 `func (o *AiUsage) GetState() string`
@@ -194,6 +244,16 @@ and a boolean to check if the value has been set.
 SetResetsAt sets ResetsAt field to given value.
 
 
+### SetResetsAtNil
+
+`func (o *AiUsage) SetResetsAtNil(b bool)`
+
+ SetResetsAtNil sets the value for ResetsAt to be an explicit nil
+
+### UnsetResetsAt
+`func (o *AiUsage) UnsetResetsAt()`
+
+UnsetResetsAt ensures that no value is present for ResetsAt, not even an explicit nil
 ### GetByFeature
 
 `func (o *AiUsage) GetByFeature() map[string]AiUsageByFeatureValue`

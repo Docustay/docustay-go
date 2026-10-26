@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewGetDraftSource200Response
 
-`func NewGetDraftSource200Response(id string, state string, title string, source map[string]interface{}, facts map[string]interface{}, variableValues map[string]string, paper string, roles []interface{}, people []interface{}, sendOptions map[string]interface{}, ) *GetDraftSource200Response`
+`func NewGetDraftSource200Response(id string, state string, title string, source map[string]*interface{}, facts map[string]*interface{}, variableValues map[string]string, paper string, roles []interface{}, people []interface{}, sendOptions map[string]*interface{}, ) *GetDraftSource200Response`
 
 NewGetDraftSource200Response instantiates a new GetDraftSource200Response object
 This constructor will assign default values to properties that have it defined,
@@ -96,40 +96,40 @@ SetTitle sets Title field to given value.
 
 ### GetSource
 
-`func (o *GetDraftSource200Response) GetSource() map[string]interface{}`
+`func (o *GetDraftSource200Response) GetSource() map[string]*interface{}`
 
 GetSource returns the Source field if non-nil, zero value otherwise.
 
 ### GetSourceOk
 
-`func (o *GetDraftSource200Response) GetSourceOk() (*map[string]interface{}, bool)`
+`func (o *GetDraftSource200Response) GetSourceOk() (*map[string]*interface{}, bool)`
 
 GetSourceOk returns a tuple with the Source field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSource
 
-`func (o *GetDraftSource200Response) SetSource(v map[string]interface{})`
+`func (o *GetDraftSource200Response) SetSource(v map[string]*interface{})`
 
 SetSource sets Source field to given value.
 
 
 ### GetFacts
 
-`func (o *GetDraftSource200Response) GetFacts() map[string]interface{}`
+`func (o *GetDraftSource200Response) GetFacts() map[string]*interface{}`
 
 GetFacts returns the Facts field if non-nil, zero value otherwise.
 
 ### GetFactsOk
 
-`func (o *GetDraftSource200Response) GetFactsOk() (*map[string]interface{}, bool)`
+`func (o *GetDraftSource200Response) GetFactsOk() (*map[string]*interface{}, bool)`
 
 GetFactsOk returns a tuple with the Facts field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFacts
 
-`func (o *GetDraftSource200Response) SetFacts(v map[string]interface{})`
+`func (o *GetDraftSource200Response) SetFacts(v map[string]*interface{})`
 
 SetFacts sets Facts field to given value.
 
@@ -154,6 +154,16 @@ and a boolean to check if the value has been set.
 SetVariableValues sets VariableValues field to given value.
 
 
+### SetVariableValuesNil
+
+`func (o *GetDraftSource200Response) SetVariableValuesNil(b bool)`
+
+ SetVariableValuesNil sets the value for VariableValues to be an explicit nil
+
+### UnsetVariableValues
+`func (o *GetDraftSource200Response) UnsetVariableValues()`
+
+UnsetVariableValues ensures that no value is present for VariableValues, not even an explicit nil
 ### GetPaper
 
 `func (o *GetDraftSource200Response) GetPaper() string`
@@ -216,20 +226,20 @@ SetPeople sets People field to given value.
 
 ### GetSendOptions
 
-`func (o *GetDraftSource200Response) GetSendOptions() map[string]interface{}`
+`func (o *GetDraftSource200Response) GetSendOptions() map[string]*interface{}`
 
 GetSendOptions returns the SendOptions field if non-nil, zero value otherwise.
 
 ### GetSendOptionsOk
 
-`func (o *GetDraftSource200Response) GetSendOptionsOk() (*map[string]interface{}, bool)`
+`func (o *GetDraftSource200Response) GetSendOptionsOk() (*map[string]*interface{}, bool)`
 
 GetSendOptionsOk returns a tuple with the SendOptions field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSendOptions
 
-`func (o *GetDraftSource200Response) SetSendOptions(v map[string]interface{})`
+`func (o *GetDraftSource200Response) SetSendOptions(v map[string]*interface{})`
 
 SetSendOptions sets SendOptions field to given value.
 

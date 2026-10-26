@@ -31,8 +31,8 @@ import (
 func main() {
 	documentId := "6f1c1f0e-7a0c-4d1d-9b5e-2f0a7b1c3d4e" // string |  (optional)
 	to := "to_example" // string |  (optional)
-	status := "status_example" // string |  (optional)
-	kind := "kind_example" // string |  (optional)
+	status := "status_example" // string | Only emails in this state; any other value is refused (R13-D205). (optional)
+	kind := "kind_example" // string | Only emails of this kind; any other value is refused (R13-D346). (optional)
 	limit := int32(56) // int32 |  (optional)
 	cursor := "cursor_example" // string |  (optional)
 
@@ -61,8 +61,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **documentId** | **string** |  | 
  **to** | **string** |  | 
- **status** | **string** |  | 
- **kind** | **string** |  | 
+ **status** | **string** | Only emails in this state; any other value is refused (R13-D205). | 
+ **kind** | **string** | Only emails of this kind; any other value is refused (R13-D346). | 
  **limit** | **int32** |  | 
  **cursor** | **string** |  | 
 

@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Status** | **string** |  | 
-**Mode** | **string** |  | 
+**Mode** | **NullableString** |  | 
 
 ## Methods
 
 ### NewPaymentsStatus200Response
 
-`func NewPaymentsStatus200Response(status string, mode string, ) *PaymentsStatus200Response`
+`func NewPaymentsStatus200Response(status string, mode NullableString, ) *PaymentsStatus200Response`
 
 NewPaymentsStatus200Response instantiates a new PaymentsStatus200Response object
 This constructor will assign default values to properties that have it defined,
@@ -66,6 +66,16 @@ and a boolean to check if the value has been set.
 SetMode sets Mode field to given value.
 
 
+### SetModeNil
+
+`func (o *PaymentsStatus200Response) SetModeNil(b bool)`
+
+ SetModeNil sets the value for Mode to be an explicit nil
+
+### UnsetMode
+`func (o *PaymentsStatus200Response) UnsetMode()`
+
+UnsetMode ensures that no value is present for Mode, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -4,22 +4,43 @@ All URIs are relative to *https://app.docustay.app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateWebhook**](WebhooksAPI.md#CreateWebhook) | **Post** /api/v1/webhooks | Add a webhook
-[**DeleteWebhook**](WebhooksAPI.md#DeleteWebhook) | **Delete** /api/v1/webhooks/{id} | Remove a webhook
-[**FetchRelayEvents**](WebhooksAPI.md#FetchRelayEvents) | **Get** /api/v1/webhooks/{id}/relay | Fetch stored deliveries of a relay webhook
-[**ListWebhookDeliveries**](WebhooksAPI.md#ListWebhookDeliveries) | **Get** /api/v1/webhooks/{id}/deliveries | Recent deliveries
-[**ListWebhookTopics**](WebhooksAPI.md#ListWebhookTopics) | **Get** /api/v1/webhooks/topics | The events a webhook can subscribe to
-[**ListWebhooks**](WebhooksAPI.md#ListWebhooks) | **Get** /api/v1/webhooks | List webhooks
-[**RotateWebhookSecret**](WebhooksAPI.md#RotateWebhookSecret) | **Post** /api/v1/webhooks/{id}/rotate | Rotate the signing secret
-[**TestWebhook**](WebhooksAPI.md#TestWebhook) | **Post** /api/v1/webhooks/{id}/test | Send a test event
+[**WebhookDocumentsAiAllowanceLow**](WebhooksAPI.md#WebhookDocumentsAiAllowanceLow) | **Post** /documents.ai.allowance_low | documents.ai.allowance_low
+[**WebhookDocumentsApprovalDecided**](WebhooksAPI.md#WebhookDocumentsApprovalDecided) | **Post** /documents.approval.decided | documents.approval.decided
+[**WebhookDocumentsApprovalRequested**](WebhooksAPI.md#WebhookDocumentsApprovalRequested) | **Post** /documents.approval.requested | documents.approval.requested
+[**WebhookDocumentsDocumentBounced**](WebhooksAPI.md#WebhookDocumentsDocumentBounced) | **Post** /documents.document.bounced | documents.document.bounced
+[**WebhookDocumentsDocumentChangesRequested**](WebhooksAPI.md#WebhookDocumentsDocumentChangesRequested) | **Post** /documents.document.changes_requested | documents.document.changes_requested
+[**WebhookDocumentsDocumentCreated**](WebhooksAPI.md#WebhookDocumentsDocumentCreated) | **Post** /documents.document.created | documents.document.created
+[**WebhookDocumentsDocumentDeclined**](WebhooksAPI.md#WebhookDocumentsDocumentDeclined) | **Post** /documents.document.declined | documents.document.declined
+[**WebhookDocumentsDocumentDelegated**](WebhooksAPI.md#WebhookDocumentsDocumentDelegated) | **Post** /documents.document.delegated | documents.document.delegated
+[**WebhookDocumentsDocumentDownloaded**](WebhooksAPI.md#WebhookDocumentsDocumentDownloaded) | **Post** /documents.document.downloaded | documents.document.downloaded
+[**WebhookDocumentsDocumentExecuted**](WebhooksAPI.md#WebhookDocumentsDocumentExecuted) | **Post** /documents.document.executed | documents.document.executed
+[**WebhookDocumentsDocumentExpired**](WebhooksAPI.md#WebhookDocumentsDocumentExpired) | **Post** /documents.document.expired | documents.document.expired
+[**WebhookDocumentsDocumentOpened**](WebhooksAPI.md#WebhookDocumentsDocumentOpened) | **Post** /documents.document.opened | documents.document.opened
+[**WebhookDocumentsDocumentReminderDue**](WebhooksAPI.md#WebhookDocumentsDocumentReminderDue) | **Post** /documents.document.reminder_due | documents.document.reminder_due
+[**WebhookDocumentsDocumentSent**](WebhooksAPI.md#WebhookDocumentsDocumentSent) | **Post** /documents.document.sent | documents.document.sent
+[**WebhookDocumentsDocumentSigned**](WebhooksAPI.md#WebhookDocumentsDocumentSigned) | **Post** /documents.document.signed | documents.document.signed
+[**WebhookDocumentsDocumentVoided**](WebhooksAPI.md#WebhookDocumentsDocumentVoided) | **Post** /documents.document.voided | documents.document.voided
+[**WebhookDocumentsEmailBounced**](WebhooksAPI.md#WebhookDocumentsEmailBounced) | **Post** /documents.email.bounced | documents.email.bounced
+[**WebhookDocumentsEmailComplained**](WebhooksAPI.md#WebhookDocumentsEmailComplained) | **Post** /documents.email.complained | documents.email.complained
+[**WebhookDocumentsEmailDelivered**](WebhooksAPI.md#WebhookDocumentsEmailDelivered) | **Post** /documents.email.delivered | documents.email.delivered
+[**WebhookDocumentsEmailPaused**](WebhooksAPI.md#WebhookDocumentsEmailPaused) | **Post** /documents.email.paused | documents.email.paused
+[**WebhookDocumentsPaymentFailed**](WebhooksAPI.md#WebhookDocumentsPaymentFailed) | **Post** /documents.payment.failed | documents.payment.failed
+[**WebhookDocumentsPaymentHoldLapsed**](WebhooksAPI.md#WebhookDocumentsPaymentHoldLapsed) | **Post** /documents.payment.hold_lapsed | documents.payment.hold_lapsed
+[**WebhookDocumentsPaymentReceived**](WebhooksAPI.md#WebhookDocumentsPaymentReceived) | **Post** /documents.payment.received | documents.payment.received
+[**WebhookDocumentsTeamCreated**](WebhooksAPI.md#WebhookDocumentsTeamCreated) | **Post** /documents.team.created | documents.team.created
+[**WebhookDocumentsTeamDeleted**](WebhooksAPI.md#WebhookDocumentsTeamDeleted) | **Post** /documents.team.deleted | documents.team.deleted
+[**WebhookDocumentsTeamUpdated**](WebhooksAPI.md#WebhookDocumentsTeamUpdated) | **Post** /documents.team.updated | documents.team.updated
+[**WebhookDocumentsTemplateCreated**](WebhooksAPI.md#WebhookDocumentsTemplateCreated) | **Post** /documents.template.created | documents.template.created
+[**WebhookDocumentsTemplateFieldsDetected**](WebhooksAPI.md#WebhookDocumentsTemplateFieldsDetected) | **Post** /documents.template.fields_detected | documents.template.fields_detected
+[**WebhookDocumentsUsageThreshold**](WebhooksAPI.md#WebhookDocumentsUsageThreshold) | **Post** /documents.usage.threshold | documents.usage.threshold
 
 
 
-## CreateWebhook
+## WebhookDocumentsAiAllowanceLow
 
-> CreateWebhook201Response CreateWebhook(ctx).CreateWebhookRequest(createWebhookRequest).Execute()
+> WebhookDocumentsAiAllowanceLow(ctx).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
 
-Add a webhook
+documents.ai.allowance_low
 
 
 
@@ -36,17 +57,15 @@ import (
 )
 
 func main() {
-	createWebhookRequest := *openapiclient.NewCreateWebhookRequest([]string{"EventTypes_example"}) // CreateWebhookRequest | 
+	webhookDocumentsDocumentSentRequest :=  // WebhookDocumentsDocumentSentRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.WebhooksAPI.CreateWebhook(context.Background()).CreateWebhookRequest(createWebhookRequest).Execute()
+	r, err := apiClient.WebhooksAPI.WebhookDocumentsAiAllowanceLow(context.Background()).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.CreateWebhook``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.WebhookDocumentsAiAllowanceLow``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `CreateWebhook`: CreateWebhook201Response
-	fmt.Fprintf(os.Stdout, "Response from `WebhooksAPI.CreateWebhook`: %v\n", resp)
 }
 ```
 
@@ -56,16 +75,16 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiCreateWebhookRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiWebhookDocumentsAiAllowanceLowRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **createWebhookRequest** | [**CreateWebhookRequest**](CreateWebhookRequest.md) |  | 
+ **webhookDocumentsDocumentSentRequest** | [**WebhookDocumentsDocumentSentRequest**](WebhookDocumentsDocumentSentRequest.md) |  | 
 
 ### Return type
 
-[**CreateWebhook201Response**](CreateWebhook201Response.md)
+ (empty response body)
 
 ### Authorization
 
@@ -74,86 +93,18 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## DeleteWebhook
+## WebhookDocumentsApprovalDecided
 
-> DeleteWebhook200Response DeleteWebhook(ctx, id).Execute()
+> WebhookDocumentsApprovalDecided(ctx).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
 
-Remove a webhook
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/docustay/docustay-go/docustay"
-)
-
-func main() {
-	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.WebhooksAPI.DeleteWebhook(context.Background(), id).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.DeleteWebhook``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `DeleteWebhook`: DeleteWebhook200Response
-	fmt.Fprintf(os.Stdout, "Response from `WebhooksAPI.DeleteWebhook`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiDeleteWebhookRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**DeleteWebhook200Response**](DeleteWebhook200Response.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## FetchRelayEvents
-
-> FetchRelayEvents200Response FetchRelayEvents(ctx, id).After(after).Wait(wait).Limit(limit).Execute()
-
-Fetch stored deliveries of a relay webhook
+documents.approval.decided
 
 
 
@@ -170,304 +121,34 @@ import (
 )
 
 func main() {
-	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	after := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string |  (optional)
-	wait := int32(56) // int32 |  (optional)
-	limit := int32(56) // int32 |  (optional)
+	webhookDocumentsDocumentSentRequest :=  // WebhookDocumentsDocumentSentRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.WebhooksAPI.FetchRelayEvents(context.Background(), id).After(after).Wait(wait).Limit(limit).Execute()
+	r, err := apiClient.WebhooksAPI.WebhookDocumentsApprovalDecided(context.Background()).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.FetchRelayEvents``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.WebhookDocumentsApprovalDecided``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `FetchRelayEvents`: FetchRelayEvents200Response
-	fmt.Fprintf(os.Stdout, "Response from `WebhooksAPI.FetchRelayEvents`: %v\n", resp)
 }
 ```
 
 ### Path Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** |  | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiFetchRelayEventsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiWebhookDocumentsApprovalDecidedRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
- **after** | **string** |  | 
- **wait** | **int32** |  | 
- **limit** | **int32** |  | 
+ **webhookDocumentsDocumentSentRequest** | [**WebhookDocumentsDocumentSentRequest**](WebhookDocumentsDocumentSentRequest.md) |  | 
 
 ### Return type
 
-[**FetchRelayEvents200Response**](FetchRelayEvents200Response.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## ListWebhookDeliveries
-
-> ListWebhookDeliveries200Response ListWebhookDeliveries(ctx, id).Execute()
-
-Recent deliveries
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/docustay/docustay-go/docustay"
-)
-
-func main() {
-	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.WebhooksAPI.ListWebhookDeliveries(context.Background(), id).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.ListWebhookDeliveries``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `ListWebhookDeliveries`: ListWebhookDeliveries200Response
-	fmt.Fprintf(os.Stdout, "Response from `WebhooksAPI.ListWebhookDeliveries`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiListWebhookDeliveriesRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**ListWebhookDeliveries200Response**](ListWebhookDeliveries200Response.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## ListWebhookTopics
-
-> ListWebhookTopics200Response ListWebhookTopics(ctx).Execute()
-
-The events a webhook can subscribe to
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/docustay/docustay-go/docustay"
-)
-
-func main() {
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.WebhooksAPI.ListWebhookTopics(context.Background()).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.ListWebhookTopics``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `ListWebhookTopics`: ListWebhookTopics200Response
-	fmt.Fprintf(os.Stdout, "Response from `WebhooksAPI.ListWebhookTopics`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-This endpoint does not need any parameter.
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiListWebhookTopicsRequest struct via the builder pattern
-
-
-### Return type
-
-[**ListWebhookTopics200Response**](ListWebhookTopics200Response.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## ListWebhooks
-
-> ListWebhooks200Response ListWebhooks(ctx).Execute()
-
-List webhooks
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/docustay/docustay-go/docustay"
-)
-
-func main() {
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.WebhooksAPI.ListWebhooks(context.Background()).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.ListWebhooks``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `ListWebhooks`: ListWebhooks200Response
-	fmt.Fprintf(os.Stdout, "Response from `WebhooksAPI.ListWebhooks`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-This endpoint does not need any parameter.
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiListWebhooksRequest struct via the builder pattern
-
-
-### Return type
-
-[**ListWebhooks200Response**](ListWebhooks200Response.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## RotateWebhookSecret
-
-> RotateWebhookSecret200Response RotateWebhookSecret(ctx, id).RotateWebhookSecretRequest(rotateWebhookSecretRequest).Execute()
-
-Rotate the signing secret
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/docustay/docustay-go/docustay"
-)
-
-func main() {
-	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	rotateWebhookSecretRequest := *openapiclient.NewRotateWebhookSecretRequest() // RotateWebhookSecretRequest |  (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.WebhooksAPI.RotateWebhookSecret(context.Background(), id).RotateWebhookSecretRequest(rotateWebhookSecretRequest).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.RotateWebhookSecret``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `RotateWebhookSecret`: RotateWebhookSecret200Response
-	fmt.Fprintf(os.Stdout, "Response from `WebhooksAPI.RotateWebhookSecret`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRotateWebhookSecretRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **rotateWebhookSecretRequest** | [**RotateWebhookSecretRequest**](RotateWebhookSecretRequest.md) |  | 
-
-### Return type
-
-[**RotateWebhookSecret200Response**](RotateWebhookSecret200Response.md)
+ (empty response body)
 
 ### Authorization
 
@@ -476,18 +157,18 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
 [[Back to README]](../README.md)
 
 
-## TestWebhook
+## WebhookDocumentsApprovalRequested
 
-> TestWebhook200Response TestWebhook(ctx, id).TestWebhookRequest(testWebhookRequest).Execute()
+> WebhookDocumentsApprovalRequested(ctx).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
 
-Send a test event
+documents.approval.requested
 
 
 
@@ -504,42 +185,34 @@ import (
 )
 
 func main() {
-	id := "38400000-8cf0-11bd-b23e-10b96e4ef00d" // string | 
-	testWebhookRequest := *openapiclient.NewTestWebhookRequest() // TestWebhookRequest |  (optional)
+	webhookDocumentsDocumentSentRequest :=  // WebhookDocumentsDocumentSentRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.WebhooksAPI.TestWebhook(context.Background(), id).TestWebhookRequest(testWebhookRequest).Execute()
+	r, err := apiClient.WebhooksAPI.WebhookDocumentsApprovalRequested(context.Background()).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.TestWebhook``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.WebhookDocumentsApprovalRequested``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `TestWebhook`: TestWebhook200Response
-	fmt.Fprintf(os.Stdout, "Response from `WebhooksAPI.TestWebhook`: %v\n", resp)
 }
 ```
 
 ### Path Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** |  | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiTestWebhookRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiWebhookDocumentsApprovalRequestedRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-
- **testWebhookRequest** | [**TestWebhookRequest**](TestWebhookRequest.md) |  | 
+ **webhookDocumentsDocumentSentRequest** | [**WebhookDocumentsDocumentSentRequest**](WebhookDocumentsDocumentSentRequest.md) |  | 
 
 ### Return type
 
-[**TestWebhook200Response**](TestWebhook200Response.md)
+ (empty response body)
 
 ### Authorization
 
@@ -548,7 +221,1671 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## WebhookDocumentsDocumentBounced
+
+> WebhookDocumentsDocumentBounced(ctx).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+
+documents.document.bounced
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/docustay/docustay-go/docustay"
+)
+
+func main() {
+	webhookDocumentsDocumentSentRequest :=  // WebhookDocumentsDocumentSentRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.WebhooksAPI.WebhookDocumentsDocumentBounced(context.Background()).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.WebhookDocumentsDocumentBounced``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiWebhookDocumentsDocumentBouncedRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **webhookDocumentsDocumentSentRequest** | [**WebhookDocumentsDocumentSentRequest**](WebhookDocumentsDocumentSentRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## WebhookDocumentsDocumentChangesRequested
+
+> WebhookDocumentsDocumentChangesRequested(ctx).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+
+documents.document.changes_requested
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/docustay/docustay-go/docustay"
+)
+
+func main() {
+	webhookDocumentsDocumentSentRequest :=  // WebhookDocumentsDocumentSentRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.WebhooksAPI.WebhookDocumentsDocumentChangesRequested(context.Background()).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.WebhookDocumentsDocumentChangesRequested``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiWebhookDocumentsDocumentChangesRequestedRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **webhookDocumentsDocumentSentRequest** | [**WebhookDocumentsDocumentSentRequest**](WebhookDocumentsDocumentSentRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## WebhookDocumentsDocumentCreated
+
+> WebhookDocumentsDocumentCreated(ctx).WebhookDocumentsDocumentCreatedRequest(webhookDocumentsDocumentCreatedRequest).Execute()
+
+documents.document.created
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/docustay/docustay-go/docustay"
+)
+
+func main() {
+	webhookDocumentsDocumentCreatedRequest :=  // WebhookDocumentsDocumentCreatedRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.WebhooksAPI.WebhookDocumentsDocumentCreated(context.Background()).WebhookDocumentsDocumentCreatedRequest(webhookDocumentsDocumentCreatedRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.WebhookDocumentsDocumentCreated``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiWebhookDocumentsDocumentCreatedRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **webhookDocumentsDocumentCreatedRequest** | [**WebhookDocumentsDocumentCreatedRequest**](WebhookDocumentsDocumentCreatedRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## WebhookDocumentsDocumentDeclined
+
+> WebhookDocumentsDocumentDeclined(ctx).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+
+documents.document.declined
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/docustay/docustay-go/docustay"
+)
+
+func main() {
+	webhookDocumentsDocumentSentRequest :=  // WebhookDocumentsDocumentSentRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.WebhooksAPI.WebhookDocumentsDocumentDeclined(context.Background()).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.WebhookDocumentsDocumentDeclined``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiWebhookDocumentsDocumentDeclinedRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **webhookDocumentsDocumentSentRequest** | [**WebhookDocumentsDocumentSentRequest**](WebhookDocumentsDocumentSentRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## WebhookDocumentsDocumentDelegated
+
+> WebhookDocumentsDocumentDelegated(ctx).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+
+documents.document.delegated
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/docustay/docustay-go/docustay"
+)
+
+func main() {
+	webhookDocumentsDocumentSentRequest :=  // WebhookDocumentsDocumentSentRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.WebhooksAPI.WebhookDocumentsDocumentDelegated(context.Background()).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.WebhookDocumentsDocumentDelegated``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiWebhookDocumentsDocumentDelegatedRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **webhookDocumentsDocumentSentRequest** | [**WebhookDocumentsDocumentSentRequest**](WebhookDocumentsDocumentSentRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## WebhookDocumentsDocumentDownloaded
+
+> WebhookDocumentsDocumentDownloaded(ctx).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+
+documents.document.downloaded
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/docustay/docustay-go/docustay"
+)
+
+func main() {
+	webhookDocumentsDocumentSentRequest :=  // WebhookDocumentsDocumentSentRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.WebhooksAPI.WebhookDocumentsDocumentDownloaded(context.Background()).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.WebhookDocumentsDocumentDownloaded``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiWebhookDocumentsDocumentDownloadedRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **webhookDocumentsDocumentSentRequest** | [**WebhookDocumentsDocumentSentRequest**](WebhookDocumentsDocumentSentRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## WebhookDocumentsDocumentExecuted
+
+> WebhookDocumentsDocumentExecuted(ctx).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+
+documents.document.executed
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/docustay/docustay-go/docustay"
+)
+
+func main() {
+	webhookDocumentsDocumentSentRequest :=  // WebhookDocumentsDocumentSentRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.WebhooksAPI.WebhookDocumentsDocumentExecuted(context.Background()).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.WebhookDocumentsDocumentExecuted``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiWebhookDocumentsDocumentExecutedRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **webhookDocumentsDocumentSentRequest** | [**WebhookDocumentsDocumentSentRequest**](WebhookDocumentsDocumentSentRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## WebhookDocumentsDocumentExpired
+
+> WebhookDocumentsDocumentExpired(ctx).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+
+documents.document.expired
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/docustay/docustay-go/docustay"
+)
+
+func main() {
+	webhookDocumentsDocumentSentRequest :=  // WebhookDocumentsDocumentSentRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.WebhooksAPI.WebhookDocumentsDocumentExpired(context.Background()).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.WebhookDocumentsDocumentExpired``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiWebhookDocumentsDocumentExpiredRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **webhookDocumentsDocumentSentRequest** | [**WebhookDocumentsDocumentSentRequest**](WebhookDocumentsDocumentSentRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## WebhookDocumentsDocumentOpened
+
+> WebhookDocumentsDocumentOpened(ctx).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+
+documents.document.opened
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/docustay/docustay-go/docustay"
+)
+
+func main() {
+	webhookDocumentsDocumentSentRequest :=  // WebhookDocumentsDocumentSentRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.WebhooksAPI.WebhookDocumentsDocumentOpened(context.Background()).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.WebhookDocumentsDocumentOpened``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiWebhookDocumentsDocumentOpenedRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **webhookDocumentsDocumentSentRequest** | [**WebhookDocumentsDocumentSentRequest**](WebhookDocumentsDocumentSentRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## WebhookDocumentsDocumentReminderDue
+
+> WebhookDocumentsDocumentReminderDue(ctx).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+
+documents.document.reminder_due
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/docustay/docustay-go/docustay"
+)
+
+func main() {
+	webhookDocumentsDocumentSentRequest :=  // WebhookDocumentsDocumentSentRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.WebhooksAPI.WebhookDocumentsDocumentReminderDue(context.Background()).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.WebhookDocumentsDocumentReminderDue``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiWebhookDocumentsDocumentReminderDueRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **webhookDocumentsDocumentSentRequest** | [**WebhookDocumentsDocumentSentRequest**](WebhookDocumentsDocumentSentRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## WebhookDocumentsDocumentSent
+
+> WebhookDocumentsDocumentSent(ctx).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+
+documents.document.sent
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/docustay/docustay-go/docustay"
+)
+
+func main() {
+	webhookDocumentsDocumentSentRequest :=  // WebhookDocumentsDocumentSentRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.WebhooksAPI.WebhookDocumentsDocumentSent(context.Background()).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.WebhookDocumentsDocumentSent``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiWebhookDocumentsDocumentSentRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **webhookDocumentsDocumentSentRequest** | [**WebhookDocumentsDocumentSentRequest**](WebhookDocumentsDocumentSentRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## WebhookDocumentsDocumentSigned
+
+> WebhookDocumentsDocumentSigned(ctx).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+
+documents.document.signed
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/docustay/docustay-go/docustay"
+)
+
+func main() {
+	webhookDocumentsDocumentSentRequest :=  // WebhookDocumentsDocumentSentRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.WebhooksAPI.WebhookDocumentsDocumentSigned(context.Background()).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.WebhookDocumentsDocumentSigned``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiWebhookDocumentsDocumentSignedRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **webhookDocumentsDocumentSentRequest** | [**WebhookDocumentsDocumentSentRequest**](WebhookDocumentsDocumentSentRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## WebhookDocumentsDocumentVoided
+
+> WebhookDocumentsDocumentVoided(ctx).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+
+documents.document.voided
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/docustay/docustay-go/docustay"
+)
+
+func main() {
+	webhookDocumentsDocumentSentRequest :=  // WebhookDocumentsDocumentSentRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.WebhooksAPI.WebhookDocumentsDocumentVoided(context.Background()).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.WebhookDocumentsDocumentVoided``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiWebhookDocumentsDocumentVoidedRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **webhookDocumentsDocumentSentRequest** | [**WebhookDocumentsDocumentSentRequest**](WebhookDocumentsDocumentSentRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## WebhookDocumentsEmailBounced
+
+> WebhookDocumentsEmailBounced(ctx).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+
+documents.email.bounced
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/docustay/docustay-go/docustay"
+)
+
+func main() {
+	webhookDocumentsDocumentSentRequest :=  // WebhookDocumentsDocumentSentRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.WebhooksAPI.WebhookDocumentsEmailBounced(context.Background()).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.WebhookDocumentsEmailBounced``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiWebhookDocumentsEmailBouncedRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **webhookDocumentsDocumentSentRequest** | [**WebhookDocumentsDocumentSentRequest**](WebhookDocumentsDocumentSentRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## WebhookDocumentsEmailComplained
+
+> WebhookDocumentsEmailComplained(ctx).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+
+documents.email.complained
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/docustay/docustay-go/docustay"
+)
+
+func main() {
+	webhookDocumentsDocumentSentRequest :=  // WebhookDocumentsDocumentSentRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.WebhooksAPI.WebhookDocumentsEmailComplained(context.Background()).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.WebhookDocumentsEmailComplained``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiWebhookDocumentsEmailComplainedRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **webhookDocumentsDocumentSentRequest** | [**WebhookDocumentsDocumentSentRequest**](WebhookDocumentsDocumentSentRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## WebhookDocumentsEmailDelivered
+
+> WebhookDocumentsEmailDelivered(ctx).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+
+documents.email.delivered
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/docustay/docustay-go/docustay"
+)
+
+func main() {
+	webhookDocumentsDocumentSentRequest :=  // WebhookDocumentsDocumentSentRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.WebhooksAPI.WebhookDocumentsEmailDelivered(context.Background()).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.WebhookDocumentsEmailDelivered``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiWebhookDocumentsEmailDeliveredRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **webhookDocumentsDocumentSentRequest** | [**WebhookDocumentsDocumentSentRequest**](WebhookDocumentsDocumentSentRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## WebhookDocumentsEmailPaused
+
+> WebhookDocumentsEmailPaused(ctx).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+
+documents.email.paused
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/docustay/docustay-go/docustay"
+)
+
+func main() {
+	webhookDocumentsDocumentSentRequest :=  // WebhookDocumentsDocumentSentRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.WebhooksAPI.WebhookDocumentsEmailPaused(context.Background()).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.WebhookDocumentsEmailPaused``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiWebhookDocumentsEmailPausedRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **webhookDocumentsDocumentSentRequest** | [**WebhookDocumentsDocumentSentRequest**](WebhookDocumentsDocumentSentRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## WebhookDocumentsPaymentFailed
+
+> WebhookDocumentsPaymentFailed(ctx).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+
+documents.payment.failed
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/docustay/docustay-go/docustay"
+)
+
+func main() {
+	webhookDocumentsDocumentSentRequest :=  // WebhookDocumentsDocumentSentRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.WebhooksAPI.WebhookDocumentsPaymentFailed(context.Background()).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.WebhookDocumentsPaymentFailed``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiWebhookDocumentsPaymentFailedRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **webhookDocumentsDocumentSentRequest** | [**WebhookDocumentsDocumentSentRequest**](WebhookDocumentsDocumentSentRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## WebhookDocumentsPaymentHoldLapsed
+
+> WebhookDocumentsPaymentHoldLapsed(ctx).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+
+documents.payment.hold_lapsed
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/docustay/docustay-go/docustay"
+)
+
+func main() {
+	webhookDocumentsDocumentSentRequest :=  // WebhookDocumentsDocumentSentRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.WebhooksAPI.WebhookDocumentsPaymentHoldLapsed(context.Background()).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.WebhookDocumentsPaymentHoldLapsed``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiWebhookDocumentsPaymentHoldLapsedRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **webhookDocumentsDocumentSentRequest** | [**WebhookDocumentsDocumentSentRequest**](WebhookDocumentsDocumentSentRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## WebhookDocumentsPaymentReceived
+
+> WebhookDocumentsPaymentReceived(ctx).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+
+documents.payment.received
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/docustay/docustay-go/docustay"
+)
+
+func main() {
+	webhookDocumentsDocumentSentRequest :=  // WebhookDocumentsDocumentSentRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.WebhooksAPI.WebhookDocumentsPaymentReceived(context.Background()).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.WebhookDocumentsPaymentReceived``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiWebhookDocumentsPaymentReceivedRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **webhookDocumentsDocumentSentRequest** | [**WebhookDocumentsDocumentSentRequest**](WebhookDocumentsDocumentSentRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## WebhookDocumentsTeamCreated
+
+> WebhookDocumentsTeamCreated(ctx).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+
+documents.team.created
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/docustay/docustay-go/docustay"
+)
+
+func main() {
+	webhookDocumentsDocumentSentRequest :=  // WebhookDocumentsDocumentSentRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.WebhooksAPI.WebhookDocumentsTeamCreated(context.Background()).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.WebhookDocumentsTeamCreated``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiWebhookDocumentsTeamCreatedRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **webhookDocumentsDocumentSentRequest** | [**WebhookDocumentsDocumentSentRequest**](WebhookDocumentsDocumentSentRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## WebhookDocumentsTeamDeleted
+
+> WebhookDocumentsTeamDeleted(ctx).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+
+documents.team.deleted
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/docustay/docustay-go/docustay"
+)
+
+func main() {
+	webhookDocumentsDocumentSentRequest :=  // WebhookDocumentsDocumentSentRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.WebhooksAPI.WebhookDocumentsTeamDeleted(context.Background()).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.WebhookDocumentsTeamDeleted``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiWebhookDocumentsTeamDeletedRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **webhookDocumentsDocumentSentRequest** | [**WebhookDocumentsDocumentSentRequest**](WebhookDocumentsDocumentSentRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## WebhookDocumentsTeamUpdated
+
+> WebhookDocumentsTeamUpdated(ctx).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+
+documents.team.updated
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/docustay/docustay-go/docustay"
+)
+
+func main() {
+	webhookDocumentsDocumentSentRequest :=  // WebhookDocumentsDocumentSentRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.WebhooksAPI.WebhookDocumentsTeamUpdated(context.Background()).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.WebhookDocumentsTeamUpdated``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiWebhookDocumentsTeamUpdatedRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **webhookDocumentsDocumentSentRequest** | [**WebhookDocumentsDocumentSentRequest**](WebhookDocumentsDocumentSentRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## WebhookDocumentsTemplateCreated
+
+> WebhookDocumentsTemplateCreated(ctx).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+
+documents.template.created
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/docustay/docustay-go/docustay"
+)
+
+func main() {
+	webhookDocumentsDocumentSentRequest :=  // WebhookDocumentsDocumentSentRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.WebhooksAPI.WebhookDocumentsTemplateCreated(context.Background()).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.WebhookDocumentsTemplateCreated``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiWebhookDocumentsTemplateCreatedRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **webhookDocumentsDocumentSentRequest** | [**WebhookDocumentsDocumentSentRequest**](WebhookDocumentsDocumentSentRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## WebhookDocumentsTemplateFieldsDetected
+
+> WebhookDocumentsTemplateFieldsDetected(ctx).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+
+documents.template.fields_detected
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/docustay/docustay-go/docustay"
+)
+
+func main() {
+	webhookDocumentsDocumentSentRequest :=  // WebhookDocumentsDocumentSentRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.WebhooksAPI.WebhookDocumentsTemplateFieldsDetected(context.Background()).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.WebhookDocumentsTemplateFieldsDetected``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiWebhookDocumentsTemplateFieldsDetectedRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **webhookDocumentsDocumentSentRequest** | [**WebhookDocumentsDocumentSentRequest**](WebhookDocumentsDocumentSentRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## WebhookDocumentsUsageThreshold
+
+> WebhookDocumentsUsageThreshold(ctx).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+
+documents.usage.threshold
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/docustay/docustay-go/docustay"
+)
+
+func main() {
+	webhookDocumentsDocumentSentRequest :=  // WebhookDocumentsDocumentSentRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	r, err := apiClient.WebhooksAPI.WebhookDocumentsUsageThreshold(context.Background()).WebhookDocumentsDocumentSentRequest(webhookDocumentsDocumentSentRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.WebhookDocumentsUsageThreshold``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiWebhookDocumentsUsageThresholdRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **webhookDocumentsDocumentSentRequest** | [**WebhookDocumentsDocumentSentRequest**](WebhookDocumentsDocumentSentRequest.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

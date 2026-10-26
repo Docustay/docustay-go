@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewCheckDocumentRequest
 
-`func NewCheckDocumentRequest(source map[string]interface{}, ) *CheckDocumentRequest`
+`func NewCheckDocumentRequest(source map[string]*interface{}, ) *CheckDocumentRequest`
 
 NewCheckDocumentRequest instantiates a new CheckDocumentRequest object
 This constructor will assign default values to properties that have it defined,
@@ -32,20 +32,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetSource
 
-`func (o *CheckDocumentRequest) GetSource() map[string]interface{}`
+`func (o *CheckDocumentRequest) GetSource() map[string]*interface{}`
 
 GetSource returns the Source field if non-nil, zero value otherwise.
 
 ### GetSourceOk
 
-`func (o *CheckDocumentRequest) GetSourceOk() (*map[string]interface{}, bool)`
+`func (o *CheckDocumentRequest) GetSourceOk() (*map[string]*interface{}, bool)`
 
 GetSourceOk returns a tuple with the Source field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSource
 
-`func (o *CheckDocumentRequest) SetSource(v map[string]interface{})`
+`func (o *CheckDocumentRequest) SetSource(v map[string]*interface{})`
 
 SetSource sets Source field to given value.
 

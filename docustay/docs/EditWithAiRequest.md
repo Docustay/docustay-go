@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 
 ### NewEditWithAiRequest
 
-`func NewEditWithAiRequest(request string, source map[string]interface{}, ) *EditWithAiRequest`
+`func NewEditWithAiRequest(request string, source map[string]*interface{}, ) *EditWithAiRequest`
 
 NewEditWithAiRequest instantiates a new EditWithAiRequest object
 This constructor will assign default values to properties that have it defined,
@@ -50,20 +50,20 @@ SetRequest sets Request field to given value.
 
 ### GetSource
 
-`func (o *EditWithAiRequest) GetSource() map[string]interface{}`
+`func (o *EditWithAiRequest) GetSource() map[string]*interface{}`
 
 GetSource returns the Source field if non-nil, zero value otherwise.
 
 ### GetSourceOk
 
-`func (o *EditWithAiRequest) GetSourceOk() (*map[string]interface{}, bool)`
+`func (o *EditWithAiRequest) GetSourceOk() (*map[string]*interface{}, bool)`
 
 GetSourceOk returns a tuple with the Source field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSource
 
-`func (o *EditWithAiRequest) SetSource(v map[string]interface{})`
+`func (o *EditWithAiRequest) SetSource(v map[string]*interface{})`
 
 SetSource sets Source field to given value.
 

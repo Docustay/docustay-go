@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **UsedToday** | **int32** |  | 
-**LimitPerDay** | **int32** |  | 
+**LimitPerDay** | **int32** | The most emails this workspace may send today. In a workspace&#39;s first 7 days it is lower than the plan&#39;s limits.emailsPerDay (10 on Free, 100 on a paid plan). | 
 **ResetsAt** | **string** |  | 
 
 ## Methods

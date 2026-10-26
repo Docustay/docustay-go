@@ -25,6 +25,8 @@ Method | HTTP request | Description
 
 Answer a template's questions
 
+
+
 ### Example
 
 ```go
@@ -95,6 +97,8 @@ Name | Type | Description  | Notes
 
 Archive a play
 
+
+
 ### Example
 
 ```go
@@ -162,6 +166,8 @@ Name | Type | Description  | Notes
 > interface{} DuplicatePlay(ctx, name).DuplicatePlayRequest(duplicatePlayRequest).Execute()
 
 Copy a play under a new name
+
+
 
 ### Example
 
@@ -232,6 +238,8 @@ Name | Type | Description  | Notes
 > interface{} GetPlay(ctx, name).Execute()
 
 One play
+
+
 
 ### Example
 
@@ -429,6 +437,8 @@ Name | Type | Description  | Notes
 > interface{} PublishPlay(ctx, name).PublishPlayRequest(publishPlayRequest).Execute()
 
 Publish a play version
+
+
 
 ### Example
 
@@ -631,6 +641,8 @@ Name | Type | Description  | Notes
 > interface{} SetPlaybookOn(ctx, name).SetPlaybookOnRequest(setPlaybookOnRequest).Execute()
 
 Switch a pack on or off
+
+
 
 ### Example
 

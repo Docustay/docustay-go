@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** |  | 
 **State** | **string** |  | 
-**Message** | Pointer to **string** |  | [optional] 
+**Message** | Pointer to **NullableString** |  | [optional] 
 **Source** | Pointer to **map[string]interface{}** |  | [optional] 
 **Patches** | Pointer to **map[string]interface{}** |  | [optional] 
 
@@ -94,22 +94,32 @@ SetMessage sets Message field to given value.
 
 HasMessage returns a boolean if a field has been set.
 
+### SetMessageNil
+
+`func (o *AiDraftJob) SetMessageNil(b bool)`
+
+ SetMessageNil sets the value for Message to be an explicit nil
+
+### UnsetMessage
+`func (o *AiDraftJob) UnsetMessage()`
+
+UnsetMessage ensures that no value is present for Message, not even an explicit nil
 ### GetSource
 
-`func (o *AiDraftJob) GetSource() map[string]interface{}`
+`func (o *AiDraftJob) GetSource() map[string]*interface{}`
 
 GetSource returns the Source field if non-nil, zero value otherwise.
 
 ### GetSourceOk
 
-`func (o *AiDraftJob) GetSourceOk() (*map[string]interface{}, bool)`
+`func (o *AiDraftJob) GetSourceOk() (*map[string]*interface{}, bool)`
 
 GetSourceOk returns a tuple with the Source field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSource
 
-`func (o *AiDraftJob) SetSource(v map[string]interface{})`
+`func (o *AiDraftJob) SetSource(v map[string]*interface{})`
 
 SetSource sets Source field to given value.
 
@@ -119,22 +129,32 @@ SetSource sets Source field to given value.
 
 HasSource returns a boolean if a field has been set.
 
+### SetSourceNil
+
+`func (o *AiDraftJob) SetSourceNil(b bool)`
+
+ SetSourceNil sets the value for Source to be an explicit nil
+
+### UnsetSource
+`func (o *AiDraftJob) UnsetSource()`
+
+UnsetSource ensures that no value is present for Source, not even an explicit nil
 ### GetPatches
 
-`func (o *AiDraftJob) GetPatches() map[string]interface{}`
+`func (o *AiDraftJob) GetPatches() map[string]*interface{}`
 
 GetPatches returns the Patches field if non-nil, zero value otherwise.
 
 ### GetPatchesOk
 
-`func (o *AiDraftJob) GetPatchesOk() (*map[string]interface{}, bool)`
+`func (o *AiDraftJob) GetPatchesOk() (*map[string]*interface{}, bool)`
 
 GetPatchesOk returns a tuple with the Patches field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPatches
 
-`func (o *AiDraftJob) SetPatches(v map[string]interface{})`
+`func (o *AiDraftJob) SetPatches(v map[string]*interface{})`
 
 SetPatches sets Patches field to given value.
 
@@ -144,6 +164,16 @@ SetPatches sets Patches field to given value.
 
 HasPatches returns a boolean if a field has been set.
 
+### SetPatchesNil
+
+`func (o *AiDraftJob) SetPatchesNil(b bool)`
+
+ SetPatchesNil sets the value for Patches to be an explicit nil
+
+### UnsetPatches
+`func (o *AiDraftJob) UnsetPatches()`
+
+UnsetPatches ensures that no value is present for Patches, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

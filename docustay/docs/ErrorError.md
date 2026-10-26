@@ -121,20 +121,20 @@ HasRetryable returns a boolean if a field has been set.
 
 ### GetDetail
 
-`func (o *ErrorError) GetDetail() map[string]interface{}`
+`func (o *ErrorError) GetDetail() map[string]*interface{}`
 
 GetDetail returns the Detail field if non-nil, zero value otherwise.
 
 ### GetDetailOk
 
-`func (o *ErrorError) GetDetailOk() (*map[string]interface{}, bool)`
+`func (o *ErrorError) GetDetailOk() (*map[string]*interface{}, bool)`
 
 GetDetailOk returns a tuple with the Detail field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetDetail
 
-`func (o *ErrorError) SetDetail(v map[string]interface{})`
+`func (o *ErrorError) SetDetail(v map[string]*interface{})`
 
 SetDetail sets Detail field to given value.
 

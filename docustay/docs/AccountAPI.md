@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AiUsage**](AccountAPI.md#AiUsage) | **Get** /api/v1/ai/usage | AI drafts used against your plan
 [**PaymentsStatus**](AccountAPI.md#PaymentsStatus) | **Get** /api/v1/payments/status | Is Stripe ready to take a payment?
+[**Preflight**](AccountAPI.md#Preflight) | **Post** /api/v1/preflight | Ask what an action would do to your plan, before doing it
 [**Usage**](AccountAPI.md#Usage) | **Get** /api/v1/usage | Documents, templates and emails used against your plan
 
 
@@ -125,6 +126,72 @@ Other parameters are passed through a pointer to a apiPaymentsStatusRequest stru
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## Preflight
+
+> PreflightAnswer Preflight(ctx).PreflightRequest(preflightRequest).Execute()
+
+Ask what an action would do to your plan, before doing it
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/docustay/docustay-go/docustay"
+)
+
+func main() {
+	preflightRequest := *openapiclient.NewPreflightRequest("Action_example") // PreflightRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.AccountAPI.Preflight(context.Background()).PreflightRequest(preflightRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `AccountAPI.Preflight``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `Preflight`: PreflightAnswer
+	fmt.Fprintf(os.Stdout, "Response from `AccountAPI.Preflight`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPreflightRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **preflightRequest** | [**PreflightRequest**](PreflightRequest.md) |  | 
+
+### Return type
+
+[**PreflightAnswer**](PreflightAnswer.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

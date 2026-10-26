@@ -6,12 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** |  | 
 **State** | **string** |  | 
+**Notified** | **int32** | How many people were emailed that it is cancelled. A test document sends one [TEST] notice to its sender. | 
 
 ## Methods
 
 ### NewVoidDocument200Response
 
-`func NewVoidDocument200Response(id string, state string, ) *VoidDocument200Response`
+`func NewVoidDocument200Response(id string, state string, notified int32, ) *VoidDocument200Response`
 
 NewVoidDocument200Response instantiates a new VoidDocument200Response object
 This constructor will assign default values to properties that have it defined,
@@ -64,6 +65,26 @@ and a boolean to check if the value has been set.
 `func (o *VoidDocument200Response) SetState(v string)`
 
 SetState sets State field to given value.
+
+
+### GetNotified
+
+`func (o *VoidDocument200Response) GetNotified() int32`
+
+GetNotified returns the Notified field if non-nil, zero value otherwise.
+
+### GetNotifiedOk
+
+`func (o *VoidDocument200Response) GetNotifiedOk() (*int32, bool)`
+
+GetNotifiedOk returns a tuple with the Notified field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNotified
+
+`func (o *VoidDocument200Response) SetNotified(v int32)`
+
+SetNotified sets Notified field to given value.
 
 
 

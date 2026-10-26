@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** |  | 
-**Topic** | **string** |  | 
+**Topic** | **NullableString** |  | 
 **Headers** | **map[string]string** |  | 
 **Body** | **string** |  | 
 **At** | **string** |  | 
@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewFetchRelayEvents200ResponseEventsInner
 
-`func NewFetchRelayEvents200ResponseEventsInner(id string, topic string, headers map[string]string, body string, at string, ) *FetchRelayEvents200ResponseEventsInner`
+`func NewFetchRelayEvents200ResponseEventsInner(id string, topic NullableString, headers map[string]string, body string, at string, ) *FetchRelayEvents200ResponseEventsInner`
 
 NewFetchRelayEvents200ResponseEventsInner instantiates a new FetchRelayEvents200ResponseEventsInner object
 This constructor will assign default values to properties that have it defined,
@@ -69,6 +69,16 @@ and a boolean to check if the value has been set.
 SetTopic sets Topic field to given value.
 
 
+### SetTopicNil
+
+`func (o *FetchRelayEvents200ResponseEventsInner) SetTopicNil(b bool)`
+
+ SetTopicNil sets the value for Topic to be an explicit nil
+
+### UnsetTopic
+`func (o *FetchRelayEvents200ResponseEventsInner) UnsetTopic()`
+
+UnsetTopic ensures that no value is present for Topic, not even an explicit nil
 ### GetHeaders
 
 `func (o *FetchRelayEvents200ResponseEventsInner) GetHeaders() map[string]string`

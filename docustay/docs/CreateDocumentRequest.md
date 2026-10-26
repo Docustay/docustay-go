@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 
 ### NewCreateDocumentRequest
 
-`func NewCreateDocumentRequest(title string, source map[string]interface{}, people []Person, ) *CreateDocumentRequest`
+`func NewCreateDocumentRequest(title string, source map[string]*interface{}, people []Person, ) *CreateDocumentRequest`
 
 NewCreateDocumentRequest instantiates a new CreateDocumentRequest object
 This constructor will assign default values to properties that have it defined,
@@ -133,20 +133,20 @@ SetTitle sets Title field to given value.
 
 ### GetSource
 
-`func (o *CreateDocumentRequest) GetSource() map[string]interface{}`
+`func (o *CreateDocumentRequest) GetSource() map[string]*interface{}`
 
 GetSource returns the Source field if non-nil, zero value otherwise.
 
 ### GetSourceOk
 
-`func (o *CreateDocumentRequest) GetSourceOk() (*map[string]interface{}, bool)`
+`func (o *CreateDocumentRequest) GetSourceOk() (*map[string]*interface{}, bool)`
 
 GetSourceOk returns a tuple with the Source field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSource
 
-`func (o *CreateDocumentRequest) SetSource(v map[string]interface{})`
+`func (o *CreateDocumentRequest) SetSource(v map[string]*interface{})`
 
 SetSource sets Source field to given value.
 

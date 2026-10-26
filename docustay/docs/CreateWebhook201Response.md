@@ -6,11 +6,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** |  | 
 **Name** | **string** |  | 
-**Url** | **string** | null for a relay endpoint | 
+**Url** | **NullableString** | null for a relay endpoint | 
 **Relay** | **bool** |  | 
 **EventTypes** | **[]string** |  | 
 **Status** | **string** |  | 
-**DisabledReason** | **string** |  | 
+**DisabledReason** | **NullableString** |  | 
 **ConsecutiveFailures** | **int32** |  | 
 **Fingerprint** | **string** |  | 
 **CreatedAt** | **string** |  | 
@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewCreateWebhook201Response
 
-`func NewCreateWebhook201Response(id string, name string, url string, relay bool, eventTypes []string, status string, disabledReason string, consecutiveFailures int32, fingerprint string, createdAt string, secret string, ) *CreateWebhook201Response`
+`func NewCreateWebhook201Response(id string, name string, url NullableString, relay bool, eventTypes []string, status string, disabledReason NullableString, consecutiveFailures int32, fingerprint string, createdAt string, secret string, ) *CreateWebhook201Response`
 
 NewCreateWebhook201Response instantiates a new CreateWebhook201Response object
 This constructor will assign default values to properties that have it defined,
@@ -95,6 +95,16 @@ and a boolean to check if the value has been set.
 SetUrl sets Url field to given value.
 
 
+### SetUrlNil
+
+`func (o *CreateWebhook201Response) SetUrlNil(b bool)`
+
+ SetUrlNil sets the value for Url to be an explicit nil
+
+### UnsetUrl
+`func (o *CreateWebhook201Response) UnsetUrl()`
+
+UnsetUrl ensures that no value is present for Url, not even an explicit nil
 ### GetRelay
 
 `func (o *CreateWebhook201Response) GetRelay() bool`
@@ -175,6 +185,16 @@ and a boolean to check if the value has been set.
 SetDisabledReason sets DisabledReason field to given value.
 
 
+### SetDisabledReasonNil
+
+`func (o *CreateWebhook201Response) SetDisabledReasonNil(b bool)`
+
+ SetDisabledReasonNil sets the value for DisabledReason to be an explicit nil
+
+### UnsetDisabledReason
+`func (o *CreateWebhook201Response) UnsetDisabledReason()`
+
+UnsetDisabledReason ensures that no value is present for DisabledReason, not even an explicit nil
 ### GetConsecutiveFailures
 
 `func (o *CreateWebhook201Response) GetConsecutiveFailures() int32`

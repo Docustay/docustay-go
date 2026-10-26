@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Title** | Pointer to **string** |  | [optional] 
 **People** | [**[]StartDraftRequestPeopleInner**](StartDraftRequestPeopleInner.md) |  | 
 **Answers** | Pointer to [**map[string]StartDraftRequestAnswersValue**](StartDraftRequestAnswersValue.md) |  | [optional] 
+**Values** | Pointer to **map[string]string** | Send-time amounts the template&#39;s words need, by key (a &#x60;needs_input&#x60; answer lists them under &#x60;values&#x60;), e.g. &#x60;{ \&quot;deposit\&quot;: \&quot;$500\&quot; }&#x60;. | [optional] 
 **UseDefaults** | Pointer to **bool** |  | [optional] 
 
 ## Methods
@@ -118,6 +119,31 @@ SetAnswers sets Answers field to given value.
 `func (o *StartDraftRequest) HasAnswers() bool`
 
 HasAnswers returns a boolean if a field has been set.
+
+### GetValues
+
+`func (o *StartDraftRequest) GetValues() map[string]string`
+
+GetValues returns the Values field if non-nil, zero value otherwise.
+
+### GetValuesOk
+
+`func (o *StartDraftRequest) GetValuesOk() (*map[string]string, bool)`
+
+GetValuesOk returns a tuple with the Values field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetValues
+
+`func (o *StartDraftRequest) SetValues(v map[string]string)`
+
+SetValues sets Values field to given value.
+
+### HasValues
+
+`func (o *StartDraftRequest) HasValues() bool`
+
+HasValues returns a boolean if a field has been set.
 
 ### GetUseDefaults
 
